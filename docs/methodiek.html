@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Methodiek — Groningse Oorlogspuzzels</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: Georgia, 'Times New Roman', serif;
+    background: #0a0a0f;
+    color: #d0d0d0;
+    line-height: 1.9;
+}
+a { color: #e8c170; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.container { max-width: 780px; margin: 0 auto; padding: 0 32px; }
+
+header {
+    padding: 80px 0 40px;
+    border-bottom: 1px solid #1a1a2e;
+}
+header h1 {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+}
+header .back {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 14px;
+    color: #666;
+    display: block;
+    margin-bottom: 24px;
+}
+
+section {
+    padding: 48px 0;
+    border-bottom: 1px solid #1a1a2e;
+}
+h2 {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 24px;
+    color: #fff;
+    margin-bottom: 20px;
+}
+h3 {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 18px;
+    color: #e8c170;
+    margin-top: 32px;
+    margin-bottom: 12px;
+}
+p { margin-bottom: 16px; color: #aaa; }
+strong { color: #d0d0d0; }
+
+.rule {
+    background: #111118;
+    border: 1px solid #1a1a2e;
+    border-radius: 8px;
+    padding: 24px;
+    margin: 20px 0;
+}
+.rule .rule-title {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 15px;
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+.rule p { margin-bottom: 8px; font-size: 15px; }
+.rule .example {
+    border-left: 3px solid #2a2a4e;
+    padding-left: 16px;
+    margin-top: 12px;
+    color: #888;
+    font-size: 14px;
+}
+.rule .violation {
+    border-left: 3px solid #e85050;
+    padding-left: 16px;
+    margin-top: 12px;
+    color: #e85050;
+    font-size: 14px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 14px;
+    margin: 20px 0;
+}
+th {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 2px solid #2a2a4e;
+    color: #888;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 11px;
+}
+td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #1a1a2e;
+    color: #aaa;
+}
+tr:last-child td { border-bottom: none; }
+
+.axiom {
+    background: #0d1a0d;
+    border: 1px solid #1a3a1a;
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 16px 0;
+    color: #4caf50;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 15px;
+}
+
+footer {
+    padding: 40px 0;
+    text-align: center;
+    color: #444;
+    font-size: 13px;
+}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <a class="back" href="index.html">&larr; Terug naar de puzzels</a>
+        <h1>Methodiek &amp; Bewijsbaarheid</h1>
+        <p>Hoe wij tot onze hypotheses komen, hoe wij ze scoren, en waarom u elk getal kunt narekenen.</p>
+    </div>
+</header>
+
+<!-- 1. AXIOMA'S -->
+<section>
+    <div class="container">
+        <h2>I. Axioma's</h2>
+        <p>Alles wat volgt rust op vier uitgangspunten. Als u het met een van deze axioma's oneens bent, vervalt de rest. Dat is geen zwakte — dat is transparantie.</p>
+
+        <div class="axiom">Axioma 1: Een OVCG-kaart is een primaire bron — niet van het verzet zelf, maar van de naoorlogse erkenning van het verzet.</div>
+
+        <div class="axiom">Axioma 2: Wat letterlijk op een kaart staat, is een feit over die kaart. Niet noodzakelijk een feit over de werkelijkheid.</div>
+
+        <div class="axiom">Axioma 3: Wanneer meerdere onafhankelijke kaarten dezelfde elementen bevatten (datum, locatie, namen, details), is de kans op toeval omgekeerd evenredig met het aantal overeenkomende elementen.</div>
+
+        <div class="axiom">Axioma 4: Een hypothese is pas versterkt wanneer een bron buiten het OVCG-archief dezelfde claim bevestigt.</div>
+    </div>
+</section>
+
+<!-- 2. WAT WIJ DOEN EN NIET DOEN -->
+<section>
+    <div class="container">
+        <h2>II. Wat wij doen en niet doen</h2>
+
+        <h3>Wat wij doen</h3>
+        <p>Wij lezen OVCG-kaarten (Groninger Archieven, toegangsnummer 2183) met behulp van AI-transcriptie (Google Gemini 2.5 Flash Vision). Wij citeren wat erop staat. Wij redeneren over wat de citaten samen betekenen. Wij formuleren hypotheses. Wij scoren elke hypothese op verifieerbaarheid. Wij publiceren alles — inclusief onze onzekerheden.</p>
+
+        <h3>Wat wij niet doen</h3>
+        <p>Wij verklaren geen feiten over het verzet. Wij concluderen niet wie een held was en wie niet. Wij interpreteren geen motieven. Wij vullen geen ontbrekende informatie aan met aannames. Wij presenteren geen netwerkanalyse als bewijs (zie hieronder waarom).</p>
+
+        <h3>Waarom geen netwerkanalyse</h3>
+        <p>Een eerste poging om een netwerkgraaf te bouwen op basis van contactpersonen-velden leverde valse hubs op: achternamen als "De Vries" of "Bakker" werden samengevoegd tot enkele knopen die in werkelijkheid meerdere personen vertegenwoordigen. De transcripties zijn betrouwbaar; het netwerk dat daaruit is afgeleid is dat niet. Wij hebben besloten de netwerkanalyse niet als bewijs op te voeren en dit openlijk te vermelden.</p>
+    </div>
+</section>
+
+<!-- 3. REDENEERTYPEN -->
+<section>
+    <div class="container">
+        <h2>III. Redeneertypen</h2>
+        <p>Elke hypothese op deze site is gebouwd met een van twee redeneervormen. Wij benoemen bij elk verhaal welke vorm is gebruikt.</p>
+
+        <div class="rule">
+            <div class="rule-title">Deductie</div>
+            <p>Van meerdere feiten naar een noodzakelijke conclusie. Als A en B en C waar zijn, dan volgt D logisch.</p>
+            <div class="example">
+                <strong>Voorbeeld:</strong> Vier onafhankelijke kaarten noemen dezelfde datum (10-11-1944), dezelfde locatie ("Spiegelberg"), en dezelfde oorzaak ("lijst gevonden"). <strong>Conclusie:</strong> Er was een enkele razzia op die datum op die locatie, veroorzaakt door het vinden van een namenlijst. Die conclusie is logisch dwingend — vier onafhankelijke bronnen die dezelfde vier elementen bevatten is niet toeval.
+            </div>
+            <div class="violation">
+                <strong>Overtreding:</strong> "Omdat Fre Lode op 24 kaarten staat, was hij de belangrijkste verzetsman." Dat is geen deductie — frequentie bewijst geen belang. Het bewijst alleen frequentie van vermelding.
+            </div>
+        </div>
+
+        <div class="rule">
+            <div class="rule-title">Abductie</div>
+            <p>Van een observatie naar de beste verklaring. We zien X en vragen: wat verklaart X het best?</p>
+            <div class="example">
+                <strong>Voorbeeld:</strong> Drie broers Assies worden gearresteerd: Berend in 1943 (gefusilleerd), Harm en Jan in december 1944. <strong>Beste verklaring:</strong> de SD arresteerde Harm en Jan omdat ze broers waren van de gefusilleerde Berend. Dit is niet logisch dwingend, maar het is de meest plausibele verklaring gegeven de tijdlijn en de SD-praktijk van familievergelding.
+            </div>
+            <div class="violation">
+                <strong>Overtreding:</strong> "Omdat de SD familievergelding toepaste, werden Harm en Jan daarom gearresteerd." Dat is cirkelredenering — de premisse wordt als bewijs gebruikt. De juiste formulering is: "Gegeven dat de SD familievergelding toepaste (bekend uit andere bronnen), is het plausibel dat..."
+            </div>
+        </div>
+
+        <h3>Wat wij niet gebruiken</h3>
+        <p><strong>Inductie</strong> (van voorbeelden naar algemene regels) passen wij bewust niet toe. "Acht kaarten noemen boetes, dus de SD liet iedereen vrij tegen betaling" is een inductiefout. Wij zeggen: "Acht kaarten noemen boetes. Dit is een patroon. Het vereist nader onderzoek."</p>
+    </div>
+</section>
+
+<!-- 4. BEWIJSBAARHEIDSPERCENTAGE -->
+<section>
+    <div class="container">
+        <h2>IV. Bewijsbaarheidspercentage (BP)</h2>
+        <p>Elk verhaal op deze site krijgt een BP-score: een getal dat aangeeft hoe verifieerbaar de hypothese is. De score is gebaseerd op vier meetbare criteria. Geen interpretatie. Geen subjectiviteit. Iedereen kan de score narekenen.</p>
+
+        <h3>De vier criteria</h3>
+
+        <div class="rule">
+            <div class="rule-title">Criterium 1: Aantal onafhankelijke kaarten</div>
+            <p>Hoeveel OVCG-kaarten bevatten onafhankelijk van elkaar informatie die de hypothese ondersteunt?</p>
+            <p><strong>Telling:</strong> Tel alleen kaarten die zonder kennis van elkaar dezelfde elementen bevatten. Twee kaarten die dezelfde datum, locatie of persoon noemen tellen als onafhankelijke bevestiging. Een kaart die naar een andere kaart verwijst (bv. "zie kaart van X") telt niet als onafhankelijk.</p>
+        </div>
+
+        <div class="rule">
+            <div class="rule-title">Criterium 2: Letterlijk citaat</div>
+            <p>Is de kernpropositie een letterlijk citaat van de kaart, of een interpretatie?</p>
+            <p><strong>Regel:</strong> "Ja" als de claim direct is af te lezen uit de tekst op de kaart. "Nee" als de claim een conclusie is die wij trekken uit de tekst.</p>
+            <div class="example"><strong>Ja:</strong> "Gearresteerd op 12-3-1943" — staat letterlijk op de kaart.</div>
+            <div class="example"><strong>Nee:</strong> "Was de leider van de cel" — onze interpretatie van het feit dat hij de meeste contacten had.</div>
+        </div>
+
+        <div class="rule">
+            <div class="rule-title">Criterium 3: Externe bron gecheckt</div>
+            <p>Is er een bron buiten het OVCG-archief geraadpleegd om de claim te verifieren?</p>
+            <p><strong>Regel:</strong> "Ja" als wij ten minste een specifieke externe bron (Wikipedia, oorlogsbronnen.nl, Yad Vashem, boek, archief) hebben geraadpleegd. "Nee" als de hypothese uitsluitend op OVCG-kaarten rust. Het vermelden van een externe bron in de "Open vraag"-sectie telt niet — alleen daadwerkelijk geraadpleegde bronnen tellen.</p>
+        </div>
+
+        <div class="rule">
+            <div class="rule-title">Criterium 4: Externe bron bevestigt</div>
+            <p>Bevestigt de geraadpleegde externe bron de claim?</p>
+            <p><strong>Regel:</strong> "Ja" als de externe bron dezelfde feiten bevat (naam, datum, locatie, gebeurtenis). "Nee" als de externe bron de claim tegenspreekt of niet vermeldt. Alleen van toepassing als Criterium 3 = "Ja".</p>
+        </div>
+
+        <h3>De scoretabel</h3>
+        <p>De vier criteria bepalen samen het BP. Er zijn acht mogelijke combinaties:</p>
+        <table>
+            <tr><th>Kaarten</th><th>Citaat</th><th>Extern gecheckt</th><th>Extern bevestigt</th><th style="text-align:right">BP</th></tr>
+            <tr><td>1</td><td>Nee</td><td>Nee</td><td>—</td><td style="text-align:right; color:#e85050;">10%</td></tr>
+            <tr><td>1</td><td>Ja</td><td>Nee</td><td>—</td><td style="text-align:right; color:#e8c170;">25%</td></tr>
+            <tr><td>1</td><td>Ja</td><td>Ja</td><td>Nee</td><td style="text-align:right; color:#e8c170;">30%</td></tr>
+            <tr><td>1</td><td>Ja</td><td>Ja</td><td>Ja</td><td style="text-align:right; color:#e8c170;">50%</td></tr>
+            <tr><td>2+</td><td>Ja</td><td>Nee</td><td>—</td><td style="text-align:right; color:#e8c170;">55%</td></tr>
+            <tr><td>2+</td><td>Ja</td><td>Ja</td><td>Nee</td><td style="text-align:right; color:#4caf50;">70%</td></tr>
+            <tr><td>2+</td><td>Ja</td><td>Ja</td><td>Ja</td><td style="text-align:right; color:#4caf50;">85%</td></tr>
+            <tr><td>3+</td><td>Ja</td><td>Ja</td><td>Ja</td><td style="text-align:right; color:#4caf50;">95%</td></tr>
+        </table>
+
+        <h3>Waarom geen 100%?</h3>
+        <p>Omdat de AI-transcriptie niet handmatig geverifieerd is tegen de originele kaarten. Zolang dat niet is gebeurd, blijft er een foutkans in de brontekst zelf. 95% is het maximum totdat steekproefsgewijze verificatie van de transcripties is uitgevoerd.</p>
+
+        <h3>Hoe het percentage stijgt</h3>
+        <p>Het BP kan alleen stijgen door verificatie. Concreet:</p>
+        <div class="rule">
+            <div class="rule-title">Van 25% naar 50%</div>
+            <p>Iemand checkt een externe bron (archief, boek, database) en bevestigt de claim. Dat verhoogt Criterium 3 en 4 van Nee naar Ja.</p>
+        </div>
+        <div class="rule">
+            <div class="rule-title">Van 50% naar 85%</div>
+            <p>Een tweede onafhankelijke kaart wordt gevonden die dezelfde claim ondersteunt (bv. uit de nog niet getranscribeerde 1.465 kaarten). Dat verhoogt Criterium 1 van 1 naar 2+.</p>
+        </div>
+        <div class="rule">
+            <div class="rule-title">Van 85% naar 95%</div>
+            <p>Een derde onafhankelijke bron bevestigt. Op dat punt is de hypothese zo sterk als mogelijk zonder fysieke verificatie van de originele kaart.</p>
+        </div>
+    </div>
+</section>
+
+<!-- 5. WAT DIT ARCHIEF WEL EN NIET IS -->
+<section>
+    <div class="container">
+        <h2>V. Wat dit archief wel en niet is</h2>
+
+        <h3>Wat het is</h3>
+        <p>Het OVCG-archief (Groninger Archieven, toegangsnummer 2183) is een verzameling van 4.615 handgeschreven kaarten, aangelegd na de Tweede Wereldoorlog. Elke kaart beschrijft een persoon die na de oorlog als verzetsstrijder werd erkend via een formele procedure: getuigenissen, commissiebeoordelingen, en administratieve registratie.</p>
+
+        <h3>Wat het niet is</h3>
+        <p>Het archief is geen volkstelling van het verzet. Het is een administratie van erkenning. Wie geen toegang had tot de erkenningsprocedure — wie geen getuigen had, wie niet was aangesloten bij een formele organisatie, wie niet wist dat de procedure bestond — heeft geen kaart gekregen.</p>
+        <p>Dit heeft consequenties:</p>
+        <div class="rule">
+            <div class="rule-title">Consequentie 1: Afwezigheid is geen bewijs van afwezigheid</div>
+            <p>Als iemand geen kaart heeft, betekent dat niet dat hij of zij niet in het verzet zat. Het betekent alleen dat hij of zij niet is aangemeld bij de OVCG-erkenningscommissie.</p>
+        </div>
+        <div class="rule">
+            <div class="rule-title">Consequentie 2: Het archief oververtegenwoordigt formele organisaties</div>
+            <p>Leden van LO, KP, OD en andere georganiseerde groepen hadden een aanmelder — hun organisatie. Individuen die op eigen initiatief handelden (zoals Hindertje Drenth, die 13 Joodse onderduikers verborg zonder bij een groep te horen) zijn ondervertegenwoordigd.</p>
+        </div>
+        <div class="rule">
+            <div class="rule-title">Consequentie 3: Vrouwen zijn structureel ondervertegenwoordigd</div>
+            <p>9 vrouwen op 3.150 kaarten (0,3%) weerspiegelt niet de deelname van vrouwen aan het verzet. Vrouwen die als koerierster, onderduikgeefster of informant werkten, staan vaak als bijzin op de kaart van een mannelijk familielid — als ze al voorkomen.</p>
+        </div>
+        <div class="rule">
+            <div class="rule-title">Consequentie 4: Schaal vergroot de bias, niet de volledigheid</div>
+            <p>Het transcriberen van meer kaarten maakt het archief beter doorzoekbaar. Het corrigeert niet de selectiebias van het archief zelf. 4.615 kaarten met dezelfde bias is niet vollediger dan 3.150 kaarten met dezelfde bias.</p>
+        </div>
+    </div>
+</section>
+
+<!-- 6. DE AI-TRANSCRIPTIE -->
+<section>
+    <div class="container">
+        <h2>VI. De AI-transcriptie</h2>
+
+        <h3>Proces</h3>
+        <p>4.004 kaart-thumbnails (254x300 pixels) zijn gedownload via het webportaal van de Groninger Archieven en de Wayback Machine. 3.150 daarvan zijn succesvol getranscribeerd door Google Gemini 2.5 Flash Vision AI naar gestructureerde JSON-velden: naam, schuilnaam, geboortedatum, beroep, adres, verzetsgroep, politieke partij, kerkgenootschap, verzetswerk, contactpersonen, arrestatie, onderscheidingen, overlijden, opmerkingen.</p>
+        <p>Doorlooptijd: 100 minuten in twee batches, met 19 API-keys en 8 parallelle workers.</p>
+
+        <h3>Foutbronnen</h3>
+        <div class="rule">
+            <div class="rule-title">1. Resolutie</div>
+            <p>De thumbnails zijn 254x300 pixels. Dat is voldoende voor gestructureerde tekst maar onvoldoende voor moeilijk leesbaar handschrift. De originele scans (3600x2034) zijn hoger in resolutie en kunnen tot betere transcripties leiden.</p>
+        </div>
+        <div class="rule">
+            <div class="rule-title">2. Handschrift-interpretatie</div>
+            <p>Handgeschreven namen, plaatsnamen en datums kunnen door AI verkeerd gelezen worden. "Joustra" en "Jouwstra" zijn op handschrift nauwelijks te onderscheiden. De AI-transcriptie is een eerste lezing, geen definitieve.</p>
+        </div>
+        <div class="rule">
+            <div class="rule-title">3. Structuur-interpretatie</div>
+            <p>De kaarten hebben geen vast format. Velden lopen soms in elkaar over. De AI moet interpreteren welke tekst bij welk veld hoort. Dit kan leiden tot verkeerde toewijzingen (bv. verzetswerk toegeschreven aan de verkeerde persoon).</p>
+        </div>
+        <div class="rule">
+            <div class="rule-title">4. Niet geverifieerd</div>
+            <p>Er is geen steekproefsgewijze controle uitgevoerd van de AI-transcripties tegen de originele kaarten. Dit is de belangrijkste openstaande beperking en de reden dat het maximale BP 95% is (niet 100%).</p>
+        </div>
+
+        <h3>Aanbeveling</h3>
+        <p>Wij bevelen aan dat een onafhankelijke partij een steekproef van 100 kaarten handmatig verifieert en de resultaten publiceert. Dit zou de basis leggen voor een foutmarge-schatting die het hele project versterkt.</p>
+    </div>
+</section>
+
+<!-- 7. UITNODIGING -->
+<section>
+    <div class="container">
+        <h2>VII. Uitnodiging tot kritiek</h2>
+        <p>Dit document is geen verdediging. Het is een uitnodiging. Wij vragen historici, archivarissen, nabestaanden en andere onderzoekers om:</p>
+
+        <div class="rule">
+            <div class="rule-title">1. De axioma's te betwisten</div>
+            <p>Als u vindt dat een OVCG-kaart geen primaire bron is, of dat onze definitie van onafhankelijke bevestiging te ruim is, dan willen wij dat horen. Het verandert alle scores.</p>
+        </div>
+        <div class="rule">
+            <div class="rule-title">2. De scores te controleren</div>
+            <p>Elke BP-score is narekenbaarheid op basis van vier ja/nee-vragen. Als u vindt dat wij een criterium verkeerd hebben gescoord, meld het via de <a href="index.html#inbox">inbox</a>. Wij corrigeren openlijk.</p>
+        </div>
+        <div class="rule">
+            <div class="rule-title">3. De hypotheses te verifieren</div>
+            <p>Elke hypothese bevat een onderzoeksopdracht (kopieerbaar via de clipboard-knop). Die opdracht bevat specifieke verificatiestappen en zoeklocaties. Als u een stap uitvoert en het resultaat meldt, stijgt of daalt de BP-score.</p>
+        </div>
+        <div class="rule">
+            <div class="rule-title">4. Ons te corrigeren</div>
+            <p>Als een hypothese aantoonbaar onjuist is, verwijderen wij die niet — wij markeren die als "Weerlegd" met de bron die de weerlegging levert. Transparantie betekent ook fouten laten staan, mits gemarkeerd.</p>
+        </div>
+
+        <p style="margin-top:32px; color:#e8c170; font-weight:bold;">Dit project is niet het laatste woord. Het is het eerste puzzelstukje.</p>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p><a href="index.html">&larr; Terug naar de puzzels</a></p>
+        <p style="margin-top:8px;">Martijn Aslander | Claude (Anthropic) + Gemini (Google) | April 2026</p>
+    </div>
+</footer>
+
+</body>
+</html>
