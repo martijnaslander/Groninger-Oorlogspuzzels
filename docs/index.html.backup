@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Groningse Oorlogspuzzels</title>
+<meta name="description" content="3.150 handgeschreven verzetskaarten uit Groningen, gelezen door AI in 100 minuten. Puzzelstukjes die 80 jaar in laden lagen.">
+<meta property="og:title" content="Groningse Oorlogspuzzels">
+<meta property="og:description" content="3.150 handgeschreven WOII-verzetskaarten, gelezen door AI. Puzzelstukjes die 80 jaar in laden lagen.">
+<meta property="og:type" content="website">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: Georgia, 'Times New Roman', serif;
+    background: #0a0a0f;
+    color: #d0d0d0;
+    line-height: 1.8;
+}
+a { color: #e8c170; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.container { max-width: 900px; margin: 0 auto; padding: 0 32px; }
+
+header {
+    padding: 100px 0 70px;
+    text-align: center;
+    border-bottom: 1px solid #1a1a2e;
+}
+header h1 {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 56px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -2px;
+    margin-bottom: 20px;
+}
+header .subtitle {
+    font-size: 20px;
+    color: #888;
+    max-width: 680px;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+}
+header .numbers {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    margin-top: 40px;
+}
+header .number {
+    text-align: center;
+}
+header .number .big {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: #e8c170;
+}
+header .number .label {
+    font-size: 14px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.intro {
+    padding: 80px 0;
+    border-bottom: 1px solid #1a1a2e;
+}
+.intro p {
+    font-size: 20px;
+    color: #aaa;
+    margin-bottom: 24px;
+}
+.intro .highlight {
+    color: #e8c170;
+    font-weight: bold;
+}
+
+.findings {
+    padding: 80px 0 40px;
+}
+.findings h2 {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 36px;
+    color: #fff;
+    margin-bottom: 48px;
+    text-align: center;
+}
+
+.card {
+    background: #111118;
+    border: 1px solid #1a1a2e;
+    border-radius: 12px;
+    padding: 40px;
+    margin-bottom: 32px;
+    position: relative;
+}
+.card .status {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+.status-bewezen {
+    background: #1a3a1a;
+    color: #4caf50;
+    border: 1px solid #2d5a2d;
+}
+.status-hypothese {
+    background: #3a3a1a;
+    color: #e8c170;
+    border: 1px solid #5a5a2d;
+}
+.status-onderzoeken {
+    background: #1a1a3a;
+    color: #6c9fe8;
+    border: 1px solid #2d2d5a;
+}
+.card h3 {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 24px;
+    color: #fff;
+    margin-bottom: 16px;
+    padding-right: 120px;
+}
+.card p {
+    color: #aaa;
+    margin-bottom: 12px;
+}
+.card .quote {
+    border-left: 3px solid #e8c170;
+    padding-left: 20px;
+    margin: 20px 0;
+    font-style: italic;
+    color: #ccc;
+}
+.card .source {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 12px;
+    color: #555;
+    margin-top: 16px;
+}
+.card .clipboard-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 16px;
+    padding: 8px 16px;
+    background: #1a1a2e;
+    border: 1px solid #2a2a4e;
+    border-radius: 8px;
+    color: #6c9fe8;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.card .clipboard-btn:hover {
+    background: #2a2a4e;
+    color: #8cb8f0;
+}
+.card .clipboard-btn.copied {
+    background: #1a3a1a;
+    border-color: #2d5a2d;
+    color: #4caf50;
+}
+.card .next-steps {
+    margin-top: 20px;
+    padding: 16px 20px;
+    background: #0d0d18;
+    border: 1px solid #1a1a2e;
+    border-radius: 8px;
+    display: none;
+}
+.card .next-steps.visible {
+    display: block;
+}
+.card .next-steps h4 {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 14px;
+    color: #6c9fe8;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.card .next-steps ul {
+    list-style: none;
+    padding: 0;
+}
+.card .next-steps li {
+    color: #888;
+    font-size: 14px;
+    padding: 4px 0;
+    padding-left: 16px;
+    position: relative;
+}
+.card .next-steps li:before {
+    content: "\2192";
+    position: absolute;
+    left: 0;
+    color: #555;
+}
+
+.numbers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 48px 0;
+}
+.num-card {
+    background: #111118;
+    border: 1px solid #1a1a2e;
+    border-radius: 8px;
+    padding: 24px;
+    text-align: center;
+}
+.num-card .val {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: #e8c170;
+}
+.num-card .desc {
+    font-size: 14px;
+    color: #888;
+    margin-top: 4px;
+}
+
+.method {
+    padding: 60px 0;
+    border-top: 1px solid #1a1a2e;
+}
+.method h2 {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 28px;
+    color: #fff;
+    margin-bottom: 24px;
+}
+.method p {
+    color: #888;
+    margin-bottom: 16px;
+}
+.method .levels {
+    margin: 32px 0;
+}
+.method .level {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+.method .level .badge {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+    min-width: 80px;
+    text-align: center;
+}
+.badge-hoog { background: #1a3a1a; color: #4caf50; }
+.badge-middel { background: #3a3a1a; color: #e8c170; }
+.badge-laag { background: #3a1a1a; color: #e85050; }
+
+/* BP meter */
+.card .bp {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 13px;
+}
+.bp .bp-bar {
+    width: 120px;
+    height: 6px;
+    background: #1a1a2e;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.bp .bp-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.3s;
+}
+.bp .bp-label {
+    color: #888;
+    font-size: 12px;
+}
+.bp-low .bp-fill { background: #e85050; }
+.bp-mid .bp-fill { background: #e8c170; }
+.bp-high .bp-fill { background: #4caf50; }
+
+/* Inbox section */
+.inbox {
+    padding: 60px 0;
+    border-top: 1px solid #1a1a2e;
+}
+.inbox h2 {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 28px;
+    color: #fff;
+    margin-bottom: 16px;
+}
+.inbox p {
+    color: #888;
+    margin-bottom: 16px;
+}
+.inbox-form {
+    background: #111118;
+    border: 1px solid #1a1a2e;
+    border-radius: 12px;
+    padding: 32px;
+    margin-top: 24px;
+}
+.inbox-form label {
+    display: block;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 13px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+    margin-top: 16px;
+}
+.inbox-form label:first-child { margin-top: 0; }
+.inbox-form input, .inbox-form textarea, .inbox-form select {
+    width: 100%;
+    padding: 10px 14px;
+    background: #0a0a0f;
+    border: 1px solid #2a2a4e;
+    border-radius: 6px;
+    color: #d0d0d0;
+    font-family: Georgia, serif;
+    font-size: 15px;
+}
+.inbox-form textarea { min-height: 120px; resize: vertical; }
+.inbox-form select { appearance: auto; }
+.inbox-form button {
+    margin-top: 20px;
+    padding: 12px 32px;
+    background: #e8c170;
+    color: #0a0a0f;
+    border: none;
+    border-radius: 8px;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.inbox-form button:hover { background: #f0d080; }
+.inbox-form .success {
+    display: none;
+    margin-top: 16px;
+    padding: 16px;
+    background: #1a3a1a;
+    border: 1px solid #2d5a2d;
+    border-radius: 8px;
+    color: #4caf50;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+footer {
+    padding: 60px 0;
+    border-top: 1px solid #1a1a2e;
+    text-align: center;
+    color: #555;
+    font-size: 14px;
+}
+footer a { color: #888; }
+
+@media (max-width: 600px) {
+    header h1 { font-size: 36px; }
+    header .numbers { flex-direction: column; gap: 24px; }
+    .card { padding: 24px; }
+    .card h3 { padding-right: 0; }
+    .card .status { position: static; display: inline-block; margin-bottom: 12px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <h1>Groningse Oorlogspuzzels</h1>
+        <p class="subtitle">3.150 handgeschreven verzetskaarten, gelezen door AI in 100 minuten. Puzzelstukjes die 80 jaar in laden lagen — en die nu voor het eerst in elkaar vallen.</p>
+        <div class="numbers">
+            <div class="number"><div class="big">3.150</div><div class="label">Kaarten gelezen</div></div>
+            <div class="number"><div class="big">100</div><div class="label">Minuten</div></div>
+            <div class="number"><div class="big">1.249</div><div class="label">Gearresteerd</div></div>
+            <div class="number"><div class="big">9</div><div class="label">Vrouwen met eigen kaart</div></div>
+        </div>
+    </div>
+</header>
+
+<section class="intro">
+    <div class="container">
+        <p>In het archief van het Oorlogs- en Verzetscentrum Groningen liggen 4.615 handgeschreven kaarten. Op elke kaart staat het verhaal van iemand die zich verzette tegen de Duitse bezetting. Naam, schuilnaam, beroep, verzetsgroep, contactpersonen, arrestatie, lot.</p>
+        <p>Die kaarten zijn 80 jaar lang alleen fysiek toegankelijk geweest. Om ze te lezen moest je naar Groningen, een la opentrekken, en kaart voor kaart doorwerken. <span class="highlight">Niemand heeft ooit alle kaarten gelezen.</span></p>
+        <p>In de nacht van 5 op 6 april 2026 las AI 3.150 van die kaarten. Dit zijn de verhalen die tevoorschijn kwamen.</p>
+        <p>Elke bevinding verwijst naar een inventarisnummer (minr) in de <a href="https://www.groningerarchieven.nl">Groninger Archieven</a>, toegang 2183. Alles is controleerbaar.</p>
+    </div>
+</section>
+
+<section class="findings">
+    <div class="container">
+        <h2>De verhalen</h2>
+
+        <!-- VROUWENMARS -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>116 vrouwen liepen de helsetocht. 3 kregen een verzetskaart.</h3>
+            <p>In april 1945 liepen 116 vrouwelijke gevangenen te voet van Westerbork naar Grijpskerk. Van de 17 Groningse vrouwen op die mars zijn er 3 terug te vinden als houder van een eigen OVCG-verzetskaart. 3 anderen verschijnen alleen als bijzin op de kaart van hun man of vader.</p>
+            <div class="quote">"Zijn dochter Kootje was koerierster voor NID."<br>— Kaart van Klaas Hoving (minr 1146785). Kootje liep de vrouwenmars als nr. 105.</div>
+            <div class="quote">"Koerierster, veel verzetswerk."<br>— Kaart van Albert Lunshof (minr 1153854). Over zijn vrouw Albertien, vrouwenmars nr. 104. Zij kreeg geen eigen kaart.</div>
+            <p>9 vrouwen op 3.150 kaarten. Dat is 0,3%. Niet omdat vrouwen niet meevochten. Maar omdat het formulier niet voor hen was gemaakt.</p>
+            <p class="source">Bronnen: minr 1185016 (Van Til), 1183175 (Sennema), 1155434 (Van der Munnik), 1153854 (Lunshof), 1146785 (Hoving), 1137691 (Bonninga) | vrouwenmars1945.nl</p>
+        </div>
+
+        <!-- FRE LODE -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>De man op 24 kaarten die een bedrijf oprichtte</h3>
+            <p>Freerk (Fre) Lode verschijnt als contactpersoon op 24 van de 3.150 kaarten — meer dan wie ook met een unieke naam. Hij was bureauhouder van de GDN (Geheime Dienst Nederland) in Groningen, na Wim Dibbits.</p>
+            <p>Na de oorlog richtte hij Lode's Instrumenten op (1948) — producent van de eerste elektromagnetische fietsergometer. Het bedrijf bestaat nog steeds als Lode Holding op het Zernike Science Park in Groningen.</p>
+            <p>Dit verband — tussen de verzetsspil en de bedrijfsoprichter — is niet eerder gelegd.</p>
+            <p class="source">Bronnen: minr 1153639 (eigen kaart), 24 kaarten noemen hem als contact | lode.nl | oorlogslevens.nl</p>
+        </div>
+
+        <!-- TWEE LODES -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>Twee mannen, dezelfde naam, ander lot</h3>
+            <p>Het archief bevat twee kaarten op naam van "Lode, Freerk" — twee verschillende personen uit Groningen, vier jaar leeftijdsverschil.</p>
+            <p>Freerk #1 (1912) werd GDN-bureauhouder en richtte na de oorlog een bedrijf op. Freerk #2 (1908) werd gearresteerd, gemarteld in het Scholtenhuis, gedeporteerd naar Neuengamme, en overleefde ternauwernood de Cap Arcona-bombing op het zusterschip Athen.</p>
+            <p>Bronnen die "Freerk Lode" noemen zonder verdere identificatie kunnen naar een van beide verwijzen. Dit onderscheid is niet eerder gemaakt.</p>
+            <p class="source">Bronnen: minr 1153639 (Lode #1) en 1153633 (Lode #2)</p>
+        </div>
+
+        <!-- CAP ARCONA -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>Drie Groningers op het doodsschip</h3>
+            <p>Op 3 mei 1945 bombardeerde de RAF de Cap Arcona in de Lubecker Bocht. 7.000 gevangenen aan boord, 4.500 dood. In de OVCG-kaarten staan minstens drie Groningers die op dat schip of een zusterschip zaten.</p>
+            <div class="quote">"Toen de Engelsen hoorden wat de Duitsers hadden gedaan, werden enkele SD-bewakers meegeschoten. Via Luneburgerheide-Brussel-Breda kwam Riekus in augustus 1945 thuis."<br>— Kaart van Van Dijk, Henderikus (minr 1140944). Overleefde.</div>
+            <p>Evert Franssen (minr 1142246), tekenonderwijzer, CPN — "met moeder, broer en zuster gearresteerd wegens verspreiding illegale lectuur." Overleden 25 april 1945 aan boord.</p>
+            <p>Drie mannen, dezelfde route: Groningen &rarr; Scholtenhuis &rarr; Neuengamme &rarr; Lubeck. Een stierf. Twee overleefden. Een emigreerde later naar Tasmanie.</p>
+            <p class="source">Bronnen: minr 1140944, 1142246, 1153633, 1153399</p>
+        </div>
+
+        <!-- SCHOLTENHUIS VADER -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>De vader die werd gemarteld voor zijn zoon</h3>
+            <div class="quote">"4 december 1944, in Groningen, i.v.m. werk van zijn zoon, zwaar mishandeld."<br>— Kaart van Hahn, Albertus (minr 1143270)</div>
+            <p>Een vader, opgepakt en mishandeld in het Scholtenhuis — niet voor eigen verzetswerk, maar voor dat van zijn zoon.</p>
+            <p class="source">Bron: minr 1143270</p>
+        </div>
+
+        <!-- VERRADERS -->
+        <div class="card">
+            <span class="status status-hypothese">Hypothese</span>
+            <h3>99 kaarten noemen de verrader bij naam</h3>
+            <p>Op 99 van de 3.150 kaarten wordt de persoon die tot arrestatie leidde met naam genoemd. Geesje Bleeker verschijnt 4 keer — over haar is een boek verschenen. Maar namen als Arij Rozenbroek, Adie Pijper, Huschka en Vogelsang zijn niet eerder systematisch verzameld.</p>
+            <p>Deze namenlijst is nooit gepubliceerd. Sommige namen zullen bekend zijn uit naoorlogse rechtszaken. Andere mogelijk niet.</p>
+            <p class="source">Verificatie nodig: vergelijking met Bijzondere Rechtspleging-archieven</p>
+        </div>
+
+        <!-- MEISTAKING -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>Van Groningen naar Dachau — de Meistaking-route</h3>
+            <p>Mei 1943. De grote staking. Op de kaarten is de represaille-route zichtbaar: Groningen &rarr; Scholtenhuis &rarr; Vught &rarr; Dachau.</p>
+            <div class="quote">"3-5-1943, H.V.B, Vught - Dachau, repressie Meistaking."<br>— Kaart van Faber, Ate (minr 1141962)</div>
+            <p class="source">Bronnen: minr 1136461 (Assies), 1141962 (Faber), 1142238 (Frankruyter)</p>
+        </div>
+
+        <!-- CHLOROFORM -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>De chloroform-overval van Zuidbroek</h3>
+            <div class="quote">"Benadering Landwachter Melamus middels chloroform bedwelming, in Zuidbroek, persoon had reeds chloroform in bezit."<br>— Kaart van Antonides, Hielke</div>
+            <p>Het verzet in Zuidbroek bedwelmde een Landwachter met chloroform. Een detail dat nergens in de standaard verzetsgeschiedenis verschijnt.</p>
+            <p class="source">Verificatie: kaart controleren in Groninger Archieven</p>
+        </div>
+
+        <!-- TANTE G BERLIJN -->
+        <div class="card">
+            <span class="status status-onderzoeken">Te onderzoeken</span>
+            <h3>Een Groningse vrouw op missie in Berlijn</h3>
+            <div class="quote">"Kuurierster, later secretaresse van Wim Schoenmaker op Hoofdkantoor Amsterdam. In Oorlog door Jr. White Berlijn Contra-spionage. Gedecoreerd door Prins Bernhard op 14-10-43."<br>— Kaart van Lunshof, G.H. (minr 1153857)</div>
+            <p>Geessien Lunshof, schuilnaam Tiny, ontving de Bronzen Leeuw — een van de hoogste militaire onderscheidingen. Op haar kaart staat een verwijzing naar een contra-spionagemissie in Berlijn. "Jr. White" is waarschijnlijk een codenaam.</p>
+            <p>Slechts 6 van de 3.150 kaarten noemen Berlijn. Dit is een van de zeldzaamste vermeldingen in het hele archief.</p>
+            <p class="source">Bron: minr 1153857 | Nader onderzoek: wie was "Jr. White"?</p>
+        </div>
+
+        <!-- SD OMKOPING -->
+        <div class="card">
+            <span class="status status-onderzoeken">Te onderzoeken</span>
+            <h3>De SD'er die zich liet omkopen</h3>
+            <div class="quote">"Door SD wegens pilotenhulp, tegen betaling van f 300,- aan Knorr, vrijgelaten."<br>— Kaart van Van Dijk, Mark (minr 1140051)</div>
+            <p>Een SD-functionaris genaamd Knorr accepteerde 300 gulden om een verzetsman vrij te laten. Is Knorr bekend uit andere bronnen? Was dit een patroon of een uitzondering?</p>
+            <p class="source">Bron: minr 1140051 | Verificatie nodig</p>
+        </div>
+
+        <!-- VERDWENEN -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>"Na Westerbork niets meer gehoord"</h3>
+            <div class="quote">"4.2.43 door SD, na Westerbork niets meer gehoord."<br>— Kaart van Achttienribben, Siemon (minr 1136166)</div>
+            <p>Drie woorden die een heel leven samenvatten. Hoeveel kaarten eindigen zo? Dat is een telling die nog gedaan moet worden.</p>
+            <p class="source">Bron: minr 1136166</p>
+        </div>
+
+        <!-- MULTI-GROEP -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>477 mensen zaten in drie of meer groepen</h3>
+            <p>15% van alle kaarthouders vermeldt drie of meer verzetsgroepen. Jan Kamminga (minr not available) was lid van LO, ID en Marx tegelijk. Dit doorbreekt het beeld van gescheiden organisaties.</p>
+            <p>Het bekendste voorbeeld: 159 personen waren lid van zowel LO als OD. Dat is geen toeval — dat is bewust dubbellidmaatschap.</p>
+            <p class="source">Directe telling op 3.150 kaarten</p>
+        </div>
+
+    <!-- SECTIE: KRUISVERIFICATIE -->
+    <h2 style="margin-top:80px;">Kruisverificaties</h2>
+    <p style="text-align:center; color:#888; margin-bottom:16px; max-width:680px; margin-left:auto; margin-right:auto;">Verhalen die geen enkele kaart alleen vertelt — maar die zichtbaar worden als je meerdere kaarten naast elkaar legt. Elke claim is opgebouwd uit onafhankelijke bronnen.</p>
+
+        <!-- LIJST-RAZZIA -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>De Lijst-razzia van 10 november 1944</h3>
+            <p>8 mensen gearresteerd op dezelfde dag. Vier onafhankelijke kaarten beschrijven, zonder van elkaars bestaan te weten, hetzelfde event:</p>
+            <div class="quote">"Door het vinden van een lijst op adres Riefsema, na verraad van een NSB-evacuee Spiegelberg."<br>— Kaart van Dijkstra, Ares Gerrit (minr 1141549)</div>
+            <div class="quote">"Na verraad van een NSB-emance van een adres waar men een lijst vond."<br>— Kaart van Nienhuis, Roelof Hilje (minr 1155922)</div>
+            <div class="quote">"Naar aanleiding van een NSB-verrader en een gevonden lijst op het adres Spiegelberg."<br>— Kaart van De Vries, Jacob (minr 1187590)</div>
+            <div class="quote">"Na verraad van een NSB claquee... Spiegelberg."<br>— Kaart van Zuiderhoek, Jelte (minr 1189360)</div>
+            <p><strong>Redenering (deductie):</strong> Vier kaarthouders noemen onafhankelijk dezelfde elementen: een lijst, een adres (Spiegelberg/Riefsema), een NSB-verrader, dezelfde datum. Dit is niet toeval — dit is een enkele SD-razzia die de KP Groningen trof. Iemand had een namenlijst thuis. Een NSB'er verraadde het adres. De SD vond de lijst en arresteerde iedereen die erop stond.</p>
+            <p><strong>Open vraag:</strong> Is "Spiegelberg" een adres of een persoon? Wie stonden er op die lijst? Hoeveel overleefden het? Noorman (minr 1156041), gearresteerd op dezelfde dag, eindigde in Neuengamme.</p>
+            <p class="source">Bronnen: minr 1141549, 1155922, 1187590, 1189360, 1156041, 1143637, 1143797, 1139056</p>
+        </div>
+
+        <!-- KEIJER VERGELDING -->
+        <div class="card">
+            <span class="status status-hypothese">Hypothese</span>
+            <h3>De Keijer-vergelding: 8 opgepakt na een liquidatie</h3>
+            <p>Op 25 april 1944 werden minstens 8 mensen gearresteerd in en rond Winsum. De kaarten vertellen waarom:</p>
+            <div class="quote">"Razzia te Winsum door Grune Polizei, represaille Keijer."<br>— Kaart van Heslinga, Cornelis (minr 1143728)</div>
+            <div class="quote">"I.v.m. liquidatie Keijer, vervoerd naar Duitsland."<br>— Kaart van Hummel, Herman (minr 1146946)</div>
+            <div class="quote">"I.v.m. liquidatie Keijer, naar Duitsland vervoerd."<br>— Kaart van Korthuis, Jan (minr 1152958)</div>
+            <div class="quote">"Razzia Winsum, represaille Keijzer."<br>— Kaart van Tuitman, Reinder (minr 1185378)</div>
+            <p><strong>Redenering (abductie):</strong> Het verzet liquideerde iemand genaamd Keijer of Keijzer — vermoedelijk een collaborateur of bezettingsfunctionaris. De Duitsers sloegen dezelfde dag terug met een razzia in Winsum. Minstens 8 gearresteerd, naar Vught en Duitsland gedeporteerd. De kaarten spellen de naam inconsistent (Keijer/Keijzer/Keijser) maar beschrijven onmiskenbaar dezelfde vergelding.</p>
+            <p><strong>Open vraag:</strong> Wie was Keijer? Burgemeester, politieman, NSB'er? De kaarten zeggen het niet. Checkbaar in gemeentearchieven Winsum en NIOD.</p>
+            <p class="source">Bronnen: minr 1143728, 1146946, 1152958, 1185378, 1188095, 1188071, 1137573, 1140881</p>
+        </div>
+
+        <!-- CAFE X -->
+        <div class="card">
+            <span class="status status-hypothese">Hypothese</span>
+            <h3>"Cafe X" — de laatste razzia, 2 maart 1945</h3>
+            <p>Vijf weken voor de bevrijding. 11 mensen gearresteerd op dezelfde dag. Minstens drie kaarten noemen hetzelfde verzamelpunt:</p>
+            <div class="quote">"2-3-'45 door S.D., naar cafe X gebracht. Gevangen gezeten in Scholtenhuis. H.V.B. op 16-3-'45 naar Neuengamme, laatst april bij Lubeck in zee op het schip Cap Arkona."<br>— Kaart van Van Dijk, Henderikus (minr 1140944)</div>
+            <div class="quote">"2-3-45 door S.D. en naar cafe X gebracht."<br>— Kaart van De Poel, Menno Jan (minr 1179442)</div>
+            <div class="quote">"2-3-45 door S.D., naar cafe X gebracht, IJse Marum was ook betrokken."<br>— Kaart van Van Dijk, Hindrik (minr 1140945)</div>
+            <p><strong>Redenering (deductie):</strong> "Cafe X" was een verzamelpunt — een echt cafe in Groningen waar de SD opgepakten naartoe bracht voor eerste verhoor. Drie onafhankelijke kaarten noemen het. Vandaar liep het standaardtraject: Scholtenhuis &rarr; Huis van Bewaring &rarr; transport. Voor Van Dijk en De Poel eindigde dat traject op de Cap Arcona.</p>
+            <p><strong>Keten (over 4 kaarten heen):</strong></p>
+            <p style="font-family: monospace; color: #e8c170; padding-left: 20px; font-size: 14px; line-height: 2;">
+                2 maart: razzia &rarr; "Cafe X"<br>
+                &darr;<br>
+                Scholtenhuis (verhoor/marteling)<br>
+                &darr;<br>
+                16 maart: transport Neuengamme<br>
+                &darr;<br>
+                Eind april: Lubecker Bocht, Cap Arcona<br>
+                &darr;<br>
+                3 mei: RAF-bombardement &mdash; 4.500 dood<br>
+                &darr;<br>
+                Van Dijk overleeft &rarr; Luneburgerheide &rarr; Brussel &rarr; Breda &rarr; thuis (aug '45)<br>
+                Laning overleeft &rarr; emigreert naar Kingston, Tasmanie<br>
+                Franssen overlijdt aan boord (25 april 1945)
+            </p>
+            <p><strong>Open vraag:</strong> Welk cafe was "Cafe X"? Waar in Groningen? Hoeveel van de 11 gearresteerden op 2 maart eindigden op de Cap Arcona?</p>
+            <p class="source">Bronnen: minr 1140944, 1179442, 1140945, 1142246, 1153399, 1138535, 1141715, 1140880, 1153459, 1179196, 1181610, 1182331, 1183140</p>
+        </div>
+
+        <!-- BROERS ASSIES -->
+        <div class="card">
+            <span class="status status-hypothese">Hypothese</span>
+            <h3>Drie broers, allen gearresteerd</h3>
+            <p>De familie Assies uit Marum. Drie broers, drie kaarten, drie arrestaties:</p>
+            <p><strong>Berend Assies</strong> (minr 1136461): gearresteerd 3 mei 1943, Meistaking. Gefusilleerd.</p>
+            <p><strong>Harm Assies</strong> (minr 1136464): gearresteerd 18 december 1944. Neuengamme.</p>
+            <p><strong>Jan Assies</strong> (minr 1136466): gearresteerd 10 december 1944.</p>
+            <p><strong>Redenering (abductie):</strong> De eerste broer valt bij de Meistaking in mei 1943 — gefusilleerd. Anderhalf jaar later worden de andere twee opgepakt, acht dagen na elkaar. Toeval? Of werden Harm en Jan gearresteerd omdat ze broers waren van de gefusilleerde Berend? Represaille tegen families was standaard SD-praktijk. De tijdlijn suggereert een verband dat nader onderzoek verdient.</p>
+            <p><strong>Open vraag:</strong> Was er een SD-dossier op de familie Assies? Zijn er meer families waar meerdere leden werden gearresteerd?</p>
+            <p class="source">Bronnen: minr 1136461, 1136464, 1136466</p>
+        </div>
+
+        <!-- DIJKEMA CLAN -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>De Dijkema-clan: een familieverzet</h3>
+            <p>Meer dan 10 Dijkema's in het archief, allen uit het noorden van Groningen. Meerdere KP-leden. Een van hen vertelt het duidelijkst:</p>
+            <div class="quote">"1.7.44, samen met ouders en 2 broers, voor werk aan front sleuven."<br>— Kaart van Dijkema, Kornelis (minr 1141270)</div>
+            <p>Kornelis werd samen met zijn ouders en twee broers opgepakt. Daarnaast staan in het archief: Klaas Simon Jozef (KP), Piet Harmannus (KP 1e categorie), Albartus W. (KP, RJOD, KP3), Albert Klaas (Groep 't Zandt, LO), Hendrik Jan (LO, KP), Popke (BS).</p>
+            <p><strong>Redenering (deductie):</strong> Dit is geen toeval en geen naamgenoten — dit is een familienetwerk dat meerdere KP-eenheden bemande in het noorden van Groningen. De Dijkema's waren een verzetscluster op familieniveau. Dit patroon — hele families in het verzet — is anekdotisch bekend maar nooit systematisch in kaart gebracht.</p>
+            <p><strong>Open vraag:</strong> Hoeveel families in het OVCG-archief hebben 3 of meer kaarthouders? Is er een patroon in welke families werden getroffen?</p>
+            <p class="source">Bronnen: minr 1141270, 1141269, 1141361, 1141241, 1141244, 1141264, 1141268, 1141318, 1141335, 1141352</p>
+        </div>
+
+        <!-- 13 NOV GIJZELAARS -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>De gijzelingsdag: 13 november 1943</h3>
+            <p>Op 13 november 1943 werden minstens 7 mensen gearresteerd — meerdere expliciet als "gijzelaar":</p>
+            <div class="quote">"13-11-1943, Politiebureau Groningen, als gijzelaar."<br>— Kaart van Gelderloos (minr 1142334), Staal (minr 1183656), Buist (minr 1138955)</div>
+            <div class="quote">"13-11-1943 door S.D., Kalk vluchtte de tuin in, ging langs de straatweg tussen de huizen van burgemeester vd Nedert en de Wed. Koppers door, toen werd door Duitsers op hem geschoten, hij viel vlak onder de heggesloot aan een huis. Getroffen, overleden."<br>— Kaart van Kalk, Hendrik Renze (minr 1147375)</div>
+            <p><strong>Redenering (deductie):</strong> Dit was een gijzelingsactie — de SD pakte willekeurig burgers op als drukmiddel. Drie kaarten noemen expliciet "gijzelaar." Kalk probeerde te vluchten en werd doodgeschoten in een tuin, tussen het huis van de burgemeester en dat van weduwe Koppers. Het detail van de locatie — de heggesloot, de twee huizen — is het soort informatie dat alleen op de kaart staat en nergens anders.</p>
+            <p class="source">Bronnen: minr 1142334, 1183656, 1138955, 1147375, 1136625, 1137720, 1140900</p>
+        </div>
+
+        <!-- LEHNHOFF -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>SD-agent Lehnhoff: een carriere over 9 kaarten</h3>
+            <p>De naam "Lehnhoff" duikt op in 9 onafhankelijke kaarten, verspreid over vier jaar:</p>
+            <div class="quote">"1-4-1941, door Lehnhoff, wegens communistische activiteiten (De Waarheid, Noorderlicht)."<br>— Kaart van Odenzeel, Lammert (minr 1156240)</div>
+            <div class="quote">"16 oktober 1942, door Lehnhoff + Nederl. helper."<br>— Kaart van Bos, Teunid (minr 1138398)</div>
+            <div class="quote">"Herfst 1944, door Lehnhoff, wegens Jodenhulp."<br>— Kaart van Crowwel, Cornelia Elisabeth (minr 1139277)</div>
+            <div class="quote">"Op 1 april 1945 door S.D.-er Lehnhoff in zijn woning te Bedum doodgeschoten, nadat een eerdere zoekactie te Heren mislukte."<br>— Kaart van Wolters, Freerk Simon (minr 1188971)</div>
+            <p><strong>Redenering (abductie):</strong> Geen enkele kaartschrijver wist van de andere kaarten. Toch tekenen ze samen het profiel van een SD-agent: communistenjager in 1941, arrestant in 1942, Jodenjager in 1944, moordenaar in 1945. Lehnhoff schoot Wolters dood twee weken voor de bevrijding. De kaarten documenteren onbedoeld de carriere van een dader.</p>
+            <p><strong>Open vraag:</strong> Is Lehnhoff berecht na de oorlog? Zijn er meer SD-agenten wier naam op meerdere kaarten verschijnt?</p>
+            <p class="source">Bronnen: minr 1156240, 1138398, 1139277, 1188971, 1156527, 1183792, 1136322, 1136427, 1136429</p>
+        </div>
+
+        <!-- WOLTERS -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>Doodgeschoten op 1 april 1945</h3>
+            <div class="quote">"Op 1 april 1945 door S.D.-er Lehnhoff in zijn woning te Bedum doodgeschoten, nadat een eerdere zoekactie te Heren mislukte. Een andere gezochte persoon was ontvlucht."<br>— Kaart van Wolters, Freerk Simon (minr 1188971)</div>
+            <p>Veertien dagen voor de bevrijding. De SD wist dat het voorbij was. En schoot nog.</p>
+            <p><strong>Redenering (deductie):</strong> De kaart vermeldt dat een "eerdere zoekactie te Heren mislukte" en dat "een andere gezochte persoon was ontvlucht." Lehnhoff zocht iemand, vond hem niet, ging door naar het volgende adres in Bedum, en schoot Wolters dood. De chronologie op de kaart beschrijft een jacht die eindigt met een moord.</p>
+            <p class="source">Bron: minr 1188971</p>
+        </div>
+
+        <!-- MARECHAUSSEES -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>15 marechaussees met een dubbelleven</h3>
+            <p>15 marechaussees in het archief met schuilnamen en verzetswerk. Ze werkten overdag voor het gezag en 's nachts ertegen:</p>
+            <div class="quote">"Weigering administratie Landwacht op te bemannen."<br>— Kaart van De Groot, Marten (minr 1142761). Gearresteerd omdat hij weigerde de Landwacht te helpen.</div>
+            <div class="quote">"27-7-1944 door S.D., neergeschoten door Trupi d'Hus na verraad door Geesje Bleeker."<br>— Kaart van Van der Heide, Hijlke (minr 1143621). Marechaussee, KP+LO+OD. Weigerde eerder een Joods echtpaar te arresteren.</div>
+            <p><strong>Redenering (deductie):</strong> 50% van alle politiemensen in het archief werd gearresteerd — het hoogste percentage van alle beroepsgroepen. Ze liepen het meeste risico omdat ze van binnenuit werkten. Hun schuilnamen (Grep, Harry, Flip, Ben, Piet Brinkman) tonen dat ze niet alleen passief weigerden maar actief een tweede identiteit aannamen.</p>
+            <p><strong>Open vraag:</strong> Hoeveel marechaussees in Groningen zaten er in totaal? Welk percentage koos voor verzet? Was er een georganiseerd politieverzet?</p>
+            <p class="source">Bronnen: minr 1143621, 1142761, 1140748, 1140784, 1139732, 1139886, 1141922, 1147218, 1146961, 1146530, 1143795, 1144011, 1146605, 1147275, 1147423, 1147674</p>
+        </div>
+
+        <!-- TREINONTSNAPPING -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>Ontsnapt uit een trein bij Nieuweschans</h3>
+            <div class="quote">"8-2-45, door S.D. in zijn huis, gevangen gezeten in Winschoten, Groningen, Friesland, op 13-4-45 ontsnapt uit trein in Nieuweschans."<br>— Kaart van De Raad, Klaas Jan (minr 1179799)</div>
+            <p>13 april 1945. Een dag voordat de vrouwenmars werd bevrijd bij Grijpskerk. De treinen reden nog. Mensen sprongen eruit.</p>
+            <p><strong>Redenering (abductie):</strong> De SD transporteerde gevangenen per trein naar het oosten terwijl de Canadezen van het westen naderden. In die chaos van de laatste dagen sprongen mensen uit rijdende treinen. De Raad sprong bij Nieuweschans — de grens met Duitsland. Een dag later was het voorbij.</p>
+            <p class="source">Bron: minr 1179799</p>
+        </div>
+
+        <!-- BUCHENWALD ONTSNAPPING -->
+        <div class="card">
+            <span class="status status-onderzoeken">Te onderzoeken</span>
+            <h3>Ontvlucht uit Buchenwald</h3>
+            <div class="quote">"7/12/1943 door I.D. op aanwijzing van verraad door B. Homan. Gevangen gezeten in Utrecht, Amersfoort, Buchenwald (ontvlucht). Door vlucht is gegaan en ondergedoken."<br>— Kaart van Van der Veen, Hendrik (minr 1186039)</div>
+            <p>Ontsnappen uit Buchenwald was bijna onmogelijk. Toch staat het er: "ontvlucht." En daarna ondergedoken.</p>
+            <p><strong>Redenering (abductie):</strong> Ontsnappingen uit Buchenwald zijn uiterst zeldzaam maar gedocumenteerd. De kaart noemt ook de verrader: B. Homan — dezelfde naam die op een andere kaart verschijnt. Als Van der Veen werkelijk uit Buchenwald ontsnapte, is dit een van de weinige gedocumenteerde gevallen vanuit Groningen.</p>
+            <p><strong>Open vraag:</strong> Is dit verifieerbaar via de Arolsen Archives (voorheen ITS)? Zijn er meer Groningers die uit een concentratiekamp ontsnapten?</p>
+            <p class="source">Bron: minr 1186039 | Verificatie: Arolsen Archives</p>
+        </div>
+
+        <!-- PHILIPS COMMANDO -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>Het Philips Commando: van Vught naar Auschwitz</h3>
+            <div class="quote">"10-7-1942: werkkamp Bals. 1-8-1942: werkkamp Sellingerbosch. Begin april 1943: naar Vught. Maart 1944: met het Philips Commando overgeplaatst naar Westerbork. Juni 1944: gezonden naar concentratiekamp Auschwitz."<br>— Kaart van Evert van der Wal (minr 1143323)</div>
+            <p>Een volledige deportatieroute over twee jaar — vijf kampen, eindigend in Auschwitz. Het "Philips Commando" was een groep gevangenen die in Kamp Vught voor Philips werkten. Sommigen werden via Westerbork naar Auschwitz gestuurd.</p>
+            <p><strong>Redenering (deductie):</strong> De kaart documenteert elke stap met datum en locatie. Dit is geen herinnering — dit is een administratief spoor. De route Bals &rarr; Sellingerbosch &rarr; Vught &rarr; Westerbork &rarr; Auschwitz is verifieerbaar via kampregistraties. Het Philips Commando is historisch gedocumenteerd; de individuele Groningse deelnemers via OVCG niet.</p>
+            <p class="source">Bron: minr 1143323 | Verificatie: Gedenkstatte Vught, Herinneringscentrum Westerbork, Auschwitz Memorial</p>
+        </div>
+
+        <!-- BURGEMEESTER BEVRIJD -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>KP bevrijdt burgemeester uit gevangenis</h3>
+            <div class="quote">"Gearresteerd op 12-5-44, gevangen gezeten in H.V.B. Assen. Bevrijd op 11-12-44 uit H.V.B. Assen door KP Noord-Drenthe."<br>— Kaart van Row Rema, burgemeester van Zuidlaren (minr 1181643)</div>
+            <p>De Knokploeg Noord-Drenthe pleegde een gewapende overval op het Huis van Bewaring in Assen om een burgemeester te bevrijden. Dat is niet een onderduikactie — dat is een aanval op een overheidsgebouw.</p>
+            <p><strong>Redenering (deductie):</strong> De kaart vermeldt "LO + sabotage" als verzetsgroep en de bevrijding door KP als feit. De KP in Noord-Drenthe was kennelijk in staat om gevangenen uit het Huis van Bewaring te halen. Hoe vaak gebeurde dit? Wie zaten er nog meer in die gevangenis?</p>
+            <p><strong>Open vraag:</strong> Is deze bevrijdingsactie gedocumenteerd in de geschiedschrijving van de KP Noord-Drenthe?</p>
+            <p class="source">Bron: minr 1181643</p>
+        </div>
+
+        <!-- LIJST-RAZZIA VERVOLG -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>Van namenlijst tot executie: 4 opgehangen in Neuengamme</h3>
+            <p>De Lijst-razzia van 10 november 1944 had een vervolg. Minstens vier van de gearresteerden werden opgehangen in Neuengamme:</p>
+            <div class="quote">"10-11-1944 door S.D., door het vinden van een lijst op adres Riefsema, na verraad van een M.B.S.-evacuee Spiegelberg."<br>Overleden: "21-2-1945, opgehangen, te Neuengamme."<br>— Kaart van Dijkstra, Ares Gerrit, 25 jaar, kantorbediende (minr 1141549)</div>
+            <div class="quote">"16-11-1944, Scholtenshuis (zolder), door S.D."<br>Overleden: "22-2-1945, opgehangen te Neuengamme."<br>— Kaart van Jagt, Gerardus, directeur restaurant Suisse (minr 1147121)</div>
+            <p><strong>Redenering (deductie):</strong> De hele keten is reconstrueerbaar over 4 onafhankelijke kaarten: een namenlijst op een adres &rarr; een NSB'er verraadt het &rarr; SD-razzia 10 november &rarr; Scholtenhuis &rarr; transport naar Neuengamme &rarr; opgehangen in februari 1945. Vier mannen, vier kaarten, een keten. Geen enkele kaart vertelt het hele verhaal. Samen beschrijven ze een systeem.</p>
+            <p>De moeder van Dijkstra emigreerde na de oorlog naar Canada.</p>
+            <p class="source">Bronnen: minr 1141549 (Dijkstra), 1147121 (Jagt), 1154734 (Mulder), 1187590 (De Vries)</p>
+        </div>
+
+        <!-- SELMA VAN HASSELT -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>Herkend als Jodin in de trein</h3>
+            <div class="quote">"Januari 1944, in de trein, door een vroegere schoolvriend die bij de SS was en haar als Jodin kende."<br>— Kaart van Selma van Hasselt, 23 jaar, verpleegster</div>
+            <p>Selma van Hasselt, geboren 9 maart 1920 in Groningen. Verpleegster. Koerierster voor Top-LKP Johannes Post — een van de bekendste verzetsleiders van Nederland.</p>
+            <p>In de trein herkend door een voormalige klasgenoot die bij de SS was gegaan. Westerbork. Maart 1944 naar Duitsland. <strong>Vergast te Malchow, april 1945</strong> — een maand voor de bevrijding.</p>
+            <p><strong>Redenering (abductie):</strong> Een toevallige ontmoeting in een trein. Twee voormalige klasgenoten. De een koos voor het verzet, de ander voor de SS. Dat moment van herkenning — misschien een seconde — kostte haar het leven. De kaart legt vast wat geen geschiedenisboek kan: het toeval dat doodt.</p>
+            <p class="source">Bron: OVCG-kaart Selma van Hasselt | Johannes Post: Wikipedia</p>
+        </div>
+
+        <!-- 17-JARIGEN -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>Twee zeventienjarigen</h3>
+            <div class="quote">"27-12-1944, Groenmarkt Groningen, transport via Helmershaven, aankomst Neuengamme 17 april 1945."<br>— Kaart van H.M. Hemstra, geboren 25 januari 1927 (minr 1153512). Hij was 17.</div>
+            <div class="quote">"25-4-1944, i.v.m. liquidatie Keijzer, naar Duitsland vervoerd."<br>— Kaart van Kuipers, Jan, geboren 25 februari 1927 (minr 1153328). Groentekweker. Hij was 17.</div>
+            <p><strong>Redenering (deductie):</strong> Hemstra was 17 toen hij op de Groenmarkt werd opgepakt en naar Neuengamme gestuurd. Kuipers was 17 toen hij werd opgepakt als represaille voor de liquidatie van Keijzer — een actie die hij niet pleegde. Twee jongens, twee kaarten. De geboortedatums staan erop. De rekensom is simpel en onweerlegbaar.</p>
+            <p class="source">Bronnen: minr 1153512 (Hemstra), 1153328 (Kuipers)</p>
+        </div>
+
+        <!-- PTT NETWERK -->
+        <div class="card">
+            <span class="status status-hypothese">Hypothese</span>
+            <h3>Het PTT-netwerk: 10 postbodes in het verzet</h3>
+            <p>10 PTT-ambtenaren in het archief. Postbodes, telefonisten, een chef-verkeersstation. Verspreid over Groningen, Leeuwarden, Delfzijl:</p>
+            <div class="quote">"Besteller PTT"<br>— Kaart van Jobse, Gerrit Albertus (minr 1147225). GDN + KP. Woonde later in Australie.</div>
+            <p>Daarnaast: Dijkhuis (PTT-ambtenaar, GV), Van Halsema (PTT-ambtenaar, GV C), Heuvringh (ambtenaar PTT, AM LO KP3), Klein (postbode, LO+NSF+OD), Noorman (ambtenaar PTT, KP), Oosterum (postbode, LO), Verheul (ambtenaar PTT, K-groep LO).</p>
+            <p><strong>Redenering (abductie):</strong> De PTT was de ideale dekmantel. Postbodes kwamen overal, op elk tijdstip, zonder argwaan te wekken. Ze kenden elke deur, elke route, elk adres. 10 PTT'ers in 3.150 kaarten is statistisch niet bijzonder — maar hun spreiding over meerdere verzetsgroepen (GDN, KP, LO, GV, OD) suggereert dat de PTT als institutie werd gebruikt als verzetsinfrastructuur.</p>
+            <p><strong>Open vraag:</strong> Was er een georganiseerd PTT-verzet in Noord-Nederland? Kenden deze 10 elkaar? De kaarten noemen elkaar niet als contactpersoon — dat kan wijzen op compartimentering.</p>
+            <p class="source">Bronnen: minr 1147225, 1141423, 1143340, 1143798, 1143756, 1147679, 1147707, 1156057, 1156496, 1186838</p>
+        </div>
+
+        <!-- DIASPORA -->
+        <div class="card">
+            <span class="status status-hypothese">Hypothese</span>
+            <h3>De diaspora: zij die weggingen</h3>
+            <p>Na de oorlog vertrokken verzetsmensen uit Groningen naar het buitenland. De kaarten registreren hun latere adressen:</p>
+            <div class="quote">"Geemigreerd naar Australie."<br>— Kaart van Van Dam-De Vries (minr 1139430). LO. Doorgangshuis voor Joden en onderduikers aan de Tuinbouwstraat 27A.</div>
+            <div class="quote">"Huidig adres: 284 The Helleide Rynmond, Pretoria 0081, Zuid-Afrika."<br>— Kaart van Dijkstra, Berend (minr 1141576). OD + BS.</div>
+            <div class="quote">"Bevrijd in april 1945 uit Braunschweig door Canadezen. Begraven in Australie."<br>— Kaart van Van der Denk, Jakob (minr 1140237). LO+OD+KP. Gearresteerd met zijn vrouw, Scholtenhuis, Amersfoort. Stierf 1973 in Australie.</div>
+            <p>Daarnaast: Laning (Cap Arcona-overlevende, Tasmanie), moeder Dijkstra (zoon opgehangen Neuengamme, Canada).</p>
+            <p><strong>Redenering (abductie):</strong> Waarom vertrokken ze? De kaarten zeggen het niet. Maar het patroon suggereert een verband: mensen die het ergste hadden meegemaakt — doorgangshuis voor Joden, Scholtenhuis, executie van een zoon — verlieten Groningen. De stad die ze hadden beschermd was onleefbaar geworden door wat ze er hadden gezien. Dit is geen emigratie. Dit is vlucht uit de herinnering.</p>
+            <p><strong>Open vraag:</strong> Hoeveel OVCG-kaarthouders emigreerden? Is er een patroon in wie wegging en wie bleef?</p>
+            <p class="source">Bronnen: minr 1139430, 1141576, 1140237, 1153399, 1141549</p>
+        </div>
+
+        <!-- 13 JODEN IN EEN HUISJE -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>14 mensen in een huisje: Hindertje Drenth</h3>
+            <div class="quote">"Herbergen (verbergen) van 13 joodse onderduikers in haar huisje en een gedeserteerde Oostenrijker."<br>— Kaart van Drenth - van der Sluis, Hindertje (minr 1140559)</div>
+            <p>Hindertje Drenth. Krommewijk, Onstwedde. Boerenarbeidersgezin. Geen verzetsgroep. Geen schuilnaam. Geen onderscheiding. Gewoon een vrouw die 14 mensen in haar huisje verstopte.</p>
+            <p>Haar man Willem was boerenarbeider en is "inmiddels overleden." De kaart staat op haar naam met toevoeging "van der Sluis" — meisjesnaam. Ze is nooit gearresteerd. Ze heeft nooit een onderscheiding gekregen.</p>
+            <p><strong>Redenering (abductie):</strong> 13 Joodse onderduikers plus een gedeserteerde Oostenrijker in een boerenarbeidershuisje in Onstwedde. Dat is geen incidentele hulp — dat is een schuilplaats op industriele schaal, in een klein huis, maandenlang, zonder enige organisatorische steun (geen verzetsgroep vermeld). De vraag die de kaart niet beantwoordt: wie waren die 13? En waarom kreeg Hindertje geen Yad Vashem-onderscheiding?</p>
+            <p><strong>Open vraag:</strong> Is Hindertje Drenth bekend bij Yad Vashem als Rechtvaardige onder de Volkeren? Zijn de 13 Joodse onderduikers identificeerbaar?</p>
+            <p class="source">Bron: minr 1140559 | Verificatie: Yad Vashem database, Joods Monument</p>
+        </div>
+
+        <!-- PRIJSLIJST SD -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>De prijslijst van de SD</h3>
+            <p>Minstens 8 kaarten beschrijven boetes waarmee de SD gevangenen vrijliet. Samen vormen ze een informele prijslijst:</p>
+            <div class="quote">"Juni 1944 gearresteerd, vrijgelaten tegen fl. 1000 boete. Februari 1945 gearresteerd, vrijgelaten tegen fl. 400 boete."<br>— Kaart van De Jager, Johannes Wilm (minr 1147114). Tweemaal gepakt, tweemaal afgekocht.</div>
+            <div class="quote">"Razzia door S.D. Vrijgelaten na betaling van een boete van f. 300,- (bemiddeld door Matthijs Fokkens uit Poelestraat)."<br>— Kaart van Fokkens, Willem (minr 1142148). Een familielid bemiddelde.</div>
+            <div class="quote">"Augustus 1944, wegens bezit radiotoestel. Vrijgelaten na betaling f. 500,- boete."<br>— Kaart van Flonk, Jan (minr 1142125)</div>
+            <p>De bedragen: fl. 200 (4 onderduikers), fl. 250 (Scholtenhuis), fl. 300 (onderduiker + pilotenhulp), fl. 500 (razzia/radio), fl. 1.000 (provinciaal bestuurslid). Bij de tweede arrestatie van De Jager zakte de prijs naar fl. 400.</p>
+            <p><strong>Redenering (abductie):</strong> Acht onafhankelijke kaarten beschrijven hetzelfde verschijnsel: de SD liet gevangenen vrij tegen betaling. De bedragen varieren maar volgen een patroon — hoe belangrijker de gevangene, hoe hoger het bedrag. Dit was geen genade en geen officiele procedure. Dit was corruptie als systeem. De kaarten documenteren onbedoeld een zwarte markt in mensenlevens.</p>
+            <p><strong>Redenering (deductie):</strong> Op de kaart van De Jager staat ook de verrader: "Mw. P. Domburg, echtgenote van een employe — zij werd door het Bijzonder Gerechtshof veroordeeld." De hele keten — verzet, verraad, omkoping, berechting — staat op een enkele kaart. Daarnaast noemt De Jager als contactpersoon "Jr. Mansholt" — waarschijnlijk Sicco Mansholt, later EU-commissaris voor Landbouw.</p>
+            <p><strong>Open vraag:</strong> Was de SD-corruptie in Groningen systematisch? Wie inde de boetes — individuele SD'ers of de organisatie? Hoeveel families konden niet betalen?</p>
+            <p class="source">Bronnen: minr 1147114, 1142259, 1142125, 1143350, 1142148, 1140051, 1187994, 1142141</p>
+        </div>
+
+        <!-- DOLLE DINSDAG -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>Dolle Dinsdag op de kaarten</h3>
+            <div class="quote">"Hendrik Bos, die door Hamminga ondergedoken was, werd ook gearresteerd op 25-8-1944 en vrijgelaten op Dolle Dinsdag (5 september 1944)."<br>— Kaart van Hamminga, Harm Pieter (minr 1143350)</div>
+            <div class="quote">"Zij heeft op Dolle Dinsdag de pistolen die hij had gehaald..."<br>— Kaart van Riensema, Luken (minr 1180509). Vier schuilnamen: H. Beerman, Oom Henk, T. Timot, F.F. Wallen.</div>
+            <p>5 september 1944. Het gerucht dat Breda bevrijd was. Duitsers in paniek. Gevangenen vrijgelaten. Wapens uit schuilplaatsen gehaald.</p>
+            <p><strong>Redenering (deductie):</strong> Dolle Dinsdag is historisch gedocumenteerd als massale paniek. Maar de kaarten tonen wat er op individueel niveau gebeurde: Bos werd vrijgelaten uit detentie (de bewakers lieten mensen gaan), en Riensema's vrouw haalde de verstopte pistolen tevoorschijn (het verzet dacht dat het voorbij was). Twee kaarten, twee kanten van dezelfde dag.</p>
+            <p class="source">Bronnen: minr 1143350 (Hamminga/Bos), 1180509 (Riensema)</p>
+        </div>
+
+        <!-- STRAFKAMP FARMSUM -->
+        <div class="card">
+            <span class="status status-hypothese">Hypothese</span>
+            <h3>Strafkamp Farmsum: het vergeten lokale kamp</h3>
+            <div class="quote">"Overgebracht naar strafkamp Farmsum op 18 oktober 1944, terug op 15 november 1944."<br>— Kaart van Bruno Drenthe (minr 1140518)</div>
+            <p>5 kaarten noemen "strafkamp Farmsum" — een kamp bij Delfzijl. Gevangenen werden er naartoe gestuurd vanuit het Scholtenhuis, soms voor weken, soms voor maanden.</p>
+            <p><strong>Redenering (abductie):</strong> Westerbork, Vught, Amersfoort zijn de bekende kampen. Farmsum is dat niet. Maar het bestond, en het functioneerde als lokaal strafkamp voor Groningse gevangenen. 5 vermeldingen op 3.150 kaarten is weinig — maar het is mogelijk dat Farmsum onder een andere naam of als onderdeel van een groter complex bekender is. De kaarten leveren het eerste aanknopingspunt.</p>
+            <p><strong>Open vraag:</strong> Wat was strafkamp Farmsum precies? Waar stond het? Hoeveel gevangenen gingen erdoor? Is het gedocumenteerd in de kampregistraties?</p>
+            <p class="source">Bronnen: minr 1140518, 1140290, 1142130, 1142119, 1155927</p>
+        </div>
+
+        <!-- HINDERTJE CONTEXT -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>De vrouw zonder organisatie</h3>
+            <p>Hindertje Drenth verborg 13 Joodse onderduikers. Maar op haar kaart staat geen verzetsgroep. Geen LO, geen KP, geen OD. Ze handelde alleen — of met een netwerk dat de kaartschrijver niet kende.</p>
+            <p>Dit is het patroon dat de Magische 13-analyse blootlegde: het archief documenteert niet het verzet, maar wie als verzetsstrijder werd erkend. Hindertje viel buiten de formele erkenningsstructuur. Ze was geen lid van een organisatie. Ze was gewoon iemand die haar deur opendeed.</p>
+            <p>Ze is een van de 9 vrouwen met een eigen kaart. Maar haar kaart vermeldt geen groep, geen schuilnaam, geen onderscheiding. Alleen wat ze deed: 14 mensen verbergen.</p>
+            <p><strong>Redenering (deductie):</strong> De OVCG-kaarten zijn aangelegd via verzetsorganisaties: LO, KP, OD meldden hun leden aan. Wie buiten die organisaties opereerde, had geen aanmelder. Dat Hindertje uberhaupt een kaart heeft, is opmerkelijk — waarschijnlijk doordat haar verhaal via het rapport "Beck H.D. bladzijde 144" werd opgetekend. Hoeveel Hindertjes hadden geen rapport en dus geen kaart?</p>
+            <p class="source">Bron: minr 1140559</p>
+        </div>
+
+        <!-- CORNELIA ZWIJGT -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>De vrouw die niet brak</h3>
+            <div class="quote">"Meerdere keren gearresteerd, op het Scholtenshuis en in het Huis van Bewaring te Groningen. Scherpe verhoren maar niets prijsgegeven, steeds weer vrijgelaten."<br>— Kaart van Hoving-van Harn, Cornelia (minr 1146635)</div>
+            <p>LO, OD, KP. Koerierster. "Medewerkster van haar man, oome Kees." Meerdere keren in het Scholtenhuis — de martelkamer van de SD in Groningen. Ze zweeg. Ze werd vrijgelaten. Ze ging door.</p>
+            <p><strong>Redenering (deductie):</strong> "Steeds weer vrijgelaten" betekent dat de SD haar meerdere keren oppakte en meerdere keren niet genoeg bewijs had. Dat bewijs hadden ze wel gekregen als ze had gepraat — haar man zat in LO, OD en KP. Haar zwijgen beschermde niet alleen haarzelf maar het hele netwerk rond "oome Kees." De kaart registreert dit in twee zinnen. Geen onderscheiding vermeld.</p>
+            <p class="source">Bron: minr 1146635</p>
+        </div>
+
+        <!-- RICHTERS DUITSER -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>Een Duitser verborg wapens in een Nederlands gemeentehuis</h3>
+            <div class="quote">"Waarschuwde via inlichtingen van politie meermalen voor razzia's. Verborg wapens in Gemeentehuis Ten Boer."<br>"5.1.1945, overval op Gemeentehuis, waar wapens werden gevonden door S.D."<br>Overleden: "7.2.1945, Neuengamme."<br>— Kaart van Richters, Gerhardus (minr 1180408)</div>
+            <p>Geboren 8 september 1910 in <strong>Ibbenbueren, Duitsland</strong>. Gemeentesecretaris van Ten Boer. OD, BS. Waarschuwde voor razzia's. Verborg wapens in het gemeentehuis. Gearresteerd toen de SD die wapens vond. Stierf een maand later in Neuengamme.</p>
+            <p><strong>Redenering (abductie):</strong> Een in Duitsland geboren ambtenaar koos voor het Nederlandse verzet, gebruikte zijn positie om wapens te verbergen in een overheidsgebouw, en waarschuwde burgers voor razzia's. Hij stierf in een Duits concentratiekamp. De paradox — een Duitser die stierf in een Duits kamp omdat hij voor Nederland koos — staat nergens zo scherp als op deze kaart.</p>
+            <p><strong>Open vraag:</strong> Wanneer emigreerde Richters naar Nederland? Waren er meer Duits-geboren verzetsmensen in Groningen? De data toont minstens 3 (Richters, Grunewald uit Offenbach, Boomsma uit Behlinghausen).</p>
+            <p class="source">Bron: minr 1180408 | Verificatie: gemeentearchief Ten Boer, KZ-Gedenkstatte Neuengamme</p>
+        </div>
+
+        <!-- WESTERDIJK ZENDER + MASSAGRAF -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>De zender op de boerderij, het massagraf bij Norg</h3>
+            <div class="quote">"Radiodienst O.D., zender van Atlanta hier geplaatst."<br>"6-2-45, Radiostation, door overval v.d. S.D., zwaargewond."<br>Overleden: "8-4-45 te Norg. Gevonden in massagraf te Norg."<br>— Kaart van Westerdijk, Bene Roelf (minr 1188348)</div>
+            <p>Landbouwer, 35 jaar. Had een illegale zender ("Atlanta") op zijn boerderij bij Withwichmeeden. SD-overval op 6 februari 1945. Zwaargewond. Twee maanden later overleden. Gevonden in een massagraf bij Norg.</p>
+            <p>Op de kaart staat ook: "V. Til Buurma heeft gewaarschuwd voor onvoorzichtigheid." Iemand had hem gewaarschuwd. Het hielp niet.</p>
+            <p><strong>Redenering (deductie):</strong> Minstens 10 kaarten in de dataset noemen Norg of Anloo als plaats van executie of als vindplaats van een massagraf. Dit waren executieplaatsen in de laatste oorlogsweken — de SD doodde gevangenen vlak voor de bevrijding. Westerdijk werd niet gefusilleerd maar stierf aan zijn verwondingen en werd in het massagraf gelegd. De 10 kaarten samen tekenen de contouren van een systematische moordoperatie in de laatste weken.</p>
+            <p><strong>Open vraag:</strong> Hoeveel slachtoffers liggen in het massagraf bij Norg? Zijn alle 10 kaarthouders die Norg noemen daar begraven?</p>
+            <p class="source">Bron: minr 1188348 | Gerelateerde kaarten bij Norg: minr 1146799, 1153126, 1178987, 1184327, 1186366, 1187585, 1188605, 1138535, 1138664</p>
+        </div>
+
+        <!-- BEREND TRIP -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>"Hij nam alle schuld op zich"</h3>
+            <div class="quote">"Gearresteerd op 2 mei 1943 in Nieuw-Buinen na het toespreken van stakers op de stakingsdag (1 mei 1943). Hij nam alle schuld op zich voor het Polizei-Standgericht-Groningen."<br>— Kaart van Berend Trip (minr 1185345)</div>
+            <p>Meistaking, mei 1943. Trip sprak stakers toe. Werd opgepakt. En nam bij het Polizei-Standgericht alle schuld op zich — om de anderen te beschermen.</p>
+            <p><strong>Redenering (deductie):</strong> "Alle schuld op zich nemen" bij een Standgericht is een doodvonnis accepteren. Trip wist dat. De kaart vermeldt niet of het vonnis werd uitgevoerd — maar het feit dat het Standgericht wordt genoemd (een spoedrechtbank voor de zwaarste gevallen) maakt duidelijk dat dit geen routinearrestatie was. De Meistaking in Groningen kostte meerdere levens. Trip koos ervoor de prijs alleen te betalen.</p>
+            <p><strong>Open vraag:</strong> Heeft Trip het overleefd? De kaart vermeldt geen overlijdensdatum. Is hij berecht of is het vonnis niet uitgevoerd?</p>
+            <p class="source">Bron: minr 1185345</p>
+        </div>
+
+        <!-- ILONE GROENEWOLD -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>Van Bergen-Belsen tot de rechtszaal</h3>
+            <p>Ilone Groenewold. Onderduikers geholpen. Illegale bladen verspreid. Gewapend verzet. Contacten met de illegale pers en de ondergrondse beweging. 1944 gearresteerd door SD. Westerbork. <strong>Bergen-Belsen. Overleden 1945.</strong></p>
+            <div class="quote">"Een onderzoek naar de daders van de arrestatie is ingesteld. De gedaagden waren Jacob H. en zijn familie, betrokken bij Jodenvervolging en collaboratie. Jacob H. is ter dood veroordeeld. De veroordeling is later door de Bijzondere Raad van Cassatie vernietigd."<br>— Kaart van Ilone Groenewold (minr 1142706)</div>
+            <p><strong>Redenering (deductie):</strong> Dit is de enige kaart in de dataset die de volledige boog beschrijft: verzet &rarr; verraad &rarr; deportatie &rarr; dood &rarr; naoorlogse rechtszaak &rarr; veroordeling &rarr; cassatie. De verrader werd ter dood veroordeeld maar dat vonnis werd later vernietigd door de Bijzondere Raad van Cassatie. De kaart documenteert niet alleen het oorlogsverhaal maar ook het falen van de naoorlogse gerechtigheid — tenminste vanuit het perspectief van de familie die de rechtszaak aanspande.</p>
+            <p><strong>Open vraag:</strong> Wie was "Jacob H."? Is het cassatie-arrest vindbaar? Dr. G. Chr. Aalders (VU) wordt als betrokkene genoemd — heeft hij hierover gepubliceerd?</p>
+            <p class="source">Bron: minr 1142706 | Verificatie: Bijzondere Raad van Cassatie-archieven, Nationaal Archief</p>
+        </div>
+
+        <!-- BURGEMEESTER BEVRIJD DOOR DUITSER -->
+        <div class="card">
+            <span class="status status-onderzoeken">Te onderzoeken</span>
+            <h3>Een Duitse officier bevrijdde een Nederlandse burgemeester</h3>
+            <div class="quote">"Bevelen Duitsers op te volgen geweigerd, op 3-5-43 ontslagen. Door Standgericht ter dood veroordeeld."<br>"Bevrijd op 19-5-43 uit H.V.B. door Maj. Johann Michels cmdt v./v. 71/211 bataljon."<br>— Kaart van Gerrits Karel, burgemeester Stadskanaal (minr 1142403)</div>
+            <p>Burgemeester Gerrits weigerde Duitse bevelen op te volgen. Ter dood veroordeeld door een Standgericht. Maar twee weken later bevrijd uit het Huis van Bewaring door <strong>Majoor Johann Michels</strong> — commandant van een Duits bataljon.</p>
+            <p><strong>Redenering (abductie):</strong> Een Duitse majoor bevrijdde een ter dood veroordeelde Nederlandse burgemeester uit de gevangenis. Dit is geen standaardprocedure. Michels handelde ofwel op eigen gezag (militair verzet), ofwel via een bevel dat het Standgericht-vonnis overrulede. In beide gevallen is dit een uitzonderlijk verhaal: een Duitser die een Nederlander redde van de dood. Gecombineerd met Richters (Duits-geboren gemeentesecretaris die stierf in Neuengamme) toont dit dat de scheidslijn niet nationaal was maar individueel.</p>
+            <p>De kaart vermeldt ook: "Wel medewerking verleend aan registratie Joden" — Gerrits was niet zuiver. Hij werkte mee aan Jodenregistratie maar weigerde andere bevelen. De werkelijkheid op de kaarten is niet zwart-wit.</p>
+            <p><strong>Open vraag:</strong> Wie was Majoor Johann Michels? Is hij bekend in de geschiedschrijving van het Duitse militaire verzet? Waarom bevrijdde hij Gerrits?</p>
+            <p class="source">Bron: minr 1142403 | Verificatie: Bundesarchiv (Michels), gemeentearchief Stadskanaal</p>
+        </div>
+
+        <!-- VERRADEN DOOR VROUW -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>Verraden door zijn eigen vrouw</h3>
+            <div class="quote">"Aug. 1944, door zijn vrouw verraden en gearresteerd."<br>Overleden: "21-12-1944 te Neuengamme."<br>— Kaart van Van der Kamp, Arend, 27 jaar (minr 1147436)</div>
+            <p>Verkoper elektrotechnische artikelen. Peizerweg 51a, Groningen. Onderduiker. Verraden door zijn eigen vrouw en gearresteerd. Vier maanden later dood in Neuengamme.</p>
+            <p>De kaart vermeldt: "Echtgenote Jann Nieborg, in arrest." Zij werd na de oorlog opgepakt. Er is een "krankenverslag" uit 1946 en 1947.</p>
+            <p><strong>Redenering (deductie):</strong> "In arrest" na de oorlog betekent dat Jann Nieborg is vervolgd voor het verraden van haar man. De krankenverslagen uit '46 en '47 suggereren een rechtszaak bij de Bijzondere Rechtspleging. De kaart documenteert niet alleen het verraad maar ook de consequentie — de verrader werd berecht. Dit is een van de zeldzame gevallen waarin dader en slachtoffer op dezelfde kaart staan.</p>
+            <p class="source">Bron: minr 1147436 | Verificatie: Bijzondere Rechtspleging-archief, Nationaal Archief</p>
+        </div>
+
+        <!-- WIM HOMMES LAATSTE WOORDEN -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>"Ik ga de dood in de volle overtuiging"</h3>
+            <div class="quote">"Zijn laatste woorden waren: 'Ik ga de dood in de volle overtuiging dat ik mijn leven heb gegeven voor God en mijn Vaderland.'"<br>"Zijn laatste brief aan zijn moeder sprak van rustig sterven, dankbaarheid en geloof."<br>— Kaart van Wim Hommes, 21 jaar, student (minr 1143628)</div>
+            <p>LO, KP Groningen. Leider van een LO-groep. Overvallen gepleegd. Betrokken bij de liquidatie van verrader Drenth. Distributiekantoor overvallen. Gearresteerd 2 september 1944. Ter dood veroordeeld door Kriegsgericht Groningen. <strong>Gefusilleerd in Vught, oktober 1944, samen met 20 anderen.</strong></p>
+            <p>De kaart vermeldt: "Zoon van een vader die jarenlang in het verzet heeft geleid." Contactpersonen: "Helle v.d. Heide, zijn vader, zijn zuster, zijn broer." Een heel gezin in het verzet. De zoon stierf.</p>
+            <p><strong>Redenering (deductie):</strong> De kaartschrijver noteerde zijn laatste woorden. Dat betekent dat iemand die woorden heeft gehoord of dat ze zijn overgeleverd — via een medegevangene, een bewaker, of de afscheidsbrief zelf. De kaart is niet alleen een administratief document. Het is een testament. 21 jaar oud. Zijn moeder leefde.</p>
+            <p class="source">Bron: minr 1143628</p>
+        </div>
+
+        <!-- 18 DOMINEES -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>18 dominees gearresteerd: de kansel als verzet</h3>
+            <p>18 predikanten in het archief werden gearresteerd. De redenen zijn opmerkelijk specifiek:</p>
+            <div class="quote">"Misbruik van de ambtsdienst; gebeden voor de wettige overheid, de verdrukte Joden, en in de prediking gesproken over de demonische tendenzen van het Duitse Rijk."<br>— Kaart van Van Otterlo, Gereformeerd Predikant (minr 1157365)</div>
+            <div class="quote">"17.6.1944, voor arrest van Joden huisvesting."<br>— Kaart van Ds. Reinders (minr 1180257)</div>
+            <div class="quote">"10.1.42, wegens anti-Duitse houding in preken en gebed."<br>— Kaart van Tunderman (minr 1185384)</div>
+            <div class="quote">"19.5.42 op Scholtenhuis ontboden i.v.m. preek over arbeidsinzet. Met ouderling heengegaan, wel vrij gebleven."<br>— Kaart van Gootjes (minr 1142535)</div>
+            <p><strong>Redenering (abductie):</strong> De SD arresteerde dominees voor wat ze zeiden op de kansel. "Gebeden voor de verdrukte Joden" was strafbaar. "Spreken over demonische tendenzen" was strafbaar. Preken was verzet. De kaarten tonen dat de kerk niet alleen een dekmantel was voor verzetsactiviteiten (bonkaarten, onderduikers) maar dat het spreken zelf — het benoemen van onrecht — als daad van verzet werd beschouwd door de bezetter. 18 dominees is geen toeval. Dat is een patroon.</p>
+            <p><strong>Open vraag:</strong> Is er een verband tussen kerkgenootschap en arrestatierisico? De data bevat NH, Gereformeerd en Baptist — is een denominatie oververtegenwoordigd?</p>
+            <p class="source">Bronnen: minr 1157365, 1180257, 1185384, 1142535, 1139728, 1139779, 1140481, 1143869, 1155726, 1189514, 1136184, 1139056, 1140498, 1140549, 1143423, 1143707, 1146862, 1147108</p>
+        </div>
+
+        <!-- DOORN PREDIKANT -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>Gemarteld, vrijgelaten, beschoten, ontkomen</h3>
+            <div class="quote">"Gearresteerd op 17 september 1944 in zijn huis te Winsum door de SD na verraad van een NSB'er. Overgebracht naar het Scholtenhuis in Groningen, waar hij verhoord en gemarteld werd. Later vrijgelaten met meldingsplicht bij de SD. Werd tijdens onderduik in Ter Apel verrast door de SD, vluchtte en werd geraakt door een schot, maar wist te ontkomen."<br>— Kaart van Evert Edsko Doorn, predikant (minr 1140549)</div>
+            <p>En: "Ondanks martelingen heeft hij geen namen genoemd en nam hij alle schuld op zich, waardoor vele levens gered werden."</p>
+            <p><strong>Redenering (deductie):</strong> De kaart beschrijft vier momenten: (1) gearresteerd na verraad, (2) gemarteld in Scholtenhuis maar niets gezegd, (3) vrijgelaten met meldingsplicht maar ging door, (4) opnieuw verrast, beschoten, geraakt maar ontkomen. Vier keer had hij kunnen stoppen. Vier keer deed hij dat niet. Hij stierf in 1950, vijf jaar na de bevrijding — de kaart suggereert dat de gevolgen van de marteling hem uiteindelijk het leven kostten.</p>
+            <p class="source">Bron: minr 1140549</p>
+        </div>
+
+        <!-- SIEBRAND JAGER 400 ONDERDUIKERS -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>De dominee die 400 onderduikers redde</h3>
+            <div class="quote">"Als ambtenaar bij de distributiedienst hielp hij ca. 300-400 onderduikers in Slochteren met bonnen en voedselpassen. Hielp 's nachts een groep van 10 Joden op de vlucht voor de Duitsers."<br>— Kaart van Siebrand Jager, predikant en distributieambtenaar (minr 1147108)</div>
+            <p>NH predikant en tegelijk ambtenaar bij de distributiedienst — de perfecte dubbelrol. Overdag deelde hij bonkaarten uit namens de overheid. Daarnaast voorzag hij 300-400 onderduikers van bonnen en voedselpassen. Hij hielp 's nachts Joden vluchten. Hij maakte persoonsbewijzen, stamkaarten, nieuwsbulletins. Hij organiseerde KP-overvallen in Slochteren.</p>
+            <p><strong>Redenering (deductie):</strong> 300-400 onderduikers is een getal dat niet uit bescheidenheid wordt opgeschreven. De kaartschrijver noteerde dit als feit, waarschijnlijk op basis van Jagers eigen opgave of die van zijn organisatie. Als distributieambtenaar had hij toegang tot het systeem dat hij misbruikte — bonkaarten voor 400 mensen betekent dat 400 namen niet op officiele lijsten stonden. De schaal van zijn operatie is vergelijkbaar met die van de bekendste verzetsgroepen, maar Jager opereerde grotendeels alleen, vanuit een dubbelfunctie.</p>
+            <p><strong>Open vraag:</strong> Komt Jagers schatting van 300-400 overeen met andere bronnen over het aantal onderduikers in Slochteren? Is hij bekend bij Yad Vashem?</p>
+            <p class="source">Bron: minr 1147108 | Verificatie: gemeentearchief Slochteren, Yad Vashem</p>
+        </div>
+
+        <!-- EERSTE KP'ER -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>De eerste KP'er die werd doodgeschoten</h3>
+            <div class="quote">"5-6-43 Groningen, gefusilleerd op zijn onderduikadres (fam. v. d. Heuvel) door verraad van Pergonet."<br>"Was de eerste K.P.'er die doodgeschoten werd."<br>— Kaart van Hut, Pieter Elibert, 21 jaar, schuilnaam "Piet Brinkman" (minr 1146961)</div>
+            <p>Gemeenteambtenaar te Uithuizermeeden. LO, KP I. Verborg een Joodse man genaamd Willie. Hielp Engelse piloten. Kreeg onenigheid met de NSB-burgemeester en moest onderduiken.</p>
+            <p><strong>Redenering (deductie):</strong> De kaart noemt hem expliciet "de eerste KP'er die doodgeschoten werd." Die formulering is niet van Hut zelf — die is van de kaartschrijver, die overzicht had over het hele archief. Het is een historisch oordeel, vastgelegd op de kaart. De verrader Pergonet wordt bij naam genoemd. De vraag is: is Pergonet berecht? En: klopt de claim "eerste"? Dat is verifieerbaar via KP-archieven.</p>
+            <p class="source">Bron: minr 1146961 | Verificatie: KP-archieven, Bijzondere Rechtspleging (Pergonet)</p>
+        </div>
+
+        <!-- KAMMINGA NORG -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>Kaarten van verdedigingswerken, vermoord drie dagen voor de bevrijding</h3>
+            <div class="quote">"Doorgeven kaarten van verdedigingswerken. Contact met Chef Staf OD Groningen Patten."<br>Overleden: "8-4-1945, vermoord of gefusilleerd te Norg II."<br>— Kaart van Kamminga, Jan, 29 jaar (minr 1147432)</div>
+            <p>LO, ID, <strong>Marx Wildervank en Winschoten</strong>. De Groep Marx was een inlichtingendienst die kaarten tekende van Duitse stellingen voor de geallieerden. Kamminga gaf die kaarten door aan de Chef Staf OD.</p>
+            <p>Drie dagen voor de bevrijding vermoord bij Norg — hetzelfde massagraf waar Westerdijk (minr 1188348) werd gevonden.</p>
+            <p><strong>Redenering (deductie):</strong> Twee onafhankelijke kaarten (Kamminga en Westerdijk) noemen allebei Norg als plaats van dood, in dezelfde periode (april 1945). Samen met 8 andere kaarten die Norg noemen, tekent dit het beeld van een systematische executieoperatie in de laatste oorlogsdagen. De SD vermoordde gevangenen vlak voordat de Canadezen arriveerden — om getuigen te elimineren. Kamminga's werk (kaarten van verdedigingswerken) maakte hem bijzonder gevaarlijk voor de Duitsers.</p>
+            <p class="source">Bron: minr 1147432 | Gerelateerd: minr 1188348 (Westerdijk), 10 kaarten noemen Norg</p>
+        </div>
+
+        <!-- DRIE SAMEN BEGRAVEN -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>Drie kameraden, samen gefusilleerd, samen begraven</h3>
+            <div class="quote">"5-10-1944, gefusilleerd te Hoogezand. Begraven samen met Sangers en Veninga."<br>— Kaart van Jan Huitzing, 24 jaar, bakker, schuilnaam "Jan v.d. Woude" (minr 1146824)</div>
+            <p>LO, OD. Verraden door een NSB'er. Gearresteerd en dezelfde dag gefusilleerd. Drie mannen — Huitzing, Sangers, Veninga — liggen samen begraven.</p>
+            <p><strong>Redenering (abductie):</strong> Gefusilleerd op de dag van arrestatie. Dat is geen rechtspraak — dat is standrecht. De drie worden samen begraven, wat suggereert dat de gemeenschap hen na de oorlog samen herdacht. De kaart van Huitzing noemt Sangers en Veninga als medeslachtoffers. Hebben Sangers en Veninga eigen OVCG-kaarten? Als ja, bevestigen drie onafhankelijke kaarten dezelfde executie.</p>
+            <p><strong>Open vraag:</strong> Hebben Sangers en Veninga eigen kaarten in het archief? Is er een monument in Hoogezand?</p>
+            <p class="source">Bron: minr 1146824</p>
+        </div>
+
+        <!-- STUDENT BEVRIJD DOOR CID -->
+        <div class="card">
+            <span class="status status-onderzoeken">Te onderzoeken</span>
+            <h3>Bevrijd uit het Oranjehotel door een CID-agent</h3>
+            <div class="quote">"Gearresteerd op 16-6-44 in een drukkerij te Den Haag. Gevangen gezeten in Vught. Bevrijd op 8.9.44 uit Scheveningen door hulp Chris Verhoef (CID)."<br>— Kaart van Van Uffelen, student, Studentenverzet (minr 1140284)</div>
+            <p>Een Groningse student, actief in het studentenverzet en de C.G.-Groep, wordt gearresteerd in een illegale drukkerij in Den Haag. Via Vught naar het Oranjehotel in Scheveningen. Daar wordt hij bevrijd met hulp van <strong>Chris Verhoef</strong>, een CID-agent (Centrale Inlichtingendienst).</p>
+            <p><strong>Redenering (abductie):</strong> De CID was de voorloper van de BVD/AIVD. Een CID-agent die een gevangene uit het Oranjehotel helpt ontsnappen is een daad van binnenuit — vergelijkbaar met de marechaussees die hun positie gebruikten voor het verzet. De naam Chris Verhoef wordt expliciet genoemd. Is hij bekend in de CID-geschiedschrijving?</p>
+            <p><strong>Open vraag:</strong> Wie was Chris Verhoef? Is hij gedocumenteerd als CID-verzetsman? Hoe kon hij iemand uit het Oranjehotel krijgen?</p>
+            <p class="source">Bron: minr 1140284 | Verificatie: AIVD-archief, Oranjehotel-documentatie</p>
+        </div>
+
+        <!-- CHIRURG TIJDENS OPERATIE -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <div class="bp bp-low"><span class="bp-label">BP</span><div class="bp-bar"><div class="bp-fill" style="width:25%"></div></div><span class="bp-label">25% — 1 kaart, citaat, niet extern gecheckt</span></div>
+            <h3>Gearresteerd tijdens een blindedarmoperatie</h3>
+            <div class="quote">"19 juni 1943, gearresteerd door de SD tijdens het uitvoeren van een blindedarmoperatie. Overgebracht naar gevangenis. Twee maanden ondervraagd onder marteling en ter dood veroordeeld. Vrijgelaten zonder geld."<br>— Kaart van Wildschut, Andreas Johannes Hendrikus (minr 1142131)</div>
+            <p><strong>Redenering (abductie):</strong> De SD arresteerde een chirurg midden in een operatie. De patient lag op tafel. Dat detail — "tijdens het uitvoeren van een blindedarmoperatie" — is te specifiek om verzonnen te zijn. Het vertelt iets over de urgentie van de SD: ze konden niet wachten tot de operatie klaar was. Of over hun wreedheid: ze wilden niet wachten. Ter dood veroordeeld maar uiteindelijk vrijgelaten "zonder geld" — beroofd van alles.</p>
+            <button class="clipboard-btn" onclick="copyPrompt(this)">&#x1F4CB; Kopieer onderzoeksopdracht</button>
+            <div class="prompt-text" style="display:none">ONDERZOEKSOPDRACHT — Groningse Oorlogspuzzels
+
+Deze hypothese is ontgonnen door Martijn Aslander in samenwerking met Agentic AI (Claude + Gemini).
+Volledig verhaal en context: https://martijnaslander.github.io/ovcg-verzetskaarten/
+
+HYPOTHESE: Andreas Johannes Hendrikus Wildschut, chirurg in het Academisch Ziekenhuis Groningen, werd op 19 juni 1943 door de SD gearresteerd tijdens het uitvoeren van een blindedarmoperatie. Hij werd twee maanden gemarteld en ter dood veroordeeld, maar uiteindelijk vrijgelaten.
+
+BRONMATERIAAL:
+- OVCG-kaart minr 1142131, Groninger Archieven, toegangsnummer 2183
+- De kaart vermeldt ook een eerdere arrestatie op 16 juni 1943 i.v.m. "bevrijding van Aue Fokkens"
+
+TE VERIFIEREN:
+1. Wie was Wildschut? Is hij te vinden in de personeelsregisters van het Academisch Ziekenhuis Groningen 1940-1945?
+2. Wat gebeurde er met de patient op de operatietafel?
+3. Wie was "Aue Fokkens" die hij twee dagen eerder had bevrijd?
+4. Door welk Standgericht werd hij ter dood veroordeeld en waarom werd het vonnis niet uitgevoerd?
+5. Zijn er naoorlogse getuigenissen van Wildschut of collega's?
+
+WAAR TE ZOEKEN:
+- Groninger Archieven, toegangsnummer 2183, minr 1142131 (originele kaart)
+- Universitair Medisch Centrum Groningen (UMCG), personeelsarchief 1940-1945
+- NIOD, Amsterdam (SD-archieven Groningen)
+- Stichting 1940-1945 (dossier Wildschut)</div>
+            <p class="source">Bron: minr 1142131</p>
+        </div>
+
+        <!-- BOONSTRA WEIGERT JODEN ARRESTEREN -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <div class="bp bp-low"><span class="bp-label">BP</span><div class="bp-bar"><div class="bp-fill" style="width:25%"></div></div><span class="bp-label">25% — 1 kaart, citaat, niet extern gecheckt</span></div>
+            <h3>De commandant die weigerde Joden te arresteren</h3>
+            <div class="quote">"12-3-1943. Gearresteerd nadat hij op 8-3-1943 weigerde als commandant de opdracht uit Groningen uit te voeren om alle Joden in Grijpskerk te arresteren. Werd samen met zijn dochter Celia op zolder opgepakt."<br>— Kaart van Boonstra, Dirk (minr 1137831)</div>
+            <p><strong>Redenering (deductie):</strong> Vier dagen tussen de weigering (8 maart) en de arrestatie (12 maart). Vier dagen waarin Boonstra wist dat het eraan kwam. Hij had kunnen vluchten. Hij bleef. De kaart vermeldt dat zijn dochter Celia ook werd opgepakt — samen op zolder. De SD haalde een vader en zijn dochter van zolder omdat hij weigerde Joden te arresteren.</p>
+            <button class="clipboard-btn" onclick="copyPrompt(this)">&#x1F4CB; Kopieer onderzoeksopdracht</button>
+            <div class="prompt-text" style="display:none">ONDERZOEKSOPDRACHT — Groningse Oorlogspuzzels
+
+Deze hypothese is ontgonnen door Martijn Aslander in samenwerking met Agentic AI (Claude + Gemini).
+Volledig verhaal en context: https://martijnaslander.github.io/ovcg-verzetskaarten/
+
+HYPOTHESE: Dirk Boonstra, politiecommandant, weigerde op 8 maart 1943 de opdracht om alle Joden in Grijpskerk te arresteren. Hij werd vier dagen later zelf gearresteerd, samen met zijn dochter Celia.
+
+BRONMATERIAAL:
+- OVCG-kaart minr 1137831, Groninger Archieven, toegangsnummer 2183
+
+TE VERIFIEREN:
+1. Was Boonstra commandant van de marechaussee of de gemeentepolitie in Grijpskerk?
+2. Hoeveel Joden woonden er in maart 1943 in Grijpskerk? Zijn zij alsnog gearresteerd door een opvolger?
+3. Wat gebeurde er met Boonstra en dochter Celia na arrestatie? Deportatie? Overleving?
+4. Is Boonstra bekend bij Yad Vashem als Rechtvaardige onder de Volkeren?
+5. De burgemeester van Grijpskerk (Nadort, minr 1155628) was ook in het verzet (LO, GV C). Werkten zij samen?
+
+WAAR TE ZOEKEN:
+- Groninger Archieven, toegangsnummer 2183, minr 1137831 (originele kaart)
+- Gemeente-archief Westerkwartier (voorheen Grijpskerk)
+- Yad Vashem database (zoek: Boonstra, Grijpskerk)
+- Joods Monument (Joodse inwoners Grijpskerk)
+- Vergelijk met kaart van burgemeester Nadort (minr 1155628)</div>
+            <p class="source">Bron: minr 1137831 | Gerelateerd: minr 1155628 (burgemeester Nadort, Grijpskerk)</p>
+        </div>
+
+        <!-- 11 LANDWACHTERS RAZZIA -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <div class="bp bp-mid"><span class="bp-label">BP</span><div class="bp-bar"><div class="bp-fill" style="width:55%"></div></div><span class="bp-label">55% — 3 kaarten, citaat, niet extern gecheckt</span></div>
+            <h3>11 landwachters uit Grootegast: drie kaarten, een razzia</h3>
+            <div class="quote">"23-8-1944, door 11 landwachters uit Grotegast gearresteerd."<br>— Kaart van Rok, Sjoerd (minr 1152801)</div>
+            <div class="quote">"23-8-44 in Grijpskerk gearresteerd door 11 landwachters."<br>— Kaart van Wiersma, Klaas Reinder (minr 1188704)</div>
+            <div class="quote">"23-8-44 in Grijpskerk gearresteerd door 11 landwachters."<br>— Kaart van Wiersma, Jan (minr 1188680)</div>
+            <p>Drie onafhankelijke kaarten beschrijven dezelfde razzia: 23 augustus 1944, 11 landwachters, Grijpskerk/Grootegast. Alle drie hetzelfde traject: Landwachtkazerne &rarr; Scholtenhuis &rarr; Martinikerkhof &rarr; Amersfoort &rarr; Neuengamme.</p>
+            <p><strong>Redenering (deductie):</strong> Het getal "11" verschijnt op drie onafhankelijke kaarten. Dat is te specifiek voor toeval — drie kaartschrijvers, drie verschillende momenten, hetzelfde getal. De razzia was kennelijk zo ingrijpend dat de opgepakten het aantal landwachters onthielden. En het traject is identiek: vijf stations, in dezelfde volgorde. Dit is een gestandaardiseerde deportatieroute.</p>
+            <button class="clipboard-btn" onclick="copyPrompt(this)">&#x1F4CB; Kopieer onderzoeksopdracht</button>
+            <div class="prompt-text" style="display:none">ONDERZOEKSOPDRACHT — Groningse Oorlogspuzzels
+
+Deze hypothese is ontgonnen door Martijn Aslander in samenwerking met Agentic AI (Claude + Gemini).
+Volledig verhaal en context: https://martijnaslander.github.io/ovcg-verzetskaarten/
+
+HYPOTHESE: Op 23 augustus 1944 voerden 11 landwachters uit Grootegast een razzia uit in Grijpskerk. Minstens drie personen werden gearresteerd en via een identiek traject (Landwachtkazerne Grootegast - Scholtenhuis Groningen - Politiebureau Martinikerkhof - Kamp Amersfoort - Kamp Neuengamme) gedeporteerd.
+
+BRONMATERIAAL:
+- OVCG-kaart minr 1152801 (Rok, Sjoerd), Groninger Archieven, toegang 2183
+- OVCG-kaart minr 1188704 (Wiersma, Klaas Reinder)
+- OVCG-kaart minr 1188680 (Wiersma, Jan)
+- Drie onafhankelijke kaarten bevestigen: getal 11, datum 23-8-44, identiek traject
+
+TE VERIFIEREN:
+1. Wie waren de 11 landwachters uit Grootegast? Zijn zij na de oorlog berecht?
+2. Hoeveel mensen zijn er in totaal opgepakt bij deze razzia? (drie kaarten is een minimum)
+3. Bestond er een Landwachtkazerne in Grootegast? Waar was die gevestigd?
+4. Hebben Rok, Wiersma K.R. en Wiersma J. Neuengamme overleefd?
+5. Is deze razzia gedocumenteerd in de geschiedschrijving van het Westerkwartier?
+
+WAAR TE ZOEKEN:
+- Groninger Archieven, toegangsnummer 2183
+- Gemeente-archief Westerkwartier (Grootegast, Grijpskerk)
+- KZ-Gedenkstatte Neuengamme (kampregistraties)
+- Bijzondere Rechtspleging-archief (Landwacht Grootegast)
+- Cees Stolk, oorlogsverhalennieuwolda.nl (regionaal WOII-onderzoek)</div>
+            <p class="source">Bronnen: minr 1152801, 1188704, 1188680</p>
+        </div>
+
+        <!-- RADEMA BOOTJE VISVLIET -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <div class="bp bp-low"><span class="bp-label">BP</span><div class="bp-bar"><div class="bp-fill" style="width:25%"></div></div><span class="bp-label">25% — 1 kaart, citaat, niet extern gecheckt</span></div>
+            <h3>'s Nachts in een bootje gearresteerd bij Visvliet</h3>
+            <div class="quote">"19-06-1944, 's nachts in een bootje te Visvliet gearresteerd door Landwacht uit Grootegast en ingesloten in de Landwachtkazerne. Vals P.B. in handen van Landwacht. 20-06-1944 overgebracht naar Groningen, Scholtenhuis. 26-06-1944 naar Kamp Amersfoort (blok 7 als nr. 177), kreeg rode bal, verdacht van vluchtpoging. 08-09-1944 naar Kamp Neuengamme."<br>— Kaart van Radema, Pieter (minr 1179980)</div>
+            <p><strong>Redenering (deductie):</strong> "Rode bal" in Amersfoort was het merkteken voor gevangenen verdacht van vluchtpoging — ze kregen een rode stip op hun kleding en werden extra bewaakt. "Blok 7 als nr. 177" — de kaart noteert het bloknummer en het gevangenennummer. Dit zijn kampregistratiegegevens die verifieerbaar zijn via de Amersfoort- en Neuengamme-archieven. Het detail "'s nachts in een bootje" vertelt het verhaal: Radema probeerde over water te vluchten of te transporteren, en de Landwacht wachtte hem op.</p>
+            <button class="clipboard-btn" onclick="copyPrompt(this)">&#x1F4CB; Kopieer onderzoeksopdracht</button>
+            <div class="prompt-text" style="display:none">ONDERZOEKSOPDRACHT — Groningse Oorlogspuzzels
+
+Deze hypothese is ontgonnen door Martijn Aslander in samenwerking met Agentic AI (Claude + Gemini).
+Volledig verhaal en context: https://martijnaslander.github.io/ovcg-verzetskaarten/
+
+HYPOTHESE: Pieter Radema werd op 19 juni 1944 's nachts in een bootje bij Visvliet gearresteerd door de Landwacht uit Grootegast. Hij had een vals persoonsbewijs. Hij werd via het standaardtraject (Scholtenhuis - Amersfoort - Neuengamme) gedeporteerd. In Amersfoort kreeg hij een "rode bal" (merkteken vluchtgevaar).
+
+BRONMATERIAAL:
+- OVCG-kaart minr 1179980, Groninger Archieven, toegang 2183
+- Kampregistratie: Amersfoort blok 7, nummer 177
+
+TE VERIFIEREN:
+1. Is Radema terug te vinden in de kampregistraties van Amersfoort (blok 7, nr 177)?
+2. Wat betekende de "rode bal" precies in de Amersfoort-administratie?
+3. Heeft Radema Neuengamme overleefd?
+4. Dezelfde Landwacht uit Grootegast voerde ook de razzia van 23-8-1944 uit (zie Rok/Wiersma). Was dit dezelfde eenheid? Hoe groot was de Landwacht in Grootegast?
+5. Visvliet is ook de locatie waar de vrouwenmars werd bevrijd (april 1945). Toevallige locatie of strategisch punt?
+
+WAAR TE ZOEKEN:
+- Groninger Archieven, toegang 2183, minr 1179980
+- Nationaal Monument Kamp Amersfoort (kampregistratie)
+- KZ-Gedenkstatte Neuengamme
+- Arolsen Archives (ITS) — zoek: Radema, Pieter</div>
+            <p class="source">Bron: minr 1179980</p>
+        </div>
+
+        <!-- DOODGEMARTELD SCHOLTENHUIS -->
+        <div class="card">
+            <span class="status status-hypothese">Hypothese</span>
+            <div class="bp bp-low"><span class="bp-label">BP</span><div class="bp-bar"><div class="bp-fill" style="width:25%"></div></div><span class="bp-label">25% — 1 kaart, citaat, niet extern gecheckt</span></div>
+            <h3>Doodgemarteld op het Scholtenhuis</h3>
+            <div class="quote">"Meegenomen samen met Roelfsema en boer Benes. Roelfsema werd op het Scholtenhuis doodgemarteld."<br>— Kaart van Camphuis (minr 1139129)</div>
+            <p><strong>Redenering (abductie):</strong> Camphuis was erbij. Hij zag Roelfsema worden meegenomen. Hij weet dat Roelfsema op het Scholtenhuis "doodgemarteld" werd. Dat woord — niet "overleden" of "gestorven" maar "doodgemarteld" — is een ooggetuigeverklaring van wat er in het Scholtenhuis gebeurde. De kaartschrijver nam het woord over. Heeft Roelfsema een eigen kaart? Dan bevestigen twee kaarten hetzelfde event.</p>
+            <button class="clipboard-btn" onclick="copyPrompt(this)">&#x1F4CB; Kopieer onderzoeksopdracht</button>
+            <div class="prompt-text" style="display:none">ONDERZOEKSOPDRACHT — Groningse Oorlogspuzzels
+
+Deze hypothese is ontgonnen door Martijn Aslander in samenwerking met Agentic AI (Claude + Gemini).
+Volledig verhaal en context: https://martijnaslander.github.io/ovcg-verzetskaarten/
+
+HYPOTHESE: Een verzetsman genaamd Roelfsema werd doodgemarteld op het Scholtenhuis in Groningen. Dit staat niet op zijn eigen kaart maar op de kaart van Camphuis, die samen met Roelfsema en "boer Benes" werd meegenomen.
+
+BRONMATERIAAL:
+- OVCG-kaart minr 1139129 (Camphuis), Groninger Archieven, toegang 2183
+
+TE VERIFIEREN:
+1. Heeft Roelfsema een eigen OVCG-kaart? Zo ja: bevestigt die de dood in het Scholtenhuis?
+2. Wie was "boer Benes"? Heeft hij een eigen kaart?
+3. Wat is er bekend over martelingen in het Scholtenhuis? Is er een lijst van mensen die daar zijn omgekomen?
+4. Is Camphuis na de oorlog als getuige gehoord bij de Bijzondere Rechtspleging?
+5. Het Scholtenhuis is nu een kantoorgebouw. Is er een gedenkplaat?
+
+WAAR TE ZOEKEN:
+- Groninger Archieven, toegang 2183 (zoek: Roelfsema, Benes)
+- NIOD (SD-archieven Groningen, Scholtenhuis)
+- Bijzondere Rechtspleging-archief (verhoren SD-personeel)
+- Het Scholtenhuis, Groningen (lokale herdenking)</div>
+            <p class="source">Bron: minr 1139129 | Te checken: eigen kaart Roelfsema en Benes</p>
+        </div>
+
+        <!-- PIETER VAN DIJK ZENDER -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <div class="bp bp-mid"><span class="bp-label">BP</span><div class="bp-bar"><div class="bp-fill" style="width:55%"></div></div><span class="bp-label">55% — 2 kaarten (Van Dijk + Westerdijk), citaat, niet extern gecheckt</span></div>
+            <h3>De zender op de boerderij: omsingeld na peiling</h3>
+            <div class="quote">"6 februari 1945, boerderij nabij Ellerhuizen (Haren). De boerderij, waar een zender was gevestigd, werd omsingeld door de S.D. na peiling. Pieter van Dijk raakte betrokken bij een gevecht en probeerde te ontkomen, maar werd overmeesterd door de overmacht."<br>— Kaart van Pieter van Dijk (minr 1141185)</div>
+            <p><strong>Redenering (deductie):</strong> "Na peiling" — de Duitsers hadden radiogoniometrie (peilapparatuur) om illegale zenders te localiseren. Ze peilden de zender, omsingelden de boerderij, en overmanden Van Dijk na een gevecht. Dit is dezelfde methode waarmee Westerdijk (minr 1188348) werd gevonden — ook een illegale zender, ook een SD-overval. Twee kaarten, twee boerderijen, twee zenders, dezelfde methode. Het patroon: de SD jaagde systematisch op illegale radiozenders in de laatste oorlogsmaanden.</p>
+            <button class="clipboard-btn" onclick="copyPrompt(this)">&#x1F4CB; Kopieer onderzoeksopdracht</button>
+            <div class="prompt-text" style="display:none">ONDERZOEKSOPDRACHT — Groningse Oorlogspuzzels
+
+Deze hypothese is ontgonnen door Martijn Aslander in samenwerking met Agentic AI (Claude + Gemini).
+Volledig verhaal en context: https://martijnaslander.github.io/ovcg-verzetskaarten/
+
+HYPOTHESE: De SD gebruikte radiogoniometrie (peiling) om illegale zenders in Groningen te localiseren. Minstens twee boerderijen met zenders werden op deze manier gevonden: Pieter van Dijk bij Ellerhuizen (6 feb 1945) en Westerdijk bij Withwichmeeden (6 feb 1945 — mogelijk dezelfde dag).
+
+BRONMATERIAAL:
+- OVCG-kaart minr 1141185 (Van Dijk), Groninger Archieven, toegang 2183
+- OVCG-kaart minr 1188348 (Westerdijk) — ook een zender, ook SD-overval
+
+TE VERIFIEREN:
+1. Zijn beide zenderovervallen op dezelfde dag (6 februari 1945)? Dat zou wijzen op een gecoordineerde actie.
+2. Welke zendernamen werden gebruikt? Westerdijk had "Atlanta". Welke had Van Dijk?
+3. Hoeveel illegale zenders opereerden er in Groningen? De kaarten noemen er minstens 52.
+4. Had de SD in Groningen eigen peilapparatuur of kwam die uit Duitsland?
+5. Heeft Van Dijk de oorlog overleefd?
+
+WAAR TE ZOEKEN:
+- Groninger Archieven, toegang 2183
+- NIOD (SD-archieven, afdeling Funkabwehr)
+- Bundesarchiv (Funkabwehr/Funkhorchdienst)
+- Herinneringscentrum Kamp Westerbork (radiogeschiedenis verzet)</div>
+            <p class="source">Bron: minr 1141185 | Gerelateerd: minr 1188348 (Westerdijk, zelfde methode)</p>
+        </div>
+
+        <!-- RADIO KEES CAP ARCONA -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <div class="bp bp-mid"><span class="bp-label">BP</span><div class="bp-bar"><div class="bp-fill" style="width:55%"></div></div><span class="bp-label">55% — 3 kaarten (Van der Hul + Westerdijk + Van Dijk), citaat, niet extern gecheckt</span></div>
+            <h3>"Radio Kees" — van de zender op de boerderij naar de doodsschepen</h3>
+            <div class="quote">"6-2-45 door S.D. bij overval op boerderij Westerdijk. Gevangen gezeten in H.V.B. Later bevrijd van Achens in de haven van Neustadt op wonderbaarlijke wijze gered en behouden teruggekeerd."<br>— Kaart van Van der Hul, Jaap, schuilnaam "Radio Kees" (minr 1146915)</div>
+            <p>Radiodienst OD. Gearresteerd bij dezelfde SD-overval op boerderij Westerdijk waar de zender "Atlanta" stond (zie ook minr 1188348). De haven van Neustadt is waar de Cap Arcona lag. "Wonderbaarlijke wijze gered" — hij was bij de doodsschepen en overleefde.</p>
+            <p><strong>Redenering (deductie):</strong> Drie kaarten convergeren op dezelfde keten: boerderij met zender &rarr; SD-overval 6 februari 1945 &rarr; Neuengamme &rarr; Lubecker Bocht. Westerdijk (minr 1188348) stierf en werd gevonden in het massagraf bij Norg. Van der Hul overleefde "op wonderbaarlijke wijze" bij de doodsschepen. Van Dijk (minr 1140944) overleefde de Cap Arcona en keerde via Luneburgerheide thuis. Drie mannen, drie kaarten, drie lotgevallen — een keten van de boerderij tot de haven.</p>
+            <button class="clipboard-btn" onclick="copyPrompt(this)">&#x1F4CB; Kopieer onderzoeksopdracht</button>
+            <div class="prompt-text" style="display:none">ONDERZOEKSOPDRACHT — Groningse Oorlogspuzzels
+
+Deze hypothese is ontgonnen door Martijn Aslander in samenwerking met Agentic AI (Claude + Gemini).
+Volledig verhaal en context: https://martijnaslander.github.io/ovcg-verzetskaarten/
+
+HYPOTHESE: Jaap van der Hul ("Radio Kees") werd op 6 februari 1945 gearresteerd bij de SD-overval op boerderij Westerdijk, waar een illegale zender ("Atlanta") was gevestigd. Via Neuengamme eindigde hij bij de doodsschepen in de haven van Neustadt (Lubecker Bocht) en overleefde "op wonderbaarlijke wijze." Drie onafhankelijke kaarten (Van der Hul, Westerdijk, Van Dijk) beschrijven delen van dezelfde keten.
+
+BRONMATERIAAL:
+- OVCG-kaart minr 1146915 (Van der Hul), Groninger Archieven, toegang 2183
+- OVCG-kaart minr 1188348 (Westerdijk — zelfde overval, stierf bij Norg)
+- OVCG-kaart minr 1140944 (Van Dijk — Cap Arcona overlevende)
+
+TE VERIFIEREN:
+1. Was de overval op boerderij Westerdijk op dezelfde dag als de overval op boerderij Van Dijk bij Ellerhuizen (ook 6 feb)?
+2. Op welk schip zat Van der Hul? Cap Arcona, Athen, of Thielbek?
+3. Hoe werd hij "op wonderbaarlijke wijze gered"? Door Britse soldaten? Door te zwemmen?
+4. Is "Radio Kees" een bekende schuilnaam in de OD-radiodienst?
+5. Hoeveel Groningers eindigden bij de doodsschepen? Onze data toont er minstens 4.
+
+WAAR TE ZOEKEN:
+- Groninger Archieven, toegang 2183
+- KZ-Gedenkstatte Neuengamme (scheepsregistraties)
+- Arolsen Archives (transport- en kampregistraties)
+- Cap Arcona Museum, Neustadt in Holstein
+
+---
+KUNT U HELPEN DIT TE VERIFIEREN? Lever bewijs aan via https://martijnaslander.github.io/ovcg-verzetskaarten/#inbox</div>
+            <p class="source">Bronnen: minr 1146915, 1188348, 1140944</p>
+        </div>
+
+        <!-- DOMELA NIEUWENHUIS -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <div class="bp bp-low"><span class="bp-label">BP</span><div class="bp-bar"><div class="bp-fill" style="width:25%"></div></div><span class="bp-label">25% — 1 kaart, citaat, niet extern gecheckt</span></div>
+            <h3>Domela Nieuwenhuis — vermoord in het Pepergasthuis</h3>
+            <div class="quote">"25-9-1944, vermoord door S.D. te Groningen in Pepergasthuis."<br>— Kaart van Frederik Siert Domela Nieuwenhuis, schuilnaam "Ro Reppraan" (minr 1140156)</div>
+            <p>Voorzitter Wilhelminafonds. OD. De SD vermoordde hem in het Pepergasthuis — een middeleeuws hofje in het centrum van Groningen. Op dezelfde kaart: "2e arrestatie op 25-9-1944 door S.D. thuis" — hij werd thuis opgehaald en diezelfde dag vermoord.</p>
+            <p><strong>Redenering (abductie):</strong> De naam Domela Nieuwenhuis draagt gewicht in de Nederlandse geschiedenis — Ferdinand Domela Nieuwenhuis was de grondlegger van het socialisme. Frederik Siert was een nazaat of naamgenoot. Zijn schuilnaam "Ro Reppraan" is een anagram — waarvan? Het Pepergasthuis als moordlocatie is specifiek genoeg om verifieerbaar te zijn via politierapporten of buurtgetuigenissen.</p>
+            <button class="clipboard-btn" onclick="copyPrompt(this)">&#x1F4CB; Kopieer onderzoeksopdracht</button>
+            <div class="prompt-text" style="display:none">ONDERZOEKSOPDRACHT — Groningse Oorlogspuzzels
+
+Deze hypothese is ontgonnen door Martijn Aslander in samenwerking met Agentic AI (Claude + Gemini).
+Volledig verhaal en context: https://martijnaslander.github.io/ovcg-verzetskaarten/
+
+HYPOTHESE: Frederik Siert Domela Nieuwenhuis werd op 25 september 1944 door de SD vermoord in het Pepergasthuis in Groningen. Hij was lid van de OD en droeg de schuilnaam "Ro Reppraan."
+
+BRONMATERIAAL:
+- OVCG-kaart minr 1140156, Groninger Archieven, toegang 2183
+- Kaart vermeldt ook alias "Jacob Tordiman" en krantknipsel met initialen J.F. en F.S.
+
+TE VERIFIEREN:
+1. Wat is de familierelatie met Ferdinand Domela Nieuwenhuis (1846-1919)?
+2. Is de moord in het Pepergasthuis gedocumenteerd in politiearchieven of SD-verslagen?
+3. Van welk woord is "Ro Reppraan" een anagram?
+4. Wie was "Jacob Tordiman" — een tweede alias of een ander persoon?
+5. Is er een gedenkplaat of herdenking bij het Pepergasthuis?
+
+WAAR TE ZOEKEN:
+- Groninger Archieven, toegang 2183, minr 1140156
+- Regionaal Historisch Centrum Groninger Archieven (politierapporten 1944)
+- IISG Amsterdam (Domela Nieuwenhuis-archief)
+- Pepergasthuis Groningen (lokale herdenking)
+
+---
+KUNT U HELPEN DIT TE VERIFIEREN? Lever bewijs aan via https://martijnaslander.github.io/ovcg-verzetskaarten/#inbox</div>
+            <p class="source">Bron: minr 1140156</p>
+        </div>
+
+        <!-- ZWARTE JOOP -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <div class="bp bp-low"><span class="bp-label">BP</span><div class="bp-bar"><div class="bp-fill" style="width:25%"></div></div><span class="bp-label">25% — 1 kaart, citaat, niet extern gecheckt</span></div>
+            <h3>Zwarte Joop — verdronken bij de Waal</h3>
+            <div class="quote">"3-11-1944 te Loevestein/Gorinchem. Verdronken bij poging tot oversteek van de Waal."<br>— Kaart van Dykhuis, Johannes, 22 jaar, student, schuilnaam "Zwarte Joop" (minr 1141425)</div>
+            <p>KP Groningen, KP Steenwijk. Contacten: Reint Dykema, Piet Dykema, Jan v.d. Wal. Hij probeerde de frontlijn over te steken — van bezet naar bevrijd gebied. De Waal was de grens. November 1944. Hij haalde het niet.</p>
+            <p><strong>Redenering (abductie):</strong> In november 1944 was Zuid-Nederland bevrijd maar het Noorden niet. De Waal was de grens. Verzetsmensen probeerden over te steken om contact te leggen met de geallieerden of om te vluchten. "Zwarte Joop" was 22, student, KP'er. Hij waagde de oversteek bij Loevestein — het kasteel waar Hugo de Groot ontsnapte. Hij verdronk. De ironie van de locatie — een plek van ontsnapping die voor hem geen ontsnapping was — is te scherp om toeval te zijn.</p>
+            <button class="clipboard-btn" onclick="copyPrompt(this)">&#x1F4CB; Kopieer onderzoeksopdracht</button>
+            <div class="prompt-text" style="display:none">ONDERZOEKSOPDRACHT — Groningse Oorlogspuzzels
+
+Deze hypothese is ontgonnen door Martijn Aslander in samenwerking met Agentic AI (Claude + Gemini).
+Volledig verhaal en context: https://martijnaslander.github.io/ovcg-verzetskaarten/
+
+HYPOTHESE: Johannes Dykhuis ("Zwarte Joop"), 22 jaar, KP Groningen, verdronk op 3 november 1944 bij een poging de Waal over te steken bij Loevestein/Gorinchem — vermoedelijk om de frontlijn te passeren.
+
+BRONMATERIAAL:
+- OVCG-kaart minr 1141425, Groninger Archieven, toegang 2183
+
+TE VERIFIEREN:
+1. Zijn er meer verzetsmensen omgekomen bij Waal-oversteken in het najaar van 1944?
+2. Was dit een georganiseerde lijnoversteek of een individuele poging?
+3. Is Dykhuis begraven bij Loevestein/Gorinchem of teruggebracht naar Groningen?
+4. Contactpersonen Reint en Piet Dykema zijn de Dijkema-clan uit het archief. Was "Zwarte Joop" onderdeel van dat familienetwerk?
+5. Is er een monument voor lijnkruisers bij de Waal?
+
+WAAR TE ZOEKEN:
+- Groninger Archieven, toegang 2183
+- Regionaal Archief Gorinchem (verdronkenen Waal november 1944)
+- Slot Loevestein (oorlogsgeschiedenis)
+- NIOD (lijnkruisers-documentatie)
+
+---
+KUNT U HELPEN DIT TE VERIFIEREN? Lever bewijs aan via https://martijnaslander.github.io/ovcg-verzetskaarten/#inbox</div>
+            <p class="source">Bron: minr 1141425</p>
+        </div>
+
+        <!-- FAMILIE FOKKENS -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <div class="bp bp-low"><span class="bp-label">BP</span><div class="bp-bar"><div class="bp-fill" style="width:25%"></div></div><span class="bp-label">25% — 1 kaart, citaat, niet extern gecheckt</span></div>
+            <h3>Moeder en drie zonen — samen naar Vught</h3>
+            <div class="quote">"28.7.1943 door S.D. samen met moeder en 2 broers. Gevangen gezeten in Vught, vrijgelaten 8.10.1943."<br>— Kaart van Fokkens, Tjerk (minr 1142146)</div>
+            <p>Een moeder en haar drie zonen. Samen gearresteerd door de SD. Samen naar Vught. Drie maanden later samen vrijgelaten.</p>
+            <p><strong>Redenering (abductie):</strong> De SD pakte het hele gezin op — moeder inclusief. Dit is geen standaardprocedure bij verzetsgerelateerde arrestaties (normaal werden individuen opgepakt). Het suggeert ofwel dat het hele gezin bij het verzet was betrokken, ofwel dat de SD de moeder als drukmiddel gebruikte. Het feit dat ze na drie maanden allemaal werden vrijgelaten suggereert het laatste: gijzeling, geen bewijs.</p>
+            <button class="clipboard-btn" onclick="copyPrompt(this)">&#x1F4CB; Kopieer onderzoeksopdracht</button>
+            <div class="prompt-text" style="display:none">ONDERZOEKSOPDRACHT — Groningse Oorlogspuzzels
+
+Deze hypothese is ontgonnen door Martijn Aslander in samenwerking met Agentic AI (Claude + Gemini).
+Volledig verhaal en context: https://martijnaslander.github.io/ovcg-verzetskaarten/
+
+HYPOTHESE: De familie Fokkens (moeder + drie zonen, waaronder Tjerk) werd op 28 juli 1943 door de SD samen gearresteerd en naar Kamp Vught gestuurd. Ze werden op 8 oktober 1943 vrijgelaten. De gezamenlijke arrestatie en vrijlating suggereren gijzeling als drukmiddel.
+
+BRONMATERIAAL:
+- OVCG-kaart minr 1142146 (Fokkens, Tjerk), Groninger Archieven, toegang 2183
+- Er zijn meerdere Fokkens-kaarten in het archief (minr 1142141, 1142148, 1142130)
+
+TE VERIFIEREN:
+1. Hebben de andere Fokkens-gezinsleden eigen kaarten? Bevestigen die de gezinsarrestatie?
+2. Waarom werden ze na exact drie maanden vrijgelaten? Was er een boete (zoals bij andere Fokkens-kaarten)?
+3. Hoe oud was de moeder? Is zij als verzetsstrijder erkend of alleen als gijzelaar?
+4. Hoeveel hele gezinnen werden in Groningen door de SD opgepakt?
+
+WAAR TE ZOEKEN:
+- Groninger Archieven, toegang 2183 (zoek alle Fokkens-kaarten)
+- Herinneringscentrum Kamp Vught (registraties juli-oktober 1943)
+
+---
+KUNT U HELPEN DIT TE VERIFIEREN? Lever bewijs aan via https://martijnaslander.github.io/ovcg-verzetskaarten/#inbox</div>
+            <p class="source">Bron: minr 1142146 | Gerelateerd: minr 1142141, 1142148 (andere Fokkens)</p>
+        </div>
+
+        <!-- BEP HESLINGA -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <div class="bp bp-low"><span class="bp-label">BP</span><div class="bp-bar"><div class="bp-fill" style="width:25%"></div></div><span class="bp-label">25% — 1 kaart, citaat, niet extern gecheckt</span></div>
+            <h3>"Op het nippertje"</h3>
+            <div class="quote">"Bijna gearresteerd, op nippertje geredgegaan."<br>— Kaart van Heslinga, Bep (minr 1143727)</div>
+            <p>Koerierster. Bonkaarten. Dat is alles wat er staat. Bijna gepakt. Niet gepakt. Verder gegaan. Na de oorlog woonde ze in Rotterdam als Mevr. B. van Ekeren-Heslinga.</p>
+            <p><strong>Redenering (abductie):</strong> De meeste kaarten beschrijven wat er misging — arrestatie, deportatie, dood. Deze kaart beschrijft wat er bijna misging. "Op nippertje geredgegaan" — de kaartschrijver vond dit belangrijk genoeg om te noteren. Hoeveel anderen hadden hetzelfde verhaal maar geen kaart? Bep Heslinga staat hier als vertegenwoordiger van iedereen die net genoeg geluk had.</p>
+            <p class="source">Bron: minr 1143727</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- CIJFERS -->
+<section class="findings">
+    <div class="container">
+        <h2>De cijfers</h2>
+        <p style="text-align:center; color:#888; margin-bottom:32px;">Voor het eerst geteld. Minimumtellingen — kaarten die de activiteit beschrijven zonder het woord te gebruiken zijn niet meegeteld.</p>
+
+        <div class="numbers-grid">
+            <div class="num-card"><div class="val">524</div><div class="desc">Onderduikers verzorgd</div></div>
+            <div class="num-card"><div class="val">234</div><div class="desc">Jodenhulp (expliciet)</div></div>
+            <div class="num-card"><div class="val">195</div><div class="desc">Neuengamme als bestemming</div></div>
+            <div class="num-card"><div class="val">164</div><div class="desc">Wapenbezit/-transport</div></div>
+            <div class="num-card"><div class="val">112</div><div class="desc">Overvallen/kraken</div></div>
+            <div class="num-card"><div class="val">99</div><div class="desc">Verraders bij naam</div></div>
+            <div class="num-card"><div class="val">68</div><div class="desc">Sabotage</div></div>
+            <div class="num-card"><div class="val">52</div><div class="desc">Illegale radio/zenders</div></div>
+            <div class="num-card"><div class="val">40</div><div class="desc">Geallieerde pilotenhulp</div></div>
+            <div class="num-card"><div class="val">22</div><div class="desc">Spionage/contra-spionage</div></div>
+            <div class="num-card"><div class="val">14</div><div class="desc">Liquidaties</div></div>
+            <div class="num-card"><div class="val">6</div><div class="desc">Berlijn-missies</div></div>
+        </div>
+
+        <div class="numbers-grid">
+            <div class="num-card"><div class="val">40%</div><div class="desc">Werd gearresteerd</div></div>
+            <div class="num-card"><div class="val">50%</div><div class="desc">Van politie gearresteerd</div></div>
+            <div class="num-card"><div class="val">15%</div><div class="desc">Zat in 3+ groepen</div></div>
+            <div class="num-card"><div class="val">0,3%</div><div class="desc">Vrouwen met eigen kaart</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- WAT DIT ARCHIEF NIET IS -->
+<section class="method">
+    <div class="container">
+        <h2>Wat dit archief niet is</h2>
+        <p>Het OVCG-archief documenteert niet het verzet zelf. Het documenteert wie na de oorlog — via getuigenissen, procedures en erkenningscommissies — als verzetsstrijder werd erkend.</p>
+        <p>Wie geen toegang had tot die procedures, wie geen getuigen had, wie geen formele organisatie vertegenwoordigde, heeft geen kaart gekregen.</p>
+        <p>De 9 vrouwen op 3.150 kaarten weerspiegelen niet de deelname van vrouwen aan het verzet. Ze weerspiegelen de naoorlogse bureaucratie van de herinnering.</p>
+        <p style="color:#e8c170; font-weight:bold; margin-top:24px;">De vraag is niet alleen wat er op de kaarten staat. De vraag is wie er geen kaart kreeg.</p>
+    </div>
+</section>
+
+<!-- METHODIEK -->
+<section class="method">
+    <div class="container">
+        <h2>Methodiek &amp; betrouwbaarheid</h2>
+        <p>4.004 kaarten geïnventariseerd. 3.150 getranscribeerd met Google Gemini 2.5 Flash Vision AI. Doorlooptijd: 100 minuten. Drie niveaus van zekerheid:</p>
+        <div class="levels">
+            <div class="level">
+                <span class="badge badge-hoog">Hoog</span>
+                <span>Directe transcriptie van individuele kaarten. Alle verhalen op deze pagina. Verificatie: vergelijk met origineel in Groninger Archieven.</span>
+            </div>
+            <div class="level">
+                <span class="badge badge-middel">Middel</span>
+                <span>Aggregaties (tellingen over meerdere kaarten). Foutbron: AI-transcriptiefouten, inconsistente spelling. Geschatte betrouwbaarheid: 95-98%.</span>
+            </div>
+            <div class="level">
+                <span class="badge badge-laag">Laag</span>
+                <span>Netwerkanalyse (wie kende wie). Achternaam-only matching creëert valse verbindingen. Wordt niet als bewijs opgevoerd.</span>
+            </div>
+        </div>
+        <p style="margin-top:24px;">Elke kaart verwijst naar een inventarisnummer (minr) in <a href="https://www.groningerarchieven.nl">Groninger Archieven</a>, toegangsnummer 2183. Alle kaarten zijn publiek toegankelijk.</p>
+
+        <h3 style="font-family:-apple-system,sans-serif; color:#fff; margin-top:40px; font-size:20px;">Bewijsbaarheidspercentage (BP)</h3>
+        <p>Elk verhaal heeft een BP-score: een transparant getal dat aangeeft hoe verifieerbaar de hypothese is. De score is gebaseerd op vier meetbare criteria — geen interpretatie, geen subjectiviteit.</p>
+        <div style="overflow-x:auto; margin:20px 0;">
+        <table style="width:100%; border-collapse:collapse; font-family:-apple-system,sans-serif; font-size:14px;">
+            <tr style="border-bottom:1px solid #2a2a4e; color:#888;">
+                <th style="text-align:left; padding:8px;">Kaarten</th>
+                <th style="text-align:left; padding:8px;">Citaat</th>
+                <th style="text-align:left; padding:8px;">Extern gecheckt</th>
+                <th style="text-align:left; padding:8px;">Extern bevestigt</th>
+                <th style="text-align:right; padding:8px;">BP</th>
+            </tr>
+            <tr style="border-bottom:1px solid #1a1a2e; color:#e85050;"><td style="padding:8px;">1</td><td>Nee</td><td>Nee</td><td>—</td><td style="text-align:right;">10%</td></tr>
+            <tr style="border-bottom:1px solid #1a1a2e; color:#e8c170;"><td style="padding:8px;">1</td><td>Ja</td><td>Nee</td><td>—</td><td style="text-align:right;">25%</td></tr>
+            <tr style="border-bottom:1px solid #1a1a2e; color:#e8c170;"><td style="padding:8px;">1</td><td>Ja</td><td>Ja</td><td>Nee</td><td style="text-align:right;">30%</td></tr>
+            <tr style="border-bottom:1px solid #1a1a2e; color:#e8c170;"><td style="padding:8px;">1</td><td>Ja</td><td>Ja</td><td>Ja</td><td style="text-align:right;">50%</td></tr>
+            <tr style="border-bottom:1px solid #1a1a2e; color:#e8c170;"><td style="padding:8px;">2+</td><td>Ja</td><td>Nee</td><td>—</td><td style="text-align:right;">55%</td></tr>
+            <tr style="border-bottom:1px solid #1a1a2e; color:#4caf50;"><td style="padding:8px;">2+</td><td>Ja</td><td>Ja</td><td>Nee</td><td style="text-align:right;">70%</td></tr>
+            <tr style="border-bottom:1px solid #1a1a2e; color:#4caf50;"><td style="padding:8px;">2+</td><td>Ja</td><td>Ja</td><td>Ja</td><td style="text-align:right;">85%</td></tr>
+            <tr style="color:#4caf50;"><td style="padding:8px;">3+</td><td>Ja</td><td>Ja</td><td>Ja</td><td style="text-align:right;">95%</td></tr>
+        </table>
+        </div>
+        <p style="color:#e8c170;">Het percentage kan alleen stijgen als iemand de verificatie doet. De <a href="#inbox">inbox</a> onderaan deze pagina is de plek om bewijs aan te leveren.</p>
+        <p style="margin-top:16px;"><a href="methodiek.html" style="font-family:-apple-system,sans-serif; font-size:15px; padding:10px 20px; background:#1a1a2e; border:1px solid #2a2a4e; border-radius:8px; display:inline-block;">Volledige methodiek &amp; bewijsbaarheidsverantwoording &rarr;</a></p>
+    </div>
+</section>
+
+<!-- VERVOLGONDERZOEK -->
+<section class="method">
+    <div class="container">
+        <h2>Open vragen</h2>
+        <p>Dit is geen eindpunt. Dit is een beginpunt. Vijf concrete onderzoeksvragen:</p>
+        <div class="card" style="margin-top:24px;">
+            <h3 style="padding-right:0;">1. Wie waren de 116 vrouwen?</h3>
+            <p>Systematische identificatie van alle vrouwenmars-deelnemers in het OVCG-archief. Hoeveel hadden een eigen kaart? Hoeveel staan als bijzin? Hoeveel ontbreken?</p>
+        </div>
+        <div class="card">
+            <h3 style="padding-right:0;">2. De namenlijst van verraders</h3>
+            <p>99 kaarten noemen de verrader bij naam. Vergelijking met naoorlogse Bijzondere Rechtspleging-archieven: hoeveel zijn berecht? Hoeveel niet?</p>
+        </div>
+        <div class="card">
+            <h3 style="padding-right:0;">3. Groningers op de Cap Arcona</h3>
+            <p>Hoeveel Groningse verzetsstrijders eindigden op de doodsschepen in de Lubecker Bocht? Cross-referentie met Arolsen Archives en KZ-Gedenkstatte Neuengamme.</p>
+        </div>
+        <div class="card">
+            <h3 style="padding-right:0;">4. Kwaliteitscontrole</h3>
+            <p>Steekproefsgewijze verificatie van AI-transcripties tegen originele kaarten. Aanbevolen: 100 kaarten, twee onafhankelijke lezers.</p>
+        </div>
+        <div class="card">
+            <h3 style="padding-right:0;">5. De ontbrekende 1.465 kaarten</h3>
+            <p>3.150 van 4.615 kaarten zijn getranscribeerd. 500 wachten op API-quota. ~350 hebben geen digitale scan. Wie staat er op die ontbrekende kaarten?</p>
+        </div>
+    </div>
+</section>
+
+<!-- INBOX -->
+<section class="inbox" id="inbox">
+    <div class="container">
+        <h2>Bewijs aanleveren</h2>
+        <p>Elke hypothese op deze pagina is een open vraag. Als u informatie hebt die een verhaal bevestigt, weerlegt of aanvult — een foto, een document, een herinnering, een archiefvondst — dan horen wij dat graag.</p>
+        <p>Uw bijdrage wordt beoordeeld en kan het bewijsbaarheidspercentage (BP) van een hypothese verhogen. Elke bijdrage wordt met bronvermelding opgenomen.</p>
+
+        <div class="inbox-form">
+            <label>Over welk verhaal gaat uw bijdrage?</label>
+            <input type="text" id="inbox-verhaal" placeholder="Bijv. 'De Lijst-razzia' of 'Hindertje Drenth' of kaartnummer (minr)">
+
+            <label>Wat is uw bijdrage?</label>
+            <select id="inbox-type">
+                <option value="">Kies het type...</option>
+                <option value="bevestiging">Ik kan dit verhaal bevestigen (met bron)</option>
+                <option value="correctie">Ik heb een correctie</option>
+                <option value="aanvulling">Ik heb aanvullende informatie</option>
+                <option value="bron">Ik ken een bron die dit kan verifieren</option>
+                <option value="persoonlijk">Ik ben familie/nabestaande</option>
+            </select>
+
+            <label>Uw bericht</label>
+            <textarea id="inbox-bericht" placeholder="Beschrijf wat u weet. Vermeld indien mogelijk: bron, datum, locatie, en hoe u aan deze informatie komt."></textarea>
+
+            <label>Uw naam en contactgegevens (optioneel)</label>
+            <input type="text" id="inbox-contact" placeholder="Naam, e-mail of telefoonnummer">
+
+            <button onclick="submitInbox()">Verstuur bijdrage</button>
+            <div class="success" id="inbox-success">Bedankt voor uw bijdrage. Wij beoordelen uw informatie en nemen contact op als dat nodig is.</div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>Onderzoek: Martijn Aslander | AI: Claude (Anthropic) + Gemini 2.5 Flash (Google) | April 2026</p>
+        <p style="margin-top:8px;">Groninger Archieven, <a href="https://www.groningerarchieven.nl">toegangsnummer 2183</a> | <a href="https://www.vrouwenmars1945.nl">vrouwenmars1945.nl</a></p>
+        <p style="margin-top:16px; color:#444;">Dit project begon met een kaart. De kaart van mijn opa.</p>
+    </div>
+</footer>
+
+<script>
+const INBOX_FOOTER = `
+
+---
+KUNT U HELPEN DIT TE VERIFIEREN?
+
+Als u informatie hebt die dit verhaal bevestigt, weerlegt of aanvult — een document, een foto, een herinnering, een archiefvondst — dan kunt u dat aanleveren via:
+
+https://martijnaslander.github.io/ovcg-verzetskaarten/#inbox
+
+Uw bijdrage verhoogt het bewijsbaarheidspercentage (BP) van deze hypothese. Elke bijdrage wordt met bronvermelding opgenomen.
+
+Dit project is gebouwd door Martijn Aslander in samenwerking met Agentic AI. Het doel is niet het laatste woord te hebben — maar het eerste puzzelstukje te leggen.`;
+
+function copyPrompt(btn) {
+    const card = btn.closest('.card');
+    const promptEl = card.querySelector('.prompt-text');
+    if (!promptEl) return;
+    const fullText = promptEl.textContent.trim() + INBOX_FOOTER;
+    navigator.clipboard.writeText(fullText).then(() => {
+        btn.classList.add('copied');
+        btn.innerHTML = '&#x2705; Gekopieerd';
+        setTimeout(() => {
+            btn.classList.remove('copied');
+            btn.innerHTML = '&#x1F4CB; Kopieer onderzoeksopdracht';
+        }, 2000);
+    });
+}
+
+function submitInbox() {
+    const verhaal = document.getElementById('inbox-verhaal').value;
+    const type = document.getElementById('inbox-type').value;
+    const bericht = document.getElementById('inbox-bericht').value;
+    const contact = document.getElementById('inbox-contact').value;
+
+    if (!bericht.trim()) { alert('Vul a.u.b. een bericht in.'); return; }
+
+    // Mailto fallback (later: API endpoint)
+    const subject = encodeURIComponent('Groningse Oorlogspuzzels: ' + (verhaal || 'Bijdrage'));
+    const body = encodeURIComponent(
+        'Verhaal: ' + verhaal + '\n' +
+        'Type: ' + type + '\n' +
+        'Contact: ' + contact + '\n\n' +
+        bericht
+    );
+    window.location.href = 'mailto:martijn@aslander.nl?subject=' + subject + '&body=' + body;
+
+    document.getElementById('inbox-success').style.display = 'block';
+}
+</script>
+</body>
+</html>
