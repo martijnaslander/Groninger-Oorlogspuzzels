@@ -145,6 +145,66 @@ header .number .label {
     color: #555;
     margin-top: 16px;
 }
+.card .clipboard-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 16px;
+    padding: 8px 16px;
+    background: #1a1a2e;
+    border: 1px solid #2a2a4e;
+    border-radius: 8px;
+    color: #6c9fe8;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.card .clipboard-btn:hover {
+    background: #2a2a4e;
+    color: #8cb8f0;
+}
+.card .clipboard-btn.copied {
+    background: #1a3a1a;
+    border-color: #2d5a2d;
+    color: #4caf50;
+}
+.card .next-steps {
+    margin-top: 20px;
+    padding: 16px 20px;
+    background: #0d0d18;
+    border: 1px solid #1a1a2e;
+    border-radius: 8px;
+    display: none;
+}
+.card .next-steps.visible {
+    display: block;
+}
+.card .next-steps h4 {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 14px;
+    color: #6c9fe8;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.card .next-steps ul {
+    list-style: none;
+    padding: 0;
+}
+.card .next-steps li {
+    color: #888;
+    font-size: 14px;
+    padding: 4px 0;
+    padding-left: 16px;
+    position: relative;
+}
+.card .next-steps li:before {
+    content: "\2192";
+    position: absolute;
+    left: 0;
+    color: #555;
+}
 
 .numbers-grid {
     display: grid;
@@ -831,6 +891,209 @@ footer a { color: #888; }
             <p class="source">Bron: minr 1140284 | Verificatie: AIVD-archief, Oranjehotel-documentatie</p>
         </div>
 
+        <!-- CHIRURG TIJDENS OPERATIE -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>Gearresteerd tijdens een blindedarmoperatie</h3>
+            <div class="quote">"19 juni 1943, gearresteerd door de SD tijdens het uitvoeren van een blindedarmoperatie. Overgebracht naar gevangenis. Twee maanden ondervraagd onder marteling en ter dood veroordeeld. Vrijgelaten zonder geld."<br>— Kaart van Wildschut, Andreas Johannes Hendrikus (minr 1142131)</div>
+            <p><strong>Redenering (abductie):</strong> De SD arresteerde een chirurg midden in een operatie. De patient lag op tafel. Dat detail — "tijdens het uitvoeren van een blindedarmoperatie" — is te specifiek om verzonnen te zijn. Het vertelt iets over de urgentie van de SD: ze konden niet wachten tot de operatie klaar was. Of over hun wreedheid: ze wilden niet wachten. Ter dood veroordeeld maar uiteindelijk vrijgelaten "zonder geld" — beroofd van alles.</p>
+            <button class="clipboard-btn" onclick="copyPrompt(this)">&#x1F4CB; Kopieer onderzoeksopdracht</button>
+            <div class="prompt-text" style="display:none">ONDERZOEKSOPDRACHT — Groningse Oorlogspuzzels
+
+Deze hypothese is ontgonnen door Martijn Aslander in samenwerking met Agentic AI (Claude + Gemini).
+Volledig verhaal en context: https://martijnaslander.github.io/ovcg-verzetskaarten/
+
+HYPOTHESE: Andreas Johannes Hendrikus Wildschut, chirurg in het Academisch Ziekenhuis Groningen, werd op 19 juni 1943 door de SD gearresteerd tijdens het uitvoeren van een blindedarmoperatie. Hij werd twee maanden gemarteld en ter dood veroordeeld, maar uiteindelijk vrijgelaten.
+
+BRONMATERIAAL:
+- OVCG-kaart minr 1142131, Groninger Archieven, toegangsnummer 2183
+- De kaart vermeldt ook een eerdere arrestatie op 16 juni 1943 i.v.m. "bevrijding van Aue Fokkens"
+
+TE VERIFIEREN:
+1. Wie was Wildschut? Is hij te vinden in de personeelsregisters van het Academisch Ziekenhuis Groningen 1940-1945?
+2. Wat gebeurde er met de patient op de operatietafel?
+3. Wie was "Aue Fokkens" die hij twee dagen eerder had bevrijd?
+4. Door welk Standgericht werd hij ter dood veroordeeld en waarom werd het vonnis niet uitgevoerd?
+5. Zijn er naoorlogse getuigenissen van Wildschut of collega's?
+
+WAAR TE ZOEKEN:
+- Groninger Archieven, toegangsnummer 2183, minr 1142131 (originele kaart)
+- Universitair Medisch Centrum Groningen (UMCG), personeelsarchief 1940-1945
+- NIOD, Amsterdam (SD-archieven Groningen)
+- Stichting 1940-1945 (dossier Wildschut)</div>
+            <p class="source">Bron: minr 1142131</p>
+        </div>
+
+        <!-- BOONSTRA WEIGERT JODEN ARRESTEREN -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>De commandant die weigerde Joden te arresteren</h3>
+            <div class="quote">"12-3-1943. Gearresteerd nadat hij op 8-3-1943 weigerde als commandant de opdracht uit Groningen uit te voeren om alle Joden in Grijpskerk te arresteren. Werd samen met zijn dochter Celia op zolder opgepakt."<br>— Kaart van Boonstra, Dirk (minr 1137831)</div>
+            <p><strong>Redenering (deductie):</strong> Vier dagen tussen de weigering (8 maart) en de arrestatie (12 maart). Vier dagen waarin Boonstra wist dat het eraan kwam. Hij had kunnen vluchten. Hij bleef. De kaart vermeldt dat zijn dochter Celia ook werd opgepakt — samen op zolder. De SD haalde een vader en zijn dochter van zolder omdat hij weigerde Joden te arresteren.</p>
+            <button class="clipboard-btn" onclick="copyPrompt(this)">&#x1F4CB; Kopieer onderzoeksopdracht</button>
+            <div class="prompt-text" style="display:none">ONDERZOEKSOPDRACHT — Groningse Oorlogspuzzels
+
+Deze hypothese is ontgonnen door Martijn Aslander in samenwerking met Agentic AI (Claude + Gemini).
+Volledig verhaal en context: https://martijnaslander.github.io/ovcg-verzetskaarten/
+
+HYPOTHESE: Dirk Boonstra, politiecommandant, weigerde op 8 maart 1943 de opdracht om alle Joden in Grijpskerk te arresteren. Hij werd vier dagen later zelf gearresteerd, samen met zijn dochter Celia.
+
+BRONMATERIAAL:
+- OVCG-kaart minr 1137831, Groninger Archieven, toegangsnummer 2183
+
+TE VERIFIEREN:
+1. Was Boonstra commandant van de marechaussee of de gemeentepolitie in Grijpskerk?
+2. Hoeveel Joden woonden er in maart 1943 in Grijpskerk? Zijn zij alsnog gearresteerd door een opvolger?
+3. Wat gebeurde er met Boonstra en dochter Celia na arrestatie? Deportatie? Overleving?
+4. Is Boonstra bekend bij Yad Vashem als Rechtvaardige onder de Volkeren?
+5. De burgemeester van Grijpskerk (Nadort, minr 1155628) was ook in het verzet (LO, GV C). Werkten zij samen?
+
+WAAR TE ZOEKEN:
+- Groninger Archieven, toegangsnummer 2183, minr 1137831 (originele kaart)
+- Gemeente-archief Westerkwartier (voorheen Grijpskerk)
+- Yad Vashem database (zoek: Boonstra, Grijpskerk)
+- Joods Monument (Joodse inwoners Grijpskerk)
+- Vergelijk met kaart van burgemeester Nadort (minr 1155628)</div>
+            <p class="source">Bron: minr 1137831 | Gerelateerd: minr 1155628 (burgemeester Nadort, Grijpskerk)</p>
+        </div>
+
+        <!-- 11 LANDWACHTERS RAZZIA -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>11 landwachters uit Grootegast: drie kaarten, een razzia</h3>
+            <div class="quote">"23-8-1944, door 11 landwachters uit Grotegast gearresteerd."<br>— Kaart van Rok, Sjoerd (minr 1152801)</div>
+            <div class="quote">"23-8-44 in Grijpskerk gearresteerd door 11 landwachters."<br>— Kaart van Wiersma, Klaas Reinder (minr 1188704)</div>
+            <div class="quote">"23-8-44 in Grijpskerk gearresteerd door 11 landwachters."<br>— Kaart van Wiersma, Jan (minr 1188680)</div>
+            <p>Drie onafhankelijke kaarten beschrijven dezelfde razzia: 23 augustus 1944, 11 landwachters, Grijpskerk/Grootegast. Alle drie hetzelfde traject: Landwachtkazerne &rarr; Scholtenhuis &rarr; Martinikerkhof &rarr; Amersfoort &rarr; Neuengamme.</p>
+            <p><strong>Redenering (deductie):</strong> Het getal "11" verschijnt op drie onafhankelijke kaarten. Dat is te specifiek voor toeval — drie kaartschrijvers, drie verschillende momenten, hetzelfde getal. De razzia was kennelijk zo ingrijpend dat de opgepakten het aantal landwachters onthielden. En het traject is identiek: vijf stations, in dezelfde volgorde. Dit is een gestandaardiseerde deportatieroute.</p>
+            <button class="clipboard-btn" onclick="copyPrompt(this)">&#x1F4CB; Kopieer onderzoeksopdracht</button>
+            <div class="prompt-text" style="display:none">ONDERZOEKSOPDRACHT — Groningse Oorlogspuzzels
+
+Deze hypothese is ontgonnen door Martijn Aslander in samenwerking met Agentic AI (Claude + Gemini).
+Volledig verhaal en context: https://martijnaslander.github.io/ovcg-verzetskaarten/
+
+HYPOTHESE: Op 23 augustus 1944 voerden 11 landwachters uit Grootegast een razzia uit in Grijpskerk. Minstens drie personen werden gearresteerd en via een identiek traject (Landwachtkazerne Grootegast - Scholtenhuis Groningen - Politiebureau Martinikerkhof - Kamp Amersfoort - Kamp Neuengamme) gedeporteerd.
+
+BRONMATERIAAL:
+- OVCG-kaart minr 1152801 (Rok, Sjoerd), Groninger Archieven, toegang 2183
+- OVCG-kaart minr 1188704 (Wiersma, Klaas Reinder)
+- OVCG-kaart minr 1188680 (Wiersma, Jan)
+- Drie onafhankelijke kaarten bevestigen: getal 11, datum 23-8-44, identiek traject
+
+TE VERIFIEREN:
+1. Wie waren de 11 landwachters uit Grootegast? Zijn zij na de oorlog berecht?
+2. Hoeveel mensen zijn er in totaal opgepakt bij deze razzia? (drie kaarten is een minimum)
+3. Bestond er een Landwachtkazerne in Grootegast? Waar was die gevestigd?
+4. Hebben Rok, Wiersma K.R. en Wiersma J. Neuengamme overleefd?
+5. Is deze razzia gedocumenteerd in de geschiedschrijving van het Westerkwartier?
+
+WAAR TE ZOEKEN:
+- Groninger Archieven, toegangsnummer 2183
+- Gemeente-archief Westerkwartier (Grootegast, Grijpskerk)
+- KZ-Gedenkstatte Neuengamme (kampregistraties)
+- Bijzondere Rechtspleging-archief (Landwacht Grootegast)
+- Cees Stolk, oorlogsverhalennieuwolda.nl (regionaal WOII-onderzoek)</div>
+            <p class="source">Bronnen: minr 1152801, 1188704, 1188680</p>
+        </div>
+
+        <!-- RADEMA BOOTJE VISVLIET -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>'s Nachts in een bootje gearresteerd bij Visvliet</h3>
+            <div class="quote">"19-06-1944, 's nachts in een bootje te Visvliet gearresteerd door Landwacht uit Grootegast en ingesloten in de Landwachtkazerne. Vals P.B. in handen van Landwacht. 20-06-1944 overgebracht naar Groningen, Scholtenhuis. 26-06-1944 naar Kamp Amersfoort (blok 7 als nr. 177), kreeg rode bal, verdacht van vluchtpoging. 08-09-1944 naar Kamp Neuengamme."<br>— Kaart van Radema, Pieter (minr 1179980)</div>
+            <p><strong>Redenering (deductie):</strong> "Rode bal" in Amersfoort was het merkteken voor gevangenen verdacht van vluchtpoging — ze kregen een rode stip op hun kleding en werden extra bewaakt. "Blok 7 als nr. 177" — de kaart noteert het bloknummer en het gevangenennummer. Dit zijn kampregistratiegegevens die verifieerbaar zijn via de Amersfoort- en Neuengamme-archieven. Het detail "'s nachts in een bootje" vertelt het verhaal: Radema probeerde over water te vluchten of te transporteren, en de Landwacht wachtte hem op.</p>
+            <button class="clipboard-btn" onclick="copyPrompt(this)">&#x1F4CB; Kopieer onderzoeksopdracht</button>
+            <div class="prompt-text" style="display:none">ONDERZOEKSOPDRACHT — Groningse Oorlogspuzzels
+
+Deze hypothese is ontgonnen door Martijn Aslander in samenwerking met Agentic AI (Claude + Gemini).
+Volledig verhaal en context: https://martijnaslander.github.io/ovcg-verzetskaarten/
+
+HYPOTHESE: Pieter Radema werd op 19 juni 1944 's nachts in een bootje bij Visvliet gearresteerd door de Landwacht uit Grootegast. Hij had een vals persoonsbewijs. Hij werd via het standaardtraject (Scholtenhuis - Amersfoort - Neuengamme) gedeporteerd. In Amersfoort kreeg hij een "rode bal" (merkteken vluchtgevaar).
+
+BRONMATERIAAL:
+- OVCG-kaart minr 1179980, Groninger Archieven, toegang 2183
+- Kampregistratie: Amersfoort blok 7, nummer 177
+
+TE VERIFIEREN:
+1. Is Radema terug te vinden in de kampregistraties van Amersfoort (blok 7, nr 177)?
+2. Wat betekende de "rode bal" precies in de Amersfoort-administratie?
+3. Heeft Radema Neuengamme overleefd?
+4. Dezelfde Landwacht uit Grootegast voerde ook de razzia van 23-8-1944 uit (zie Rok/Wiersma). Was dit dezelfde eenheid? Hoe groot was de Landwacht in Grootegast?
+5. Visvliet is ook de locatie waar de vrouwenmars werd bevrijd (april 1945). Toevallige locatie of strategisch punt?
+
+WAAR TE ZOEKEN:
+- Groninger Archieven, toegang 2183, minr 1179980
+- Nationaal Monument Kamp Amersfoort (kampregistratie)
+- KZ-Gedenkstatte Neuengamme
+- Arolsen Archives (ITS) — zoek: Radema, Pieter</div>
+            <p class="source">Bron: minr 1179980</p>
+        </div>
+
+        <!-- DOODGEMARTELD SCHOLTENHUIS -->
+        <div class="card">
+            <span class="status status-hypothese">Hypothese</span>
+            <h3>Doodgemarteld op het Scholtenhuis</h3>
+            <div class="quote">"Meegenomen samen met Roelfsema en boer Benes. Roelfsema werd op het Scholtenhuis doodgemarteld."<br>— Kaart van Camphuis (minr 1139129)</div>
+            <p><strong>Redenering (abductie):</strong> Camphuis was erbij. Hij zag Roelfsema worden meegenomen. Hij weet dat Roelfsema op het Scholtenhuis "doodgemarteld" werd. Dat woord — niet "overleden" of "gestorven" maar "doodgemarteld" — is een ooggetuigeverklaring van wat er in het Scholtenhuis gebeurde. De kaartschrijver nam het woord over. Heeft Roelfsema een eigen kaart? Dan bevestigen twee kaarten hetzelfde event.</p>
+            <button class="clipboard-btn" onclick="copyPrompt(this)">&#x1F4CB; Kopieer onderzoeksopdracht</button>
+            <div class="prompt-text" style="display:none">ONDERZOEKSOPDRACHT — Groningse Oorlogspuzzels
+
+Deze hypothese is ontgonnen door Martijn Aslander in samenwerking met Agentic AI (Claude + Gemini).
+Volledig verhaal en context: https://martijnaslander.github.io/ovcg-verzetskaarten/
+
+HYPOTHESE: Een verzetsman genaamd Roelfsema werd doodgemarteld op het Scholtenhuis in Groningen. Dit staat niet op zijn eigen kaart maar op de kaart van Camphuis, die samen met Roelfsema en "boer Benes" werd meegenomen.
+
+BRONMATERIAAL:
+- OVCG-kaart minr 1139129 (Camphuis), Groninger Archieven, toegang 2183
+
+TE VERIFIEREN:
+1. Heeft Roelfsema een eigen OVCG-kaart? Zo ja: bevestigt die de dood in het Scholtenhuis?
+2. Wie was "boer Benes"? Heeft hij een eigen kaart?
+3. Wat is er bekend over martelingen in het Scholtenhuis? Is er een lijst van mensen die daar zijn omgekomen?
+4. Is Camphuis na de oorlog als getuige gehoord bij de Bijzondere Rechtspleging?
+5. Het Scholtenhuis is nu een kantoorgebouw. Is er een gedenkplaat?
+
+WAAR TE ZOEKEN:
+- Groninger Archieven, toegang 2183 (zoek: Roelfsema, Benes)
+- NIOD (SD-archieven Groningen, Scholtenhuis)
+- Bijzondere Rechtspleging-archief (verhoren SD-personeel)
+- Het Scholtenhuis, Groningen (lokale herdenking)</div>
+            <p class="source">Bron: minr 1139129 | Te checken: eigen kaart Roelfsema en Benes</p>
+        </div>
+
+        <!-- PIETER VAN DIJK ZENDER -->
+        <div class="card">
+            <span class="status status-bewezen">Bewezen</span>
+            <h3>De zender op de boerderij: omsingeld na peiling</h3>
+            <div class="quote">"6 februari 1945, boerderij nabij Ellerhuizen (Haren). De boerderij, waar een zender was gevestigd, werd omsingeld door de S.D. na peiling. Pieter van Dijk raakte betrokken bij een gevecht en probeerde te ontkomen, maar werd overmeesterd door de overmacht."<br>— Kaart van Pieter van Dijk (minr 1141185)</div>
+            <p><strong>Redenering (deductie):</strong> "Na peiling" — de Duitsers hadden radiogoniometrie (peilapparatuur) om illegale zenders te localiseren. Ze peilden de zender, omsingelden de boerderij, en overmanden Van Dijk na een gevecht. Dit is dezelfde methode waarmee Westerdijk (minr 1188348) werd gevonden — ook een illegale zender, ook een SD-overval. Twee kaarten, twee boerderijen, twee zenders, dezelfde methode. Het patroon: de SD jaagde systematisch op illegale radiozenders in de laatste oorlogsmaanden.</p>
+            <button class="clipboard-btn" onclick="copyPrompt(this)">&#x1F4CB; Kopieer onderzoeksopdracht</button>
+            <div class="prompt-text" style="display:none">ONDERZOEKSOPDRACHT — Groningse Oorlogspuzzels
+
+Deze hypothese is ontgonnen door Martijn Aslander in samenwerking met Agentic AI (Claude + Gemini).
+Volledig verhaal en context: https://martijnaslander.github.io/ovcg-verzetskaarten/
+
+HYPOTHESE: De SD gebruikte radiogoniometrie (peiling) om illegale zenders in Groningen te localiseren. Minstens twee boerderijen met zenders werden op deze manier gevonden: Pieter van Dijk bij Ellerhuizen (6 feb 1945) en Westerdijk bij Withwichmeeden (6 feb 1945 — mogelijk dezelfde dag).
+
+BRONMATERIAAL:
+- OVCG-kaart minr 1141185 (Van Dijk), Groninger Archieven, toegang 2183
+- OVCG-kaart minr 1188348 (Westerdijk) — ook een zender, ook SD-overval
+
+TE VERIFIEREN:
+1. Zijn beide zenderovervallen op dezelfde dag (6 februari 1945)? Dat zou wijzen op een gecoordineerde actie.
+2. Welke zendernamen werden gebruikt? Westerdijk had "Atlanta". Welke had Van Dijk?
+3. Hoeveel illegale zenders opereerden er in Groningen? De kaarten noemen er minstens 52.
+4. Had de SD in Groningen eigen peilapparatuur of kwam die uit Duitsland?
+5. Heeft Van Dijk de oorlog overleefd?
+
+WAAR TE ZOEKEN:
+- Groninger Archieven, toegang 2183
+- NIOD (SD-archieven, afdeling Funkabwehr)
+- Bundesarchiv (Funkabwehr/Funkhorchdienst)
+- Herinneringscentrum Kamp Westerbork (radiogeschiedenis verzet)</div>
+            <p class="source">Bron: minr 1141185 | Gerelateerd: minr 1188348 (Westerdijk, zelfde methode)</p>
+        </div>
+
     </div>
 </section>
 
@@ -934,5 +1197,25 @@ footer a { color: #888; }
     </div>
 </footer>
 
+<script>
+function copyPrompt(btn) {
+    const card = btn.closest('.card');
+    const promptEl = card.querySelector('.prompt-text');
+    if (!promptEl) return;
+    navigator.clipboard.writeText(promptEl.textContent.trim()).then(() => {
+        btn.classList.add('copied');
+        btn.innerHTML = '&#x2705; Gekopieerd';
+        setTimeout(() => {
+            btn.classList.remove('copied');
+            btn.innerHTML = '&#x1F4CB; Kopieer onderzoeksopdracht';
+        }, 2000);
+    });
+}
+function toggleSteps(btn) {
+    const card = btn.closest('.card');
+    const steps = card.querySelector('.next-steps');
+    if (steps) steps.classList.toggle('visible');
+}
+</script>
 </body>
 </html>
