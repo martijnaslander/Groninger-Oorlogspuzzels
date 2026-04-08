@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Changelog — Groningen War Puzzles</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+    background: #1e2128;
+    color: #f0ebe0;
+    line-height: 1.85;
+    font-size: 20px;
+}
+a { color: #c9a84c; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+
+/* Nav */
+.site-nav { background: #262a32; border-bottom: 1px solid #333a44; padding: 16px 0; }
+.site-nav .container { display: flex; justify-content: space-between; align-items: center; }
+.nav-home { font-family: 'Playfair Display', serif; font-size: 20px; color: #f0ebe0; font-weight: 700; }
+.nav-links { display: flex; gap: 28px; }
+.nav-links a { font-size: 16px; color: #999; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+.nav-links a:hover { color: #f0ebe0; text-decoration: none; }
+.nav-links a.active { color: #c9a84c; }
+
+/* Hero */
+.hero { padding: 80px 0 60px; border-bottom: 1px solid #333a44; text-align: center; }
+.hero h1 { font-family: 'Playfair Display', serif; font-size: 44px; color: #f0ebe0; margin-bottom: 16px; }
+.hero .subtitle { font-size: 20px; color: #999; max-width: 640px; margin: 0 auto; }
+
+/* Changelog entries */
+.changelog { padding: 60px 0; max-width: 800px; margin: 0 auto; }
+.changelog-year { font-family: 'Playfair Display', serif; font-size: 36px; color: #c9a84c; margin: 60px 0 24px; padding-bottom: 12px; border-bottom: 2px solid #333a44; }
+.changelog-year:first-child { margin-top: 0; }
+
+.entry { margin-bottom: 40px; padding-left: 24px; border-left: 3px solid #333a44; }
+.entry:hover { border-left-color: #c9a84c; }
+.entry-date { font-size: 15px; color: #888; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.entry-title { font-family: 'Playfair Display', serif; font-size: 24px; color: #f0ebe0; margin-bottom: 8px; }
+.entry-body { color: #bbb; font-size: 18px; line-height: 1.8; }
+.entry-body ul { margin: 8px 0 8px 20px; }
+.entry-body li { margin-bottom: 4px; }
+.entry-tag { display: inline-block; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; padding: 3px 10px; border-radius: 4px; margin-right: 6px; margin-top: 8px; font-weight: 600; }
+.tag-data { background: #2a3a2a; color: #6daa6d; }
+.tag-site { background: #2a2a3a; color: #7a9ec5; }
+.tag-method { background: #3a3a2a; color: #c9a84c; }
+.tag-fix { background: #3a2a2a; color: #c57a7a; }
+.tag-analysis { background: #2a3a3a; color: #6daac5; }
+
+/* Footer */
+footer { padding: 60px 0; border-top: 1px solid #333a44; text-align: center; color: #666; font-size: 16px; }
+
+@media (max-width: 768px) {
+    .container { padding: 0 20px; }
+    .hero h1 { font-size: 32px; }
+    .entry-title { font-size: 20px; }
+    .nav-links { gap: 16px; }
+    .nav-links a { font-size: 13px; }
+}
+</style>
+</head>
+<body>
+<script>if(sessionStorage.getItem("ovcg-accepted")!=="1"){window.location.href="../";}</script>
+
+<nav class="site-nav" style="position:relative;">
+    <div class="container">
+        <a href="index.html" class="nav-home">Groningen War Puzzles</a><a href="../changelog.html" style="position:absolute; right:40px; font-size:22px; text-decoration:none;" title="Nederlandse versie">🇳🇱</a>
+        <div class="nav-links">
+            <a href="index.html">Start here</a>
+            <a href="../bevindingen.html">Cross-stories</a>
+            <a href="archives.html">Archive</a>
+            <a href="../methode.html">Method</a>
+            <a href="../cijfers.html">Numbers</a>
+            <a href="../tijdlijn.html">Timeline</a>
+            <a href="changelog.html" class="active">Changelog</a>
+            <a href="about.html">About</a>
+        </div>
+    </div>
+</nav>
+
+<div class="hero">
+    <div class="container">
+        <h1>Changelog</h1>
+        <p class="subtitle">Every change to this project, documented in public.</p>
+    </div>
+</div>
+
+<div class="container">
+<div class="changelog">
+
+<h2 class="changelog-year">2026</h2>
+
+<div class="entry" id="2026-04-08-bp-fix">
+    <div class="entry-date">8 April 2026 (evening)</div>
+    <div class="entry-title">BP scores recalculated across 3,024 cards &mdash; following a sharp observation by Ika van Doorn</div>
+    <div class="entry-body">
+        <p style="color:#a09a8e; margin-bottom:16px;">Ika van Doorn discovered that the BP scores on multiple cards did not match the description next to them. A card with a quote and an external match sometimes had a lower score than what the BP table on the method page prescribes. This was a bug in the pipeline that generated the scores &mdash; the score and the description were calculated independently and had drifted out of sync.</p>
+        <p style="color:#a09a8e; margin-bottom:16px;">That evening we wrote a recalculation script that walks through every card, queries the checker database (has an external source confirmed this person?) and recalculates the BP score according to exactly the table on the method page. This yielded 204 corrections on the cross-stories page and 2,820 corrections on the archive page.</p>
+        <p style="color:#c9a84c; margin-bottom:16px;">I deliberately chose to put this entire project online while it is still in development, and to discover through feedback from others what does not work well enough and what can be improved. I think more people should do this &mdash; just share what you are working on while you are working on it. Of course you will make mistakes, and as soon as you discover them you fix them. That is the fun of experimenting.</p>
+        <ul>
+            <li>204 BP scores corrected on the cross-stories page</li>
+            <li>2,820 BP scores corrected on the archive page</li>
+            <li>BP descriptions made consistent with the recalculated scores</li>
+            <li>All scores now calculated based on the checker database (externally confirmed, externally checked, quote present)</li>
+        </ul>
+        <span class="entry-tag tag-fix">fix</span>
+        <span class="entry-tag tag-data">data</span>
+    </div>
+</div>
+
+<div class="entry" id="2026-04-08-verbeteringen">
+    <div class="entry-date">8 April 2026</div>
+    <div class="entry-title">Made criticism-proof, new pages, English version &mdash; following valuable tips from Ika van Doorn and Olivier Heimel</div>
+    <div class="entry-body">
+        <p style="color:#a09a8e; margin-bottom:16px;">Thorough revision of the entire site in preparation for the presentation at the VOGIN-IP congress on 9 April 2026. Thanks to Ika van Doorn (researcher De Vrouwenmars) and Olivier Heimel for their sharp feedback.</p>
+        <ul>
+            <li><strong>Disclaimer rewritten:</strong> more precise about what this project is and who made it</li>
+            <li><strong>Overclaims removed:</strong> "never before connected" replaced everywhere by "as far as we know"</li>
+            <li><strong>"Estimated reliability 95-98%" removed:</strong> replaced with an honest acknowledgement that no independent validation has been done</li>
+            <li><strong>BP score framed as working model:</strong> explicitly identified as our own construct, not an established method</li>
+            <li><strong>Source criticism section added:</strong> who wrote the cards, when, with what selection, from what perspective</li>
+            <li><strong>New page: The possible implications for the archival world</strong> &mdash; the difference between transcribing and informatising, Transkribus and VeleHanden mentioned, the self-improving pipeline, link to the Luhmann Zettelkasten project</li>
+            <li><strong>Mondriaan Fund project mentioned:</strong> OVCG Zichtbaar Online (2021) as context for the existing digitisation work</li>
+            <li><strong>About page rewritten:</strong> track record, books, Memex, Pilot Informatieautonomie, VOGIN-IP congress, profile photo, LinkedIn</li>
+            <li><strong>Women's March documentary:</strong> film poster, group photo Grijpskerk, credits Carla Wolbers, Ted Alkemade and Ika van Doorn</li>
+            <li><strong>Aunt G&eacute; expanded:</strong> Celebesstraat as resistance cell, Willem Schoemaker, mission to Berlin, escape on a train roof</li>
+            <li><strong>Google Form replaces mailto:</strong> contributions now reliably arrive in a spreadsheet</li>
+            <li><strong>English version:</strong> three translated pages (homepage, about, archives) for international descendants, with language flags</li>
+            <li><strong>SEO optimisation:</strong> Schema.org markup, selective robots.txt, Open Graph tags for social sharing</li>
+            <li><strong>GoatCounter analytics</strong> added on all pages</li>
+            <li><strong>robots.txt + noindex:</strong> data pages protected, core pages open for AI search engines</li>
+        </ul>
+        <p style="color:#a09a8e; margin-top:16px;"><strong>Following feedback from Ika van Doorn:</strong></p>
+        <ul>
+            <li>"The subordinate clause that changed everything" moved to the top of the homepage &mdash; the emotional heart first</li>
+            <li>Subtitle shortened: the reference to unreliability of chatbots drained the energy</li>
+            <li>Colours adjusted: hypothesis label from gold to muted blue, BP score from red to light grey, quote block from gold to ivory &mdash; so that signal and accent colours no longer overlap</li>
+            <li>Tile order: archive first (safe entry point), findings second</li>
+            <li>Findings text clarified: "233 plausible storylines based on AI combination of card information"</li>
+            <li>Reading guide more compact and dismissable on all pages</li>
+            <li>Method page: title added, "Weak" changed from yellow to red</li>
+            <li>"Cross-verification" replaced by "cross-comparison"</li>
+        </ul>
+        <p style="color:#a09a8e; margin-top:16px;"><strong>Following feedback from Olivier Heimel:</strong></p>
+        <ul>
+            <li>Search function on archive page now matches whole words &mdash; "Heimel" no longer finds "heimelijk" (secretly)</li>
+        </ul>
+        <p style="color:#a09a8e; margin-top:16px;"><strong>Following feedback from Adri Mathlener:</strong></p>
+        <ul>
+            <li>Clickable links to the original scanned cards at the Groningen Archives &mdash; added to the list of planned improvements</li>
+        </ul>
+        <p style="color:#a09a8e; margin-top:16px;"><strong>Additional feedback from Ika van Doorn:</strong></p>
+        <ul>
+            <li>"Findings" renamed to "Cross-stories" &mdash; stories that surface by overlaying cards on top of each other</li>
+            <li>Subtitle rewritten: not "more plausible than other storylines" but a concrete description of what it is</li>
+        </ul>
+        <span class="entry-tag tag-site">site</span>
+        <span class="entry-tag tag-method">method</span>
+        <span class="entry-tag tag-fix">fix</span>
+    </div>
+</div>
+
+<div class="entry" id="2026-04-08">
+    <div class="entry-date">8 April 2026</div>
+    <div class="entry-title">Website split into 7 pages + timeline + changelog</div>
+    <div class="entry-body">
+        <ul>
+            <li>Site split from 1 page (8 MB) into 7 pages: home, findings, archive, method, numbers, timeline, about</li>
+            <li>Timeline page built: 889 cards in chronological order, visual bar chart per month (1940-1945)</li>
+            <li>Search bar added to the archive page</li>
+            <li>Changelog + RSS feed added</li>
+            <li>Visual redesign: Playfair Display + Source Sans 3, warm dark blue-grey, wider layout</li>
+        </ul>
+        <span class="entry-tag tag-site">site</span>
+    </div>
+</div>
+
+<div class="entry" id="2026-04-07-audit">
+    <div class="entry-date">7 April 2026</div>
+    <div class="entry-title">Quality audit: overclaims and AI hallucinations corrected</div>
+    <div class="entry-body">
+        <ul>
+            <li>Status "Proven" renamed to "Source card confirmed" on all 2,777 cards</li>
+            <li>Reading guide/disclaimer added at the top of the stories</li>
+            <li>319x "crucial role" corrected (language error + overclaim)</li>
+            <li>159x "the most important" toned down to "an important"</li>
+            <li>166x "demonstrates that" replaced by "suggests that"</li>
+            <li>62x "indispensable" replaced by "valuable"</li>
+            <li>407x "this illustrates" varied</li>
+            <li>73x "his position as" neutralised</li>
+            <li>Typos fixed: "onderernourissement", "beruchi"</li>
+        </ul>
+        <span class="entry-tag tag-fix">fix</span>
+        <span class="entry-tag tag-method">method</span>
+    </div>
+</div>
+
+<div class="entry" id="2026-04-07-3000">
+    <div class="entry-date">7 April 2026</div>
+    <div class="entry-title">From 206 to 3,034 stories via automated pipeline</div>
+    <div class="entry-body">
+        <ul>
+            <li>Generator script built: Claude Haiku writes title, quote, context, reasoning and open question per card</li>
+            <li>Pipeline script: ovcg_pipeline_vps.py generates, injects and cross-checks in batches of 50</li>
+            <li>206 &rarr; 286 (manual, rounds 40-42)</li>
+            <li>286 &rarr; 500 (pipeline run 1, ~20 min)</li>
+            <li>500 &rarr; 1,000 (pipeline run 2, ~50 min)</li>
+            <li>1,000 &rarr; 3,034 (pipeline run 3+4, ~3 hours)</li>
+        </ul>
+        <span class="entry-tag tag-data">data</span>
+        <span class="entry-tag tag-method">method</span>
+    </div>
+</div>
+
+<div class="entry" id="2026-04-07-crosscheck">
+    <div class="entry-date">7 April 2026</div>
+    <div class="entry-title">Cross-checker: 3,135 cards checked against 6 online sources</div>
+    <div class="entry-body">
+        <ul>
+            <li>Auto-checker v3 patched: lockfile (prevents duplicate instances) + retry logic (prevents DB-lock crashes)</li>
+            <li>6 sources: oorlogsbronnen.nl, erelijst.nl, 4en5mei.nl, oorlogslevens.nl, Wikipedia, DuckDuckGo</li>
+            <li>Result: 489 strong matches, 2,074 medium, 572 weak</li>
+            <li>BP scores automatically upgraded based on external evidence</li>
+        </ul>
+        <span class="entry-tag tag-analysis">analysis</span>
+    </div>
+</div>
+
+<div class="entry" id="2026-04-07-analyse">
+    <div class="entry-date">7 April 2026</div>
+    <div class="entry-title">Cross-reference analysis: networks, families, date clusters</div>
+    <div class="entry-body">
+        <ul>
+            <li>2,040 connections found between card holders and contact persons</li>
+            <li>1 large cluster of 1,036 interconnected resistance members</li>
+            <li>203 surname clusters with 3+ cards (possible families)</li>
+            <li>139 cards mention betrayal by name</li>
+            <li>13 date clusters with 5+ simultaneous arrests (raids)</li>
+            <li>572 cards without strong online confirmation (potentially new stories)</li>
+        </ul>
+        <span class="entry-tag tag-analysis">analysis</span>
+    </div>
+</div>
+
+<div class="entry" id="2026-04-06">
+    <div class="entry-date">6 April 2026</div>
+    <div class="entry-title">First version: 162 stories + research report</div>
+    <div class="entry-body">
+        <ul>
+            <li>3,150 cards transcribed with Gemini 2.5 Flash Vision AI in 100 minutes</li>
+            <li>162 story cards written manually</li>
+            <li>Research report: women's march, Cap Arcona, two Freerk Lodes, deportation routes, betrayers</li>
+            <li>Website built: single-page, dark theme, BP scores, clipboard buttons</li>
+            <li>Methodology page written</li>
+        </ul>
+        <span class="entry-tag tag-data">data</span>
+        <span class="entry-tag tag-site">site</span>
+    </div>
+</div>
+
+<div class="entry" id="2026-04-05">
+    <div class="entry-date">5 April 2026</div>
+    <div class="entry-title">The night of the transcription</div>
+    <div class="entry-body">
+        <ul>
+            <li>4,004 cards inventoried via the Groningen Archives + Wayback Machine</li>
+            <li>3,755 thumbnails downloaded (254&times;300px)</li>
+            <li>3,150 cards transcribed to structured JSON</li>
+            <li>19 API keys, 8 parallel workers, 2 batches, 100 minutes</li>
+        </ul>
+        <span class="entry-tag tag-data">data</span>
+    </div>
+</div>
+
+</div>
+
+<div style="margin-top:80px; padding-top:60px; border-top:1px solid #333a44;">
+    <h2 style="font-family:'Playfair Display',Georgia,serif; font-size:32px; color:#f0ebe0; margin-bottom:32px;">Planned improvements</h2>
+    <p style="color:#a09a8e; margin-bottom:32px;">This project is not finished and probably never will be. Below is what we plan to improve, so you know what we are working on and what you can expect.</p>
+
+    <div class="entry">
+        <div class="entry-title" style="text-decoration:line-through; color:#6daa6d;">Clickable source references &mdash; DONE</div>
+        <div class="entry-body">
+            <p style="color:#6daa6d;">Completed on 8 April 2026. 12,764 minr numbers are now clickable links to the original scan at the Groningen Archives. <em>Tip from Adri Mathlener.</em></p>
+        </div>
+    </div>
+
+    <div class="entry">
+        <div class="entry-title">Saving and sharing stories</div>
+        <div class="entry-body">
+            <p>Multiple visitors indicated that they want to be able to save or forward certain stories to family members. We are building a way to export stories as a brief summary via a form, so you can save them or email them to someone who might find them useful.</p>
+        </div>
+    </div>
+
+    <div class="entry">
+        <div class="entry-title">The missing cards</div>
+        <div class="entry-body">
+            <p>Of the 4,615 cards in the inventory of the Groningen Archives, 3,150 have been transcribed. Over 600 have no digital scan and approximately 850 are still awaiting processing. Each of those cards may contain a missing puzzle piece &mdash; a name that completes a pattern or a connection that is currently invisible.</p>
+        </div>
+    </div>
+
+    <div class="entry">
+        <div class="entry-title">Random sample quality control</div>
+        <div class="entry-body">
+            <p>The AI transcription has not been independently validated. We want to have at least one hundred cards checked by two independent readers who compare the original scan with our transcription, so we get a reliable picture of the error margin and know where the machine most often goes wrong.</p>
+        </div>
+    </div>
+
+    <div class="entry">
+        <div class="entry-title">Comment function per story</div>
+        <div class="entry-body">
+            <p>The Google form works, but it is a detour. We are exploring whether we can add a way per story for visitors to leave a remark, correction or addition directly &mdash; so that the barrier to contribute is as low as possible.</p>
+        </div>
+    </div>
+
+    <div class="entry">
+        <div class="entry-title">More references to the method</div>
+        <div class="entry-body">
+            <p>Visitors who dive into the archive or the findings want to know along the way how reliable what they are reading is. We will add links to the method page in more places, so you can always quickly see how a number was arrived at or what a BP score precisely means.</p>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<footer>
+    <div class="container">
+        <p>Groningen War Puzzles — a citizen science project by Martijn Aslander</p>
+    </div>
+</footer>
+
+<script data-goatcounter="https://groninger-oorlogspuzzels.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
