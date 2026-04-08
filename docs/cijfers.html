@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cijfers — Groningse Oorlogspuzzels</title>
+<meta name="description" content="Kwantitatief overzicht van het Groningse verzet. Voor het eerst geteld uit 3.150 kaarten.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* === RESET === */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* === BASE === */
+body {
+    font-family: 'Source Sans 3', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #1e2128;
+    color: #f0ebe0;
+    font-size: 20px;
+    line-height: 1.85;
+}
+body.locked { overflow: hidden; }
+
+/* === DISCLAIMER OVERLAY === */
+#disclaimer-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: #1e2128;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+#disclaimer-overlay.hidden { display: none; }
+#disclaimer-box {
+    max-width: 880px;
+    background: #262a32;
+    border: 2px solid #c9a84c;
+    border-radius: 8px;
+    padding: 60px 72px;
+    max-height: 94vh;
+    overflow-y: auto;
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+}
+#disclaimer-box h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 38px;
+    color: #f0ebe0;
+    margin-bottom: 36px;
+    letter-spacing: -0.5px;
+    line-height: 1.35;
+    font-weight: 700;
+}
+#disclaimer-box p {
+    font-size: 19px;
+    color: #d5d0c5;
+    margin-bottom: 28px;
+    line-height: 1.85;
+}
+#disclaimer-box .accent {
+    color: #c9a84c;
+    font-weight: 600;
+    border-bottom: 1px solid #c9a84c;
+    padding-bottom: 1px;
+}
+#disclaimer-box .caps {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 14px;
+    color: #8a8577;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+#disclaimer-box .signature {
+    font-style: italic;
+    color: #a09a8e;
+    font-size: 21px;
+    margin-top: 8px;
+}
+#disclaimer-check {
+    margin-top: 48px;
+    padding-top: 36px;
+    border-top: 1px solid #3a3f4a;
+}
+#disclaimer-check label {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    cursor: pointer;
+    font-size: 18px;
+    color: #d5d0c5;
+    line-height: 1.8;
+}
+#disclaimer-check input[type="checkbox"] {
+    margin-top: 6px;
+    width: 28px;
+    height: 28px;
+    accent-color: #c9a84c;
+    flex-shrink: 0;
+}
+#enter-btn {
+    display: block;
+    margin-top: 32px;
+    width: 100%;
+    padding: 24px;
+    background: #333a44;
+    color: #666;
+    border: 2px solid #3a3f4a;
+    border-radius: 8px;
+    font-size: 22px;
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    cursor: not-allowed;
+    transition: all 0.3s;
+    font-weight: 700;
+}
+#enter-btn.active {
+    background: #c9a84c;
+    color: #1e2128;
+    border-color: #c9a84c;
+    cursor: pointer;
+}
+#enter-btn.active:hover {
+    background: #d4b65e;
+}
+
+/* === LINKS === */
+a { color: #c9a84c; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* === LAYOUT === */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+
+/* === HEADER / HERO === */
+header {
+    padding: 120px 0 90px;
+    text-align: center;
+    border-bottom: 1px solid #333a44;
+}
+header h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 52px;
+    font-weight: 700;
+    color: #f0ebe0;
+    letter-spacing: -1px;
+    margin-bottom: 24px;
+    line-height: 1.2;
+}
+header .subtitle {
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    font-size: 20px;
+    color: #a09a8e;
+    max-width: 720px;
+    margin: 0 auto 48px;
+    line-height: 1.7;
+}
+header .numbers {
+    display: flex;
+    justify-content: center;
+    gap: 56px;
+    margin-top: 48px;
+}
+header .number {
+    text-align: center;
+}
+header .number .big {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 44px;
+    font-weight: 700;
+    color: #c9a84c;
+}
+header .number .label {
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    font-size: 14px;
+    color: #8a8577;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 4px;
+}
+
+/* === INTRO === */
+.intro {
+    padding: 100px 0;
+    border-bottom: 1px solid #333a44;
+}
+.intro p {
+    font-size: 20px;
+    color: #c5c0b5;
+    margin-bottom: 24px;
+}
+.intro .highlight {
+    color: #c9a84c;
+    font-weight: 600;
+}
+
+/* === FINDINGS === */
+.findings {
+    padding: 100px 0 60px;
+}
+.findings h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 36px;
+    color: #f0ebe0;
+    margin-bottom: 56px;
+    text-align: center;
+}
+
+/* === CARDS === */
+.card {
+    background: #262a32;
+    border: 1px solid #333a44;
+    border-radius: 8px;
+    padding: 48px;
+    margin-bottom: 40px;
+    position: relative;
+}
+.card .status {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 5px 14px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+.status-bewezen {
+    background: #1e3028;
+    color: #6daa6d;
+    border: 1px solid #2e4a38;
+}
+.status-hypothese {
+    background: #302e1e;
+    color: #c9a84c;
+    border: 1px solid #4a4528;
+}
+.status-onderzoeken {
+    background: #1e2530;
+    color: #7a9ec5;
+    border: 1px solid #2d3a4e;
+}
+.card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 26px;
+    color: #f0ebe0;
+    margin-bottom: 18px;
+    padding-right: 140px;
+    line-height: 1.35;
+}
+.card p {
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    font-size: 19px;
+    color: #c5c0b5;
+    margin-bottom: 14px;
+    line-height: 1.85;
+}
+.card .quote {
+    border-left: 4px solid #c9a84c;
+    background: #2a2e38;
+    padding: 24px;
+    padding-left: 28px;
+    margin: 24px 0;
+    font-style: italic;
+    font-size: 21px;
+    color: #d5d0c5;
+    border-radius: 0 6px 6px 0;
+    line-height: 1.75;
+}
+.card .source {
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    font-size: 14px;
+    color: #8a8577;
+    margin-top: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.card .source a {
+    color: #a09a8e;
+}
+.card .source a:hover {
+    color: #c9a84c;
+}
+
+/* === CLIPBOARD BUTTON === */
+.card .clipboard-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 16px;
+    padding: 8px 16px;
+    background: #2a2e38;
+    border: 1px solid #333a44;
+    border-radius: 6px;
+    color: #8a8577;
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.3px;
+}
+.card .clipboard-btn:hover {
+    background: #333a44;
+    color: #c9a84c;
+    border-color: #444c58;
+}
+.card .clipboard-btn.copied {
+    background: #1e3028;
+    border-color: #2e4a38;
+    color: #6daa6d;
+}
+
+/* === NEXT STEPS === */
+.card .next-steps {
+    margin-top: 24px;
+    padding: 20px 24px;
+    background: #222630;
+    border: 1px solid #333a44;
+    border-radius: 6px;
+    display: none;
+}
+.card .next-steps.visible {
+    display: block;
+}
+.card .next-steps h4 {
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    font-size: 14px;
+    color: #c9a84c;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+.card .next-steps ul {
+    list-style: none;
+    padding: 0;
+}
+.card .next-steps li {
+    color: #a09a8e;
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    font-size: 15px;
+    padding: 5px 0;
+    padding-left: 20px;
+    position: relative;
+}
+.card .next-steps li:before {
+    content: "\2192";
+    position: absolute;
+    left: 0;
+    color: #8a8577;
+}
+
+/* === NUMBERS GRID === */
+.numbers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    margin: 56px 0;
+}
+.num-card {
+    background: #262a32;
+    border: 1px solid #333a44;
+    border-radius: 8px;
+    padding: 32px;
+    text-align: center;
+}
+.num-card .val {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 44px;
+    font-weight: 700;
+    color: #c9a84c;
+}
+.num-card .desc {
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    font-size: 16px;
+    color: #a09a8e;
+    margin-top: 8px;
+}
+
+/* === METHOD === */
+.method {
+    padding: 100px 0;
+    border-top: 1px solid #333a44;
+}
+.method h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 32px;
+    color: #f0ebe0;
+    margin-bottom: 28px;
+}
+.method p {
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    color: #a09a8e;
+    margin-bottom: 18px;
+    font-size: 19px;
+}
+.method .levels {
+    margin: 36px 0;
+}
+.method .level {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+.method .level .badge {
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 5px 12px;
+    border-radius: 4px;
+    white-space: nowrap;
+    min-width: 80px;
+    text-align: center;
+    font-weight: 600;
+}
+.badge-hoog { background: #1e3028; color: #6daa6d; }
+.badge-middel { background: #302e1e; color: #c9a84c; }
+.badge-laag { background: #301e1e; color: #c57a7a; }
+
+/* === BP METER === */
+.card .bp {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 14px;
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    font-size: 13px;
+}
+.bp .bp-bar {
+    width: 160px;
+    height: 8px;
+    background: #1e2128;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.bp .bp-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.3s;
+}
+.bp .bp-label {
+    color: #8a8577;
+    font-size: 13px;
+}
+.bp-low .bp-fill { background: #c57a7a; }
+.bp-mid .bp-fill { background: #c9a84c; }
+.bp-high .bp-fill { background: #6daa6d; }
+
+/* === INBOX SECTION === */
+.inbox {
+    padding: 100px 0;
+    border-top: 1px solid #333a44;
+}
+.inbox h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 32px;
+    color: #f0ebe0;
+    margin-bottom: 18px;
+}
+.inbox p {
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    color: #a09a8e;
+    margin-bottom: 18px;
+    font-size: 19px;
+}
+.inbox-form {
+    background: #262a32;
+    border: 1px solid #333a44;
+    border-radius: 8px;
+    padding: 40px;
+    margin-top: 28px;
+}
+.inbox-form label {
+    display: block;
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    font-size: 14px;
+    color: #8a8577;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    margin-top: 20px;
+    font-weight: 600;
+}
+.inbox-form label:first-child { margin-top: 0; }
+.inbox-form input, .inbox-form textarea, .inbox-form select {
+    width: 100%;
+    padding: 12px 16px;
+    background: #1e2128;
+    border: 1px solid #333a44;
+    border-radius: 6px;
+    color: #f0ebe0;
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+}
+.inbox-form input:focus, .inbox-form textarea:focus, .inbox-form select:focus {
+    outline: none;
+    border-color: #c9a84c;
+}
+.inbox-form textarea { min-height: 120px; resize: vertical; }
+.inbox-form select { appearance: auto; }
+.inbox-form button {
+    margin-top: 24px;
+    padding: 14px 36px;
+    background: #c9a84c;
+    color: #1e2128;
+    border: none;
+    border-radius: 6px;
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: background 0.2s;
+}
+.inbox-form button:hover { background: #d4b65e; }
+.inbox-form .success {
+    display: none;
+    margin-top: 16px;
+    padding: 16px 20px;
+    background: #1e3028;
+    border: 1px solid #2e4a38;
+    border-radius: 6px;
+    color: #6daa6d;
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+}
+
+/* === FOOTER === */
+footer {
+    padding: 80px 0;
+    border-top: 1px solid #333a44;
+    text-align: center;
+    color: #8a8577;
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    font-size: 15px;
+}
+footer a { color: #a09a8e; }
+footer a:hover { color: #c9a84c; }
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+    body { font-size: 17px; }
+    .container { padding: 0 20px; }
+    header { padding: 80px 0 60px; }
+    header h1 { font-size: 34px; letter-spacing: -0.5px; }
+    header .subtitle { font-size: 17px; }
+    header .numbers { flex-direction: column; gap: 24px; }
+    header .number .big { font-size: 36px; }
+    .intro { padding: 60px 0; }
+    .intro p { font-size: 17px; }
+    .findings { padding: 60px 0 40px; }
+    .findings h2 { font-size: 28px; margin-bottom: 36px; }
+    .card { padding: 28px; margin-bottom: 28px; }
+    .card h3 { font-size: 22px; padding-right: 0; }
+    .card p { font-size: 17px; }
+    .card .quote { font-size: 18px; padding: 18px; padding-left: 22px; }
+    .card .status { position: static; display: inline-block; margin-bottom: 14px; }
+    .method { padding: 60px 0; }
+    .method h2 { font-size: 26px; }
+    .method p { font-size: 17px; }
+    .inbox { padding: 60px 0; }
+    .inbox h2 { font-size: 26px; }
+    .inbox-form { padding: 24px; }
+    .numbers-grid { gap: 16px; }
+    .num-card { padding: 24px; }
+    .num-card .val { font-size: 36px; }
+    .num-card .desc { font-size: 14px; }
+    .bp .bp-bar { width: 120px; }
+    footer { padding: 48px 0; }
+    #disclaimer-box { padding: 32px 20px; }
+    #disclaimer-box h1 { font-size: 26px; }
+    #disclaimer-box p { font-size: 16px; line-height: 1.75; }
+    #disclaimer-check label { font-size: 15px; }
+    #enter-btn { font-size: 18px; padding: 18px; }
+}
+
+/* === SITE NAV === */
+.site-nav {
+    background: #1a1d24;
+    border-bottom: 1px solid #333a44;
+    padding: 16px 0;
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+}
+.site-nav .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.site-nav .nav-home {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 20px;
+    color: #f0ebe0;
+    font-weight: 700;
+    text-decoration: none;
+}
+.site-nav .nav-home:hover { color: #c9a84c; text-decoration: none; }
+.site-nav .nav-links {
+    display: flex;
+    gap: 28px;
+}
+.site-nav .nav-links a {
+    color: #a09a8e;
+    font-size: 15px;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: color 0.2s;
+}
+.site-nav .nav-links a:hover,
+.site-nav .nav-links a.active {
+    color: #c9a84c;
+    text-decoration: none;
+}
+@media (max-width: 768px) {
+    .site-nav .container { flex-direction: column; gap: 12px; }
+    .site-nav .nav-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
+}
+</style>
+</head>
+<body>
+<script>if(sessionStorage.getItem("ovcg-accepted")!=="1"){window.location.href="index.html";}</script>
+<nav class="site-nav">
+    <div class="container">
+        <a href="index.html" class="nav-home">Groningse Oorlogspuzzels</a>
+        <div class="nav-links">
+            <a href="bevindingen.html">Bevindingen</a>
+            <a href="archief.html">Het archief</a>
+            <a href="methode.html">Methode</a>
+            <a href="cijfers.html" class="active">Cijfers</a>
+            <a href="tijdlijn.html">Tijdlijn</a>
+            <a href="changelog.html">Changelog</a>
+            <a href="archiefwereld.html">Archiefwereld</a>
+            <a href="over.html">Over</a>
+        </div>
+    </div>
+</nav>
+
+<section class="findings">
+    <div class="container">
+        <h2>De cijfers</h2>
+        <p style="text-align:center; color:#a09a8e; margin-bottom:16px; max-width:720px; margin-left:auto; margin-right:auto;">Voor het eerst geteld uit 3.150 kaarten. Minimumtellingen — kaarten die de activiteit beschrijven zonder het woord te gebruiken zijn niet meegeteld.</p>
+
+        <div style="display:flex; justify-content:center; gap:56px; margin:48px 0; flex-wrap:wrap;">
+            <div style="text-align:center;">
+                <div style="font-family:'Playfair Display',Georgia,serif; font-size:44px; font-weight:700; color:#c9a84c;">3.150</div>
+                <div style="font-family:'Source Sans 3',sans-serif; font-size:14px; color:#8a8577; text-transform:uppercase; letter-spacing:2px; margin-top:4px;">Kaarten gelezen</div>
+            </div>
+            <div style="text-align:center;">
+                <div style="font-family:'Playfair Display',Georgia,serif; font-size:44px; font-weight:700; color:#c9a84c;">100</div>
+                <div style="font-family:'Source Sans 3',sans-serif; font-size:14px; color:#8a8577; text-transform:uppercase; letter-spacing:2px; margin-top:4px;">Minuten</div>
+            </div>
+            <div style="text-align:center;">
+                <div style="font-family:'Playfair Display',Georgia,serif; font-size:44px; font-weight:700; color:#c9a84c;">1.249</div>
+                <div style="font-family:'Source Sans 3',sans-serif; font-size:14px; color:#8a8577; text-transform:uppercase; letter-spacing:2px; margin-top:4px;">Gearresteerd</div>
+            </div>
+            <div style="text-align:center;">
+                <div style="font-family:'Playfair Display',Georgia,serif; font-size:44px; font-weight:700; color:#c9a84c;">9</div>
+                <div style="font-family:'Source Sans 3',sans-serif; font-size:14px; color:#8a8577; text-transform:uppercase; letter-spacing:2px; margin-top:4px;">Vrouwen met eigen kaart</div>
+            </div>
+        </div>
+        <div class="numbers-grid">
+            <div class="num-card"><div class="val">524</div><div class="desc">Onderduikers verzorgd</div></div>
+            <div class="num-card"><div class="val">234</div><div class="desc">Jodenhulp (expliciet)</div></div>
+            <div class="num-card"><div class="val">195</div><div class="desc">Neuengamme als bestemming</div></div>
+            <div class="num-card"><div class="val">164</div><div class="desc">Wapenbezit/-transport</div></div>
+            <div class="num-card"><div class="val">112</div><div class="desc">Overvallen/kraken</div></div>
+            <div class="num-card"><div class="val">99</div><div class="desc">Verraders bij naam</div></div>
+            <div class="num-card"><div class="val">68</div><div class="desc">Sabotage</div></div>
+            <div class="num-card"><div class="val">52</div><div class="desc">Illegale radio/zenders</div></div>
+            <div class="num-card"><div class="val">40</div><div class="desc">Geallieerde pilotenhulp</div></div>
+            <div class="num-card"><div class="val">22</div><div class="desc">Spionage/contra-spionage</div></div>
+            <div class="num-card"><div class="val">14</div><div class="desc">Liquidaties</div></div>
+            <div class="num-card"><div class="val">6</div><div class="desc">Berlijn-missies</div></div>
+        </div>
+
+        <div class="numbers-grid">
+            <div class="num-card"><div class="val">40%</div><div class="desc">Werd gearresteerd</div></div>
+            <div class="num-card"><div class="val">50%</div><div class="desc">Van politie gearresteerd</div></div>
+            <div class="num-card"><div class="val">15%</div><div class="desc">Zat in 3+ groepen</div></div>
+            <div class="num-card"><div class="val">0,3%</div><div class="desc">Vrouwen met eigen kaart</div></div>
+        </div>
+    </div>
+    </div>
+</section>
+<footer>
+    <div class="container">
+        <p>Onderzoek: Martijn Aslander | AI: Claude (Anthropic) + Gemini 2.5 Flash (Google) | April 2026</p>
+        <p style="margin-top:8px;">Groninger Archieven, <a href="https://www.groningerarchieven.nl">toegangsnummer 2183</a> | <a href="https://www.vrouwenmars1945.nl">vrouwenmars1945.nl</a></p>
+        <p style="margin-top:16px; color:#444;">Dit project begon met een kaart. De kaart van de vader van mijn moeder, Albert Lunshof.</p>
+    </div>
+</footer>
+</body>
+</html>
