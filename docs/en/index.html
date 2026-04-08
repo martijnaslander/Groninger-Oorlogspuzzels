@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Start here — Groningen War Puzzles</title>
+<meta name="description" content="A citizen science project by Martijn Aslander. 3,150 handwritten WWII resistance cards from the Groningen Archives, read by AI. Puzzle pieces that lay in drawers for 80 years.">
+
+<!-- Open Graph (LinkedIn, Facebook) -->
+<meta property="og:title" content="Groningen War Puzzles">
+<meta property="og:description" content="Using Agentic AI, I made 3,150 handwritten WWII resistance cards from the Groningen Archives machine-readable for the first time in a single night. A citizen science project by Martijn Aslander.">
+<meta property="og:image" content="https://martijnaslander.github.io/Groninger-Oorlogspuzzels/hero-archieflade.png">
+<meta property="og:url" content="https://martijnaslander.github.io/Groninger-Oorlogspuzzels/en/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Groningen War Puzzles">
+<meta name="twitter:description" content="Using Agentic AI, I made 3,150 handwritten WWII resistance cards from the Groningen Archives machine-readable for the first time.">
+<meta name="twitter:image" content="https://martijnaslander.github.io/Groninger-Oorlogspuzzels/hero-archieflade.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Source Sans 3', system-ui, sans-serif;
+    background: #1e2128;
+    color: #f0ebe0;
+    line-height: 1.85;
+    font-size: 20px;
+}
+body.locked { overflow: hidden; }
+a { color: #c9a84c; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+.readable { max-width: 740px; margin: 0 auto; }
+
+/* === DISCLAIMER OVERLAY === */
+#disclaimer-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: #1e2128;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+#disclaimer-overlay.hidden { display: none; }
+#disclaimer-box {
+    max-width: 800px;
+    background: #262a32;
+    border: 2px solid #c9a84c;
+    border-radius: 12px;
+    padding: 56px 64px;
+    max-height: 92vh;
+    overflow-y: auto;
+}
+#disclaimer-box h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 34px;
+    color: #f0ebe0;
+    margin-bottom: 28px;
+    line-height: 1.35;
+}
+#disclaimer-box p {
+    font-size: 19px;
+    color: #ccc;
+    margin-bottom: 20px;
+    line-height: 1.9;
+}
+#disclaimer-box .accent { color: #c9a84c; font-weight: 600; }
+#disclaimer-box .caps {
+    text-transform: uppercase; letter-spacing: 2px; font-size: 14px;
+    color: #888; font-weight: 700; margin-bottom: 12px;
+}
+#disclaimer-check {
+    margin-top: 36px; padding-top: 28px; border-top: 1px solid #333a44;
+}
+#disclaimer-check label {
+    display: flex; align-items: flex-start; gap: 16px;
+    cursor: pointer; font-size: 18px; color: #ccc; line-height: 1.7;
+}
+#disclaimer-check input[type="checkbox"] {
+    margin-top: 5px; width: 24px; height: 24px;
+    accent-color: #c9a84c; flex-shrink: 0;
+}
+#enter-btn {
+    display: block; margin-top: 24px; width: 100%; padding: 20px;
+    background: #333a44; color: #666; border: 2px solid #444;
+    border-radius: 8px; font-size: 20px;
+    font-family: 'Source Sans 3', sans-serif;
+    cursor: not-allowed; transition: all 0.3s; font-weight: 700;
+}
+#enter-btn.active {
+    background: #c9a84c; color: #1e2128;
+    border-color: #c9a84c; cursor: pointer;
+}
+#enter-btn.active:hover { background: #d4b45c; }
+
+/* === PAGE === */
+.hero {
+    padding: 100px 0 80px;
+    text-align: center;
+    border-bottom: 1px solid #333a44;
+}
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    color: #f0ebe0;
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+}
+.hero .subtitle {
+    font-size: 22px;
+    color: #999;
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+section {
+    padding: 80px 0;
+    border-bottom: 1px solid #333a44;
+}
+section:last-of-type { border-bottom: none; }
+
+h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    color: #f0ebe0;
+    margin-bottom: 32px;
+}
+h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    color: #f0ebe0;
+    margin-bottom: 16px;
+}
+p { color: #bbb; margin-bottom: 20px; }
+p strong { color: #f0ebe0; }
+
+.highlight { color: #c9a84c; font-weight: 600; }
+
+.quote-block {
+    border-left: 4px solid #c9a84c;
+    background: #262a32;
+    padding: 24px 28px;
+    border-radius: 0 8px 8px 0;
+    margin: 32px 0;
+    font-style: italic;
+    font-size: 21px;
+    color: #ddd;
+    line-height: 1.8;
+}
+.quote-block .source {
+    font-style: normal;
+    font-size: 15px;
+    color: #888;
+    margin-top: 12px;
+    display: block;
+}
+
+.card-link {
+    display: inline-block;
+    padding: 6px 16px;
+    background: #262a32;
+    border: 1px solid #333a44;
+    border-radius: 6px;
+    font-size: 15px;
+    color: #c9a84c;
+    margin: 4px 4px 4px 0;
+}
+.card-link:hover { background: #333a44; text-decoration: none; }
+
+.blog-links {
+    margin: 24px 0;
+    padding: 24px 28px;
+    background: #262a32;
+    border-radius: 8px;
+}
+.blog-links p { margin-bottom: 8px; font-size: 17px; }
+.blog-links a { font-size: 17px; }
+
+/* Navigation tiles */
+.nav-tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+}
+.nav-tile {
+    display: block;
+    background: #262a32;
+    border: 1px solid #333a44;
+    border-radius: 8px;
+    padding: 32px;
+    transition: all 0.2s;
+}
+.nav-tile:hover {
+    border-color: #c9a84c;
+    text-decoration: none;
+    transform: translateY(-2px);
+}
+.nav-tile h3 {
+    font-family: 'Playfair Display', serif;
+    color: #f0ebe0;
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+.nav-tile p {
+    color: #999;
+    font-size: 17px;
+    margin-bottom: 0;
+}
+
+/* How to read */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin-top: 24px;
+}
+.info-card {
+    background: #262a32;
+    border: 1px solid #333a44;
+    border-radius: 8px;
+    padding: 28px;
+}
+.info-card .label {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+.info-card p { font-size: 17px; color: #bbb; margin-bottom: 0; }
+.label-bron { color: #6daa6d; }
+.label-ai { color: #7a9ec5; }
+.label-hypothese { color: #c9a84c; }
+.label-bp { color: #c57a7a; }
+
+/* Nav */
+.site-nav { background: #262a32; border-bottom: 1px solid #333a44; padding: 16px 0; }
+.site-nav .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.nav-home { font-family: 'Playfair Display', serif; font-size: 20px; color: #f0ebe0; font-weight: 700; }
+.nav-links { display: flex; gap: 24px; flex-wrap: wrap; }
+.nav-links a { font-size: 15px; color: #888; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+.nav-links a:hover { color: #f0ebe0; text-decoration: none; }
+.nav-links a.active { color: #c9a84c; }
+
+footer { padding: 60px 0; text-align: center; color: #666; font-size: 16px; border-top: 1px solid #333a44; }
+
+@media (max-width: 768px) {
+    .container { padding: 0 20px; }
+    .hero h1 { font-size: 36px; }
+    .hero .subtitle { font-size: 19px; }
+    h2 { font-size: 26px; }
+    section { padding: 50px 0; }
+    #disclaimer-box { padding: 32px 24px; }
+    #disclaimer-box h1 { font-size: 26px; }
+    .nav-links { gap: 14px; }
+    .nav-links a { font-size: 13px; }
+}
+</style>
+</head>
+<body class="locked">
+
+<!-- DISCLAIMER OVERLAY -->
+<div id="disclaimer-overlay">
+    <div id="disclaimer-box">
+        <p class="caps">Before you read on</p>
+        <h1>This is an experiment, not a history book.</h1>
+        <p>I am <span class="accent">Martijn Aslander</span>, not a historian and not an archivist, but someone with experience in what AI can do when deployed well. In April 2026, using AI that can read handwriting, I made <span class="accent">3,150 resistance cards</span> from the Groningen Archives machine-readable for the first time.</p>
+        <p>These cards had been digitised for over twenty years and photographs existed of each one, but the contents were never searchable &mdash; you could not count anything, cross-reference anything, or compare anything. Only now are connections becoming visible that were <span class="accent">technically impossible to make before</span>.</p>
+        <p>The quotations on this site come verbatim from the archive cards. Everything around them &mdash; the titles, the summaries, the reasoning &mdash; is AI-generated and <span class="accent">has not been independently verified</span>. These are research questions, not conclusions.</p>
+        <div id="disclaimer-check">
+            <label>
+                <input type="checkbox" id="agree-check" onchange="toggleEnter()">
+                <span>I understand that this is a one-person experiment. The AI analyses have not been independently verified and may contain errors.</span>
+            </label>
+            <button id="enter-btn" onclick="enterSite()">I understand &mdash; let me read on</button>
+        </div>
+    </div>
+</div>
+
+<script>
+function toggleEnter() {
+    const btn = document.getElementById('enter-btn');
+    btn.classList.toggle('active', document.getElementById('agree-check').checked);
+}
+function enterSite() {
+    if (!document.getElementById('agree-check').checked) return;
+    document.getElementById('disclaimer-overlay').classList.add('hidden');
+    document.body.classList.remove('locked');
+    sessionStorage.setItem('ovcg-accepted', '1');
+}
+if (sessionStorage.getItem('ovcg-accepted') === '1') {
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('disclaimer-overlay').classList.add('hidden');
+        document.body.classList.remove('locked');
+    });
+}
+</script>
+
+<!-- NAVIGATION -->
+<nav class="site-nav">
+    <div class="container">
+        <a href="index.html" class="nav-home">Groningen War Puzzles</a>
+        <div class="nav-links">
+            <a href="index.html" class="active">Start here</a>
+            <a href="../bevindingen.html">Findings (Dutch)</a>
+            <a href="../archief.html">Archive (Dutch)</a>
+            <a href="../methode.html">Method (Dutch)</a>
+            <a href="../cijfers.html">Numbers (Dutch)</a>
+            <a href="../tijdlijn.html">Timeline (Dutch)</a>
+            <a href="../changelog.html">Changelog (Dutch)</a>
+            <a href="archives.html">Archives</a>
+            <a href="about.html">About</a>
+            <a href="../" style="font-size:18px; margin-left:8px;" title="Nederlandse versie">NL</a>
+        </div>
+    </div>
+</nav>
+<div class="hero" style="padding-top:40px; border-bottom:1px solid #333a44;">
+    <div class="container">
+        <h1>Groningen War Puzzles</h1>
+        <p class="subtitle">A citizen science project making 3,150 handwritten WWII resistance cards from the Groningen Archives machine-readable for the first time, using Agentic AI (not to be confused with LLM chatbots known for their unreliability). By Martijn Aslander.</p>
+    </div>
+</div>
+
+<!-- THE STORY -->
+<section>
+    <div class="container">
+        <div class="readable">
+
+            <h2>How this began</h2>
+
+            <p>A few weeks ago, I went looking for my father's family line for the first time. With the help of AI, I dived into old archives &mdash; birth certificates, marriage registers, population records. That resulted in a number of spectacular discoveries &mdash; I found the <a href="https://world.hey.com/martijnaslander/vechten-bij-waterloo-89951950">payment receipt of my grandmother's great-grandfather</a>, who had apparently served under Wellington at the Battle of Waterloo. But above all, I learned new skills: how to work with archives in a completely different way.</p>
+
+            <div class="blog-links">
+                <p style="color:#888; margin-bottom:12px;">Background (weekly blog posts, in Dutch):</p>
+                <p><a href="https://world.hey.com/martijnaslander/ai-als-geniale-genealoog-een-vakgebied-geherdefinieerd-24304f89">AI as a brilliant genealogist</a></p>
+                <p><a href="https://world.hey.com/martijnaslander/hoe-weet-je-of-wat-ai-vindt-ook-klopt-als-je-in-een-oud-archief-zoekt-af1491c9">How do you know if what AI finds is actually correct?</a></p>
+                <p><a href="https://world.hey.com/martijnaslander/ai-is-goed-in-logisch-redeneren-dus-ik-bouwde-een-redeneerteam-c80360a1">I built a reasoning team</a></p>
+            </div>
+
+            <p>Without that, I could not have done this. Because then I went looking for my grandmother's wartime past.</p>
+
+            <h2>My grandmother walked the Women's March</h2>
+
+            <p>My grandmother, <strong>Albertien Lunshof-Lunshof</strong>, walked on 11 April 1945 in the Women's March: 116 female political prisoners who left Camp Westerbork on foot, guarded by 500 German soldiers. From her eyewitness account, which is held in the archive of the <a href="https://www.kampwesterbork.nl/">Westerbork Memorial Centre</a>, I knew that in those final days of the war she was constantly dealing with the notorious camp commandant <a href="https://en.wikipedia.org/wiki/Albert_Konrad_Gemmeker">Gemmeker</a>. On 14 April they were liberated near Grijpskerk by Canadian troops. My grandmother was number 104. The march is known as the <span class="highlight">Vrouwenmars</span> (Women's March).</p>
+
+            <p>Producer <strong>Carla Wolbers</strong>, director Ted Alkemade and researcher <strong>Ika van Doorn</strong> of <a href="https://slate51.nl/">Slate51</a> made the documentary <strong>De Vrouwenmars</strong> (The Women's March) about this march, which premiered in cinemas on 11 April 2026 &mdash; exactly 81 years after the day the march began.</p>
+
+            <div style="margin:32px 0; text-align:center;">
+                <img src="../vrouwenmars-poster.jpg" alt="Film poster De Vrouwenmars — 11 April in cinemas" style="max-width:400px; width:100%; border-radius:8px; border:1px solid #333a44;">
+            </div>
+
+            <p>
+                <a href="https://www.vrouwenmars1945.nl/" class="card-link">vrouwenmars1945.nl</a>
+                <a href="https://www.vrouwenmars1945.nl/documentaire/" class="card-link">The Women's March &mdash; the documentary</a>
+                <a href="https://www.vrouwenmars1945.nl/namenlijst-2/" class="card-link">The list of 116 women</a>
+            </p>
+
+            <div style="margin:32px 0; text-align:center;">
+                <img src="https://www.vrouwenmars1945.nl/wp-content/uploads/2025/03/18-april-1945-Groepsfoto-Bernhard-Grijpskerk-Willem-van-de-Poll-Nationaal-Archief-2032x2048.jpg" alt="Group photo Women's March Grijpskerk, 18 April 1945 — Willem van de Poll, National Archives" style="max-width:700px; width:100%; border-radius:8px; border:1px solid #333a44;">
+                <p style="font-size:15px; color:#8a8577; margin-top:12px; font-style:italic;">Grijpskerk, 18 April 1945 &mdash; the women of the march with Prince Bernhard. The woman in the back row, fifth to the right of Bernhard, is likely my grandmother. Photo: Willem van de Poll, National Archives.</p>
+            </div>
+
+            <p>Her youngest sister, <strong>G.H. Lunshof</strong> &mdash; my aunt G&eacute;, who died far too young of leukaemia &mdash; code name "Tiny", lived above my grandmother at Celebesstraat 22a in Groningen. From the archive cards I could deduce that many of their fellow resistance fighters lived next door or around the corner &mdash; in the context of those times, that makes perfect sense.</p>
+            <p>Aunt G&eacute; was a member of the <a href="https://nl.wikipedia.org/wiki/Geheime_Dienst_Nederland">GDN</a> (Secret Service of the Netherlands) and the <a href="https://nl.wikipedia.org/wiki/Bureau_Inlichtingen">ID</a> (Intelligence Service), and at the age of twenty-one was secretary to <a href="https://nl.wikipedia.org/wiki/Willem_Schoemaker_(1920-2003)">Willem Schoemaker</a>, then head of the GDN and one of the most important resistance coordinators in the Netherlands. In the autumn of 1944, she was sent as a spy on a mission to the heart of Nazi Germany &mdash; Berlin. Family lore has it that she escaped Germany on the roof of a train. She received the <span class="highlight">Bronze Lion</span> from Prince Bernhard &mdash; the second-highest military decoration of the Netherlands.</p>
+
+            <div style="margin:32px 0; text-align:center;">
+                <img src="../gh-lunshof-bronzen-leeuw.jpg" alt="G.H. Lunshof receives the Bronze Lion from Prince Bernhard" style="max-width:500px; width:100%; border-radius:8px; border:1px solid #333a44;">
+                <p style="font-size:15px; color:#8a8577; margin-top:12px; font-style:italic;">G.H. Lunshof receives the Bronze Lion from Prince Bernhard</p>
+            </div>
+
+            <p>Their archive cards in the Groningen Archives:</p>
+            <p>
+                <a href="https://www.groningerarchieven.nl/archieven?mivast=5&mizig=210&miadt=5&miaet=1&micode=2183&minr=1153854&miview=inv2" class="card-link">Albert Lunshof &mdash; minr 1153854</a>
+                <a href="https://www.groningerarchieven.nl/archieven?mivast=5&mizig=210&miadt=5&miaet=1&micode=2183&minr=1153857&miview=inv2" class="card-link">G.H. Lunshof &mdash; minr 1153857</a>
+            </p>
+
+            <h2>The subordinate clause that changed everything</h2>
+
+            <p>When I looked up the card of my grandfather Albert, it read:</p>
+
+            <div class="quote-block">
+                "Koerierster, veel verzetswerk."
+                <span class="source">Card of Albert Lunshof (minr 1153854) &mdash; about his wife Albertien. She walked the Women's March as no. 104. She did not receive a card of her own. Translation: "Courier, much resistance work."</span>
+            </div>
+
+            <p>My grandmother &mdash; who marched for four days through the cold, guarded by 500 soldiers &mdash; has no resistance card of her own. She exists in the archive only as a <strong>subordinate clause on her husband's card</strong>.</p>
+
+            <p>That struck a nerve. I started looking: how many women have their own card? How many appear only as a subordinate clause? And if this archive has this blind spot &mdash; <strong>what other blind spots does it have?</strong></p>
+
+            <p>I wanted to map it out.</p>
+
+            <p>But it got completely out of hand.</p>
+
+            <h2>What happened</h2>
+
+            <p>In the weeks before, I had built a pipeline for <a href="https://martijnaslander.github.io/luhmann-zettelkasten/">another archive project</a> that uses AI to decipher and structure handwriting. In the night of 5 to 6 April 2026, I reused that pipeline on <strong>3,150 handwritten resistance cards</strong> from the Groningen Archives. In 100 minutes and for fifty euros in API costs (a negligible amount given the result), they were converted into structured data: name, code name, date of birth, profession, resistance group, what they did, who they knew, whether they were arrested, and whether they survived.</p>
+
+            <p>The cards had been <em>digitised</em> for over twenty years &mdash; they had been painstakingly photographed and catalogued with metadata. But they had never been <em>informatised</em>: the contents were not searchable or linkable, nor countable (which is useful for analysis). You could look up a card if you already knew the name. But you could not ask: <em>who was arrested on 13 November 1943?</em> or <em>how many cards mention betrayal?</em></p>
+
+            <p>Now you can.</p>
+
+            <p>This produced <strong>3,034 story cards</strong>, cross-checked against 6 online sources, with 489 strong external confirmations. To be clear, these are not 3,034 answers but 3,034 puzzles to be solved &mdash; research questions. Puzzle pieces that were largely invisible for eighty years, hidden across a multitude of archive index cards.</p>
+
+            <p>The transcription ran overnight while I slept &mdash; the next morning 3,150 structured cards were ready. <strong>The verification is not yet complete and will take months.</strong> That is precisely the point: the speed makes it possible to reveal connections that would be unfeasible to find manually. The rigour must follow &mdash; and help with that is welcome.</p>
+
+            <h2>Why this site exists in English</h2>
+
+            <p>This site exists because descendants of these resistance fighters now live all over the world. If your family came from Groningen and you have pieces of this puzzle &mdash; a document, a photo, a memory &mdash; we want to hear from you.</p>
+
+            <p>The resistance cards cover the entire province of Groningen and mention thousands of names: fighters, couriers, people in hiding, traitors, and those who were deported and never returned. Many of the families involved emigrated after the war &mdash; to Canada, the United States, Australia, South Africa. If your surname appears in this archive, there may be a story here that connects to yours.</p>
+
+        </div>
+    </div>
+</section>
+
+<!-- HOW TO READ THIS SITE -->
+<section>
+    <div class="container">
+        <div class="readable">
+            <h2>How to read this site</h2>
+            <p>This site contains four types of information. It is important that you can tell them apart.</p>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="label label-bron">Source card (verbatim)</div>
+                <h3>Quotations</h3>
+                <p>Everything in quotation marks comes verbatim from the handwritten archive card. This is the primary source. Each card refers to an inventory number (minr) that you can look up at the Groningen Archives.</p>
+            </div>
+            <div class="info-card">
+                <div class="label label-ai">AI-generated</div>
+                <h3>Titles, summaries, reasoning</h3>
+                <p>The titles, introductory text and reasoning were written by AI (Claude Haiku) based on the card data. They have not been manually verified and may contain errors, overclaims or interpretations.</p>
+            </div>
+            <div class="info-card">
+                <div class="label label-hypothese">Hypothesis</div>
+                <h3>Connections and patterns</h3>
+                <p>Some cards draw connections between individuals, events or groups. These are hypotheses &mdash; not proven facts. They are a starting point for further research.</p>
+            </div>
+            <div class="info-card">
+                <div class="label label-bp">EP score</div>
+                <h3>Evidence Provability score</h3>
+                <p>Each card has an EP score. The higher the score, the more external confirmation has been found. A low score does not mean the story is untrue &mdash; only that it has not (yet) been externally confirmed.</p>
+            </div>
+        </div>
+
+        <div class="readable" style="margin-top:40px;">
+            <p>The status <strong>"Source card confirmed"</strong> means: the archive card exists. Not: the AI interpretation is correct. The status <strong>"Hypothesis"</strong> means: the card is anonymous or the data is unclear.</p>
+            <p><strong>Tip:</strong> use the search bar on the <a href="../archief.html">archive page (Dutch)</a> to search for your own family name.</p>
+        </div>
+    </div>
+</section>
+
+<!-- NAVIGATION TO SECTIONS -->
+<section>
+    <div class="container">
+        <div class="readable">
+            <h2>Explore the archive</h2>
+            <p>The site is divided into seven sections. Each section illuminates the archive from a different angle. Most pages are currently in Dutch; translations are in progress.</p>
+        </div>
+
+        <div class="nav-tiles">
+            <a href="../bevindingen.html" class="nav-tile">
+                <h3>Findings (Dutch)</h3>
+                <p>233 stories more plausible than the rest. The Women's March, the Cap Arcona, the traitors, the deportation routes.</p>
+            </a>
+            <a href="../archief.html" class="nav-tile">
+                <h3>The archive (Dutch)</h3>
+                <p>All 3,034 story cards searchable by name, place and resistance group. Search for your own family name.</p>
+            </a>
+            <a href="../tijdlijn.html" class="nav-tile">
+                <h3>Timeline (Dutch)</h3>
+                <p>889 cards in chronological order. From April 1940 to November 1945. The peaks at the February Strike, Mad Tuesday and Liberation.</p>
+            </a>
+            <a href="../methode.html" class="nav-tile">
+                <h3>Method (Dutch)</h3>
+                <p>How this was done. Gemini Vision AI, Claude Haiku, the cross-checker, the limitations. Full transparency.</p>
+            </a>
+            <a href="../cijfers.html" class="nav-tile">
+                <h3>Numbers (Dutch)</h3>
+                <p>Counted for the first time. 524 cards mention people in hiding. 139 mention betrayal. 195 mention Neuengamme.</p>
+            </a>
+            <a href="../changelog.html" class="nav-tile">
+                <h3>Changelog (Dutch)</h3>
+                <p>Every change to this project, publicly documented. With RSS feed.</p>
+            </a>
+            <a href="archives.html" class="nav-tile">
+                <h3>Possible implications for the archive sector</h3>
+                <p>The gap between digitising and making accessible has closed. What that means for archives worldwide.</p>
+            </a>
+            <a href="about.html" class="nav-tile">
+                <h3>About this project</h3>
+                <p>Who is Martijn, why this project, how you can help. Think along, puzzle along.</p>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="container">
+        <p>Groningen War Puzzles &mdash; a citizen science project by Martijn Aslander, April 2026</p>
+        <p style="margin-top:8px;"><a href="../changelog.xml" style="color:#888;">RSS feed</a> &middot; <a href="../" style="color:#888;">Nederlandse versie</a></p>
+    </div>
+</footer>
+
+</body>
+</html>
