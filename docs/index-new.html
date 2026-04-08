@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Groningse Oorlogspuzzels</title>
+<meta name="description" content="3.150 handgeschreven verzetskaarten uit Groningen, gelezen door AI in 100 minuten. Puzzelstukjes die 80 jaar in laden lagen.">
+<meta property="og:title" content="Groningse Oorlogspuzzels">
+<meta property="og:description" content="3.150 handgeschreven WOII-verzetskaarten, gelezen door AI. Puzzelstukjes die 80 jaar in laden lagen.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* === RESET === */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* === BASE === */
+body {
+    font-family: 'Source Sans 3', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #1e2128;
+    color: #f0ebe0;
+    font-size: 20px;
+    line-height: 1.85;
+}
+body.locked { overflow: hidden; }
+
+/* === DISCLAIMER OVERLAY === */
+#disclaimer-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: #1e2128;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+#disclaimer-overlay.hidden { display: none; }
+#disclaimer-box {
+    max-width: 880px;
+    background: #262a32;
+    border: 2px solid #c9a84c;
+    border-radius: 8px;
+    padding: 60px 72px;
+    max-height: 94vh;
+    overflow-y: auto;
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+}
+#disclaimer-box h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 38px;
+    color: #f0ebe0;
+    margin-bottom: 36px;
+    letter-spacing: -0.5px;
+    line-height: 1.35;
+    font-weight: 700;
+}
+#disclaimer-box p {
+    font-size: 19px;
+    color: #d5d0c5;
+    margin-bottom: 28px;
+    line-height: 1.85;
+}
+#disclaimer-box .accent {
+    color: #c9a84c;
+    font-weight: 600;
+    border-bottom: 1px solid #c9a84c;
+    padding-bottom: 1px;
+}
+#disclaimer-box .caps {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 14px;
+    color: #8a8577;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+#disclaimer-box .signature {
+    font-style: italic;
+    color: #a09a8e;
+    font-size: 21px;
+    margin-top: 8px;
+}
+#disclaimer-check {
+    margin-top: 48px;
+    padding-top: 36px;
+    border-top: 1px solid #3a3f4a;
+}
+#disclaimer-check label {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    cursor: pointer;
+    font-size: 18px;
+    color: #d5d0c5;
+    line-height: 1.8;
+}
+#disclaimer-check input[type="checkbox"] {
+    margin-top: 6px;
+    width: 28px;
+    height: 28px;
+    accent-color: #c9a84c;
+    flex-shrink: 0;
+}
+#enter-btn {
+    display: block;
+    margin-top: 32px;
+    width: 100%;
+    padding: 24px;
+    background: #333a44;
+    color: #666;
+    border: 2px solid #3a3f4a;
+    border-radius: 8px;
+    font-size: 22px;
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    cursor: not-allowed;
+    transition: all 0.3s;
+    font-weight: 700;
+}
+#enter-btn.active {
+    background: #c9a84c;
+    color: #1e2128;
+    border-color: #c9a84c;
+    cursor: pointer;
+}
+#enter-btn.active:hover {
+    background: #d4b65e;
+}
+
+/* === LINKS === */
+a { color: #c9a84c; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* === LAYOUT === */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+
+/* === HEADER / HERO === */
+header {
+    padding: 120px 0 90px;
+    text-align: center;
+    border-bottom: 1px solid #333a44;
+}
+header h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 52px;
+    font-weight: 700;
+    color: #f0ebe0;
+    letter-spacing: -1px;
+    margin-bottom: 24px;
+    line-height: 1.2;
+}
+header .subtitle {
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    font-size: 20px;
+    color: #a09a8e;
+    max-width: 720px;
+    margin: 0 auto 48px;
+    line-height: 1.7;
+}
+header .numbers {
+    display: flex;
+    justify-content: center;
+    gap: 56px;
+    margin-top: 48px;
+}
+header .number {
+    text-align: center;
+}
+header .number .big {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 44px;
+    font-weight: 700;
+    color: #c9a84c;
+}
+header .number .label {
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    font-size: 14px;
+    color: #8a8577;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 4px;
+}
+
+/* === INTRO === */
+.intro {
+    padding: 100px 0;
+    border-bottom: 1px solid #333a44;
+}
+.intro p {
+    font-size: 20px;
+    color: #c5c0b5;
+    margin-bottom: 24px;
+}
+.intro .highlight {
+    color: #c9a84c;
+    font-weight: 600;
+}
+
+/* === FINDINGS === */
+.findings {
+    padding: 100px 0 60px;
+}
+.findings h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 36px;
+    color: #f0ebe0;
+    margin-bottom: 56px;
+    text-align: center;
+}
+
+/* === CARDS === */
+.card {
+    background: #262a32;
+    border: 1px solid #333a44;
+    border-radius: 8px;
+    padding: 48px;
+    margin-bottom: 40px;
+    position: relative;
+}
+.card .status {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 5px 14px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+.status-bewezen {
+    background: #1e3028;
+    color: #6daa6d;
+    border: 1px solid #2e4a38;
+}
+.status-hypothese {
+    background: #302e1e;
+    color: #c9a84c;
+    border: 1px solid #4a4528;
+}
+.status-onderzoeken {
+    background: #1e2530;
+    color: #7a9ec5;
+    border: 1px solid #2d3a4e;
+}
+.card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 26px;
+    color: #f0ebe0;
+    margin-bottom: 18px;
+    padding-right: 140px;
+    line-height: 1.35;
+}
+.card p {
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    font-size: 19px;
+    color: #c5c0b5;
+    margin-bottom: 14px;
+    line-height: 1.85;
+}
+.card .quote {
+    border-left: 4px solid #c9a84c;
+    background: #2a2e38;
+    padding: 24px;
+    padding-left: 28px;
+    margin: 24px 0;
+    font-style: italic;
+    font-size: 21px;
+    color: #d5d0c5;
+    border-radius: 0 6px 6px 0;
+    line-height: 1.75;
+}
+.card .source {
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    font-size: 14px;
+    color: #8a8577;
+    margin-top: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.card .source a {
+    color: #a09a8e;
+}
+.card .source a:hover {
+    color: #c9a84c;
+}
+
+/* === CLIPBOARD BUTTON === */
+.card .clipboard-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 16px;
+    padding: 8px 16px;
+    background: #2a2e38;
+    border: 1px solid #333a44;
+    border-radius: 6px;
+    color: #8a8577;
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.3px;
+}
+.card .clipboard-btn:hover {
+    background: #333a44;
+    color: #c9a84c;
+    border-color: #444c58;
+}
+.card .clipboard-btn.copied {
+    background: #1e3028;
+    border-color: #2e4a38;
+    color: #6daa6d;
+}
+
+/* === NEXT STEPS === */
+.card .next-steps {
+    margin-top: 24px;
+    padding: 20px 24px;
+    background: #222630;
+    border: 1px solid #333a44;
+    border-radius: 6px;
+    display: none;
+}
+.card .next-steps.visible {
+    display: block;
+}
+.card .next-steps h4 {
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    font-size: 14px;
+    color: #c9a84c;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+.card .next-steps ul {
+    list-style: none;
+    padding: 0;
+}
+.card .next-steps li {
+    color: #a09a8e;
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    font-size: 15px;
+    padding: 5px 0;
+    padding-left: 20px;
+    position: relative;
+}
+.card .next-steps li:before {
+    content: "\2192";
+    position: absolute;
+    left: 0;
+    color: #8a8577;
+}
+
+/* === NUMBERS GRID === */
+.numbers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    margin: 56px 0;
+}
+.num-card {
+    background: #262a32;
+    border: 1px solid #333a44;
+    border-radius: 8px;
+    padding: 32px;
+    text-align: center;
+}
+.num-card .val {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 44px;
+    font-weight: 700;
+    color: #c9a84c;
+}
+.num-card .desc {
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    font-size: 16px;
+    color: #a09a8e;
+    margin-top: 8px;
+}
+
+/* === METHOD === */
+.method {
+    padding: 100px 0;
+    border-top: 1px solid #333a44;
+}
+.method h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 32px;
+    color: #f0ebe0;
+    margin-bottom: 28px;
+}
+.method p {
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    color: #a09a8e;
+    margin-bottom: 18px;
+    font-size: 19px;
+}
+.method .levels {
+    margin: 36px 0;
+}
+.method .level {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+.method .level .badge {
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 5px 12px;
+    border-radius: 4px;
+    white-space: nowrap;
+    min-width: 80px;
+    text-align: center;
+    font-weight: 600;
+}
+.badge-hoog { background: #1e3028; color: #6daa6d; }
+.badge-middel { background: #302e1e; color: #c9a84c; }
+.badge-laag { background: #301e1e; color: #c57a7a; }
+
+/* === BP METER === */
+.card .bp {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 14px;
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    font-size: 13px;
+}
+.bp .bp-bar {
+    width: 160px;
+    height: 8px;
+    background: #1e2128;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.bp .bp-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.3s;
+}
+.bp .bp-label {
+    color: #8a8577;
+    font-size: 13px;
+}
+.bp-low .bp-fill { background: #c57a7a; }
+.bp-mid .bp-fill { background: #c9a84c; }
+.bp-high .bp-fill { background: #6daa6d; }
+
+/* === INBOX SECTION === */
+.inbox {
+    padding: 100px 0;
+    border-top: 1px solid #333a44;
+}
+.inbox h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 32px;
+    color: #f0ebe0;
+    margin-bottom: 18px;
+}
+.inbox p {
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    color: #a09a8e;
+    margin-bottom: 18px;
+    font-size: 19px;
+}
+.inbox-form {
+    background: #262a32;
+    border: 1px solid #333a44;
+    border-radius: 8px;
+    padding: 40px;
+    margin-top: 28px;
+}
+.inbox-form label {
+    display: block;
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    font-size: 14px;
+    color: #8a8577;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    margin-top: 20px;
+    font-weight: 600;
+}
+.inbox-form label:first-child { margin-top: 0; }
+.inbox-form input, .inbox-form textarea, .inbox-form select {
+    width: 100%;
+    padding: 12px 16px;
+    background: #1e2128;
+    border: 1px solid #333a44;
+    border-radius: 6px;
+    color: #f0ebe0;
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+}
+.inbox-form input:focus, .inbox-form textarea:focus, .inbox-form select:focus {
+    outline: none;
+    border-color: #c9a84c;
+}
+.inbox-form textarea { min-height: 120px; resize: vertical; }
+.inbox-form select { appearance: auto; }
+.inbox-form button {
+    margin-top: 24px;
+    padding: 14px 36px;
+    background: #c9a84c;
+    color: #1e2128;
+    border: none;
+    border-radius: 6px;
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: background 0.2s;
+}
+.inbox-form button:hover { background: #d4b65e; }
+.inbox-form .success {
+    display: none;
+    margin-top: 16px;
+    padding: 16px 20px;
+    background: #1e3028;
+    border: 1px solid #2e4a38;
+    border-radius: 6px;
+    color: #6daa6d;
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+}
+
+/* === FOOTER === */
+footer {
+    padding: 80px 0;
+    border-top: 1px solid #333a44;
+    text-align: center;
+    color: #8a8577;
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    font-size: 15px;
+}
+footer a { color: #a09a8e; }
+footer a:hover { color: #c9a84c; }
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+    body { font-size: 17px; }
+    .container { padding: 0 20px; }
+    header { padding: 80px 0 60px; }
+    header h1 { font-size: 34px; letter-spacing: -0.5px; }
+    header .subtitle { font-size: 17px; }
+    header .numbers { flex-direction: column; gap: 24px; }
+    header .number .big { font-size: 36px; }
+    .intro { padding: 60px 0; }
+    .intro p { font-size: 17px; }
+    .findings { padding: 60px 0 40px; }
+    .findings h2 { font-size: 28px; margin-bottom: 36px; }
+    .card { padding: 28px; margin-bottom: 28px; }
+    .card h3 { font-size: 22px; padding-right: 0; }
+    .card p { font-size: 17px; }
+    .card .quote { font-size: 18px; padding: 18px; padding-left: 22px; }
+    .card .status { position: static; display: inline-block; margin-bottom: 14px; }
+    .method { padding: 60px 0; }
+    .method h2 { font-size: 26px; }
+    .method p { font-size: 17px; }
+    .inbox { padding: 60px 0; }
+    .inbox h2 { font-size: 26px; }
+    .inbox-form { padding: 24px; }
+    .numbers-grid { gap: 16px; }
+    .num-card { padding: 24px; }
+    .num-card .val { font-size: 36px; }
+    .num-card .desc { font-size: 14px; }
+    .bp .bp-bar { width: 120px; }
+    footer { padding: 48px 0; }
+    #disclaimer-box { padding: 32px 20px; }
+    #disclaimer-box h1 { font-size: 26px; }
+    #disclaimer-box p { font-size: 16px; line-height: 1.75; }
+    #disclaimer-check label { font-size: 15px; }
+    #enter-btn { font-size: 18px; padding: 18px; }
+}
+
+/* === SITE NAV === */
+.site-nav {
+    background: #1a1d24;
+    border-bottom: 1px solid #333a44;
+    padding: 16px 0;
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+}
+.site-nav .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.site-nav .nav-home {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 20px;
+    color: #f0ebe0;
+    font-weight: 700;
+    text-decoration: none;
+}
+.site-nav .nav-home:hover { color: #c9a84c; text-decoration: none; }
+.site-nav .nav-links {
+    display: flex;
+    gap: 28px;
+}
+.site-nav .nav-links a {
+    color: #a09a8e;
+    font-size: 15px;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: color 0.2s;
+}
+.site-nav .nav-links a:hover,
+.site-nav .nav-links a.active {
+    color: #c9a84c;
+    text-decoration: none;
+}
+@media (max-width: 768px) {
+    .site-nav .container { flex-direction: column; gap: 12px; }
+    .site-nav .nav-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
+}
+
+/* === NAV TILES === */
+.nav-grid { padding: 80px 0; border-bottom: 1px solid #333a44; }
+.nav-tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+}
+.nav-tile {
+    background: #262a32;
+    border: 1px solid #333a44;
+    border-radius: 8px;
+    padding: 36px;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+.nav-tile:hover {
+    border-color: #c9a84c;
+    text-decoration: none;
+    transform: translateY(-2px);
+}
+.nav-tile h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 22px;
+    color: #f0ebe0;
+    margin-bottom: 12px;
+}
+.nav-tile p {
+    font-family: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    font-size: 16px;
+    color: #a09a8e;
+    line-height: 1.6;
+}
+.nav-tile:hover h3 { color: #c9a84c; }
+@media (max-width: 768px) {
+    .nav-grid { padding: 48px 0; }
+    .nav-tiles { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body class="locked">
+
+<!-- DISCLAIMER -->
+<div id="disclaimer-overlay">
+    <div id="disclaimer-box">
+        <p class="caps">Voordat je verder leest</p>
+        <h1>Dit is een experiment, geen geschiedenisboek.</h1>
+
+        <p>Dit is een <span class="accent">citizen science project van Martijn Aslander</span>. Eenpersoons. Ik onderzoek of je bestaande archieven op nieuwe manieren kunt informatiseren &mdash; nadat ze ooit gedigitaliseerd waren maar nooit machineleesbaar werden gemaakt.</p>
+
+        <p>In de nacht van 5 op 6 april 2026 heb ik 3.150 handgeschreven verzetskaarten uit het Groninger Archief laten lezen door AI. Niet door een chatbot, maar door <span class="accent">Agentic AI</span> &mdash; autonome systemen die zelfstandig zoeken, vergelijken en rapporteren. Die technologie lijkt behoorlijk betrouwbaar. Maar het blijft technologie, geen historicus.</p>
+
+        <p>Wat je hier vindt zijn <span class="accent">losse puzzelstukjes</span> die ik aan elkaar probeer te rijgen. De citaten komen letterlijk van de archiefkaarten. De titels, samenvattingen en redeneringen zijn AI-gegenereerd. <span class="accent">Dit zijn geen feiten</span> &mdash; anders dan de feitelijke informatie op de archiefkaart zelf.</p>
+
+        <p>De methodologie, de opzet, de brondata en de aanpak zijn volledig transparant gedeeld. Denk mee. Puzzel mee. Maar houd in het achterhoofd dat dit een AI-analyse is en niet de werkelijkheid waarop je mag leunen. Het zijn puzzelstukjes die helpen de werkelijkheid sneller en beter te reconstrueren.</p>
+
+        <p>Veel plezier.</p>
+
+        <div id="disclaimer-check">
+            <label>
+                <input type="checkbox" id="agree-check" onchange="toggleEnter()">
+                <span>Ik begrijp dat dit een experimenteel citizen science project is. De AI-analyses zijn niet geverifieerd en kunnen fouten bevatten. De bronkaarten zijn publiek toegankelijk via de Groninger Archieven.</span>
+            </label>
+            <button id="enter-btn" onclick="enterSite()">Bekijk de puzzelstukjes</button>
+        </div>
+    </div>
+</div>
+
+<script>
+function toggleEnter() {
+    const btn = document.getElementById('enter-btn');
+    const check = document.getElementById('agree-check');
+    if (check.checked) {
+        btn.classList.add('active');
+    } else {
+        btn.classList.remove('active');
+    }
+}
+function enterSite() {
+    if (!document.getElementById('agree-check').checked) return;
+    document.getElementById('disclaimer-overlay').classList.add('hidden');
+    document.body.classList.remove('locked');
+    sessionStorage.setItem('ovcg-disclaimer-accepted', '1');
+}
+// Auto-skip als al geaccepteerd in deze sessie
+if (sessionStorage.getItem('ovcg-disclaimer-accepted') === '1') {
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('disclaimer-overlay').classList.add('hidden');
+        document.body.classList.remove('locked');
+    });
+}
+</script>
+
+<header>
+    <div class="container">
+        <h1>Groningse Oorlogspuzzels</h1>
+        <p class="subtitle">3.150 handgeschreven verzetskaarten, gelezen door AI in 100 minuten. Puzzelstukjes die 80 jaar in laden lagen — en die nu voor het eerst in elkaar vallen.</p>
+        <div class="numbers">
+            <div class="number"><div class="big">3.150</div><div class="label">Kaarten gelezen</div></div>
+            <div class="number"><div class="big">100</div><div class="label">Minuten</div></div>
+            <div class="number"><div class="big">1.249</div><div class="label">Gearresteerd</div></div>
+            <div class="number"><div class="big">9</div><div class="label">Vrouwen met eigen kaart</div></div>
+        </div>
+    </div>
+</header>
+
+<section class="intro">
+    <div class="container">
+        <p>In het archief van het Oorlogs- en Verzetscentrum Groningen liggen 4.615 handgeschreven kaarten. Op elke kaart staat het verhaal van iemand die zich verzette tegen de Duitse bezetting. Naam, schuilnaam, beroep, verzetsgroep, contactpersonen, arrestatie, lot.</p>
+        <p>Die kaarten zijn 80 jaar lang alleen fysiek toegankelijk geweest. Om ze te lezen moest je naar Groningen, een la opentrekken, en kaart voor kaart doorwerken. <span class="highlight">Niemand heeft ooit alle kaarten gelezen.</span></p>
+        <p>In de nacht van 5 op 6 april 2026 las AI 3.150 van die kaarten. Dit zijn de verhalen die tevoorschijn kwamen.</p>
+        <p>Elke bevinding verwijst naar een inventarisnummer (minr) in de <a href="https://www.groningerarchieven.nl">Groninger Archieven</a>, toegang 2183. Alles is controleerbaar.</p>
+    </div>
+</section>
+
+<section class="nav-grid">
+    <div class="container">
+        <div class="nav-tiles">
+            <a href="bevindingen.html" class="nav-tile">
+                <h3>Bevindingen</h3>
+                <p>De sterkste verhalen uit het archief. Handmatig geselecteerd en onderbouwd.</p>
+            </a>
+            <a href="archief.html" class="nav-tile">
+                <h3>Het archief</h3>
+                <p>Alle 3.034 verhaalkaarten. Doorzoekbaar op naam, plaats en verzetsgroep.</p>
+            </a>
+            <a href="methode.html" class="nav-tile">
+                <h3>Methode</h3>
+                <p>Hoe AI 3.150 handgeschreven kaarten las in 100 minuten. Transparant en controleerbaar.</p>
+            </a>
+            <a href="cijfers.html" class="nav-tile">
+                <h3>Cijfers</h3>
+                <p>Voor het eerst geteld. Onderduikers, arrestaties, sabotage, Jodenhulp in aantallen.</p>
+            </a>
+            <a href="tijdlijn.html" class="nav-tile">
+                <h3>Tijdlijn</h3>
+                <p>889 kaarten chronologisch geordend. Van de eerste arrestaties tot de bevrijding.</p>
+            </a>
+            <a href="changelog.html">Changelog</a>
+            <a href="over.html" class="nav-tile">
+                <h3>Over dit project</h3>
+                <p>Achtergrond, contact en hoe u kunt bijdragen aan verificatie.</p>
+            </a>
+        </div>
+    </div>
+</section>
+<footer>
+    <div class="container">
+        <p>Onderzoek: Martijn Aslander | AI: Claude (Anthropic) + Gemini 2.5 Flash (Google) | April 2026</p>
+        <p style="margin-top:8px;">Groninger Archieven, <a href="https://www.groningerarchieven.nl">toegangsnummer 2183</a> | <a href="https://www.vrouwenmars1945.nl">vrouwenmars1945.nl</a></p>
+        <p style="margin-top:16px; color:#444;">Dit project begon met een kaart. De kaart van mijn opa.</p>
+    </div>
+</footer>
+</body>
+</html>
