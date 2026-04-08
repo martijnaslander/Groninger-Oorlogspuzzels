@@ -99,6 +99,24 @@ footer { padding: 60px 0; border-top: 1px solid #333a44; text-align: center; col
 
 <h2 class="changelog-year">2026</h2>
 
+<div class="entry" id="2026-04-08-bp-fix">
+    <div class="entry-date">8 april 2026 (avond)</div>
+    <div class="entry-title">BP-scores herberekend over 3.024 kaarten &mdash; naar aanleiding van een scherpe observatie van Ika van Doorn</div>
+    <div class="entry-body">
+        <p style="color:#a09a8e; margin-bottom:16px;">Ika van Doorn ontdekte dat de BP-scores op meerdere kaarten niet overeenkwamen met de beschrijving ernaast. Een kaart met een citaat en een externe match had soms een lagere score dan de BP-tabel op de methodepagina voorschrijft. Dat was een fout in de pipeline die de scores genereerde &mdash; de score en de beschrijving werden los van elkaar berekend en liepen uit de pas.</p>
+        <p style="color:#a09a8e; margin-bottom:16px;">We hebben vanavond een herberekeningsscript geschreven dat elke kaart langsloopt, de checker-database raadpleegt (heeft een externe bron deze persoon bevestigd?) en de BP-score opnieuw berekent volgens exact de tabel op de methodepagina. Dat leverde 204 correcties op de kruisverhalen-pagina en 2.820 correcties op de archief-pagina.</p>
+        <p style="color:#c9a84c; margin-bottom:16px;">Ik heb er bewust voor gekozen om dit hele project online te zetten terwijl het nog in ontwikkeling is, en via feedback van anderen te ontdekken wat er niet goed genoeg werkt en beter kan. Ik denk dat meer mensen dit zouden moeten doen &mdash; gewoon delen waar je mee bezig bent terwijl je ermee bezig bent. Natuurlijk maak je dan fouten, en zodra je ze ontdekt fix je ze. Dat is het leuke van experimenteren.</p>
+        <ul>
+            <li>204 BP-scores gecorrigeerd op de kruisverhalen-pagina</li>
+            <li>2.820 BP-scores gecorrigeerd op de archief-pagina</li>
+            <li>BP-beschrijvingen consistent gemaakt met de herberekende scores</li>
+            <li>Alle scores nu berekend op basis van de checker-database (extern bevestigd, extern gecheckt, citaat aanwezig)</li>
+        </ul>
+        <span class="entry-tag tag-fix">fix</span>
+        <span class="entry-tag tag-data">data</span>
+    </div>
+</div>
+
 <div class="entry" id="2026-04-08-verbeteringen">
     <div class="entry-date">8 april 2026</div>
     <div class="entry-title">Kritiekbestendig gemaakt, nieuwe pagina's, Engelse versie &mdash; naar aanleiding van waardevolle tips van Ika van Doorn en Olivier Heimel</div>
