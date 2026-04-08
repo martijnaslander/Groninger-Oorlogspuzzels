@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What does this mean for archives? — Groningen War Puzzles</title>
+<meta name="description" content="The implications of AI-driven informatisation for the archive sector. The gap between digitising and making accessible has closed.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Source Sans 3', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #1e2128;
+    color: #f0ebe0;
+    font-size: 20px;
+    line-height: 1.85;
+}
+a { color: #c9a84c; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+.readable { max-width: 740px; margin: 0 auto; }
+
+/* === NAV === */
+.site-nav {
+    background: #1a1d24;
+    border-bottom: 1px solid #333a44;
+    padding: 16px 0;
+}
+.site-nav .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.site-nav .nav-home {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 20px;
+    color: #f0ebe0;
+    font-weight: 700;
+}
+.site-nav .nav-home:hover { color: #c9a84c; text-decoration: none; }
+.site-nav .nav-links { display: flex; gap: 24px; flex-wrap: wrap; }
+.site-nav .nav-links a {
+    color: #a09a8e;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    transition: color 0.2s;
+}
+.site-nav .nav-links a:hover,
+.site-nav .nav-links a.active { color: #c9a84c; text-decoration: none; }
+
+/* === HERO === */
+.hero {
+    padding: 100px 0 80px;
+    text-align: center;
+    border-bottom: none;
+}
+.hero h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 46px;
+    color: #f0ebe0;
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+    line-height: 1.25;
+}
+.hero .subtitle {
+    font-size: 21px;
+    color: #a09a8e;
+    max-width: 680px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+/* === SECTIONS === */
+section {
+    padding: 80px 0;
+    border-bottom: none;
+}
+section:last-of-type { border-bottom: none; }
+h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 32px;
+    color: #f0ebe0;
+    margin-bottom: 28px;
+    line-height: 1.3;
+}
+h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 24px;
+    color: #f0ebe0;
+    margin-bottom: 16px;
+    margin-top: 40px;
+}
+p { color: #c5c0b5; margin-bottom: 20px; }
+p strong { color: #f0ebe0; }
+.highlight { color: #c9a84c; font-weight: 600; }
+
+.quote-block {
+    border-left: 4px solid #c9a84c;
+    background: #262a32;
+    padding: 24px 28px;
+    border-radius: 0 8px 8px 0;
+    margin: 32px 0;
+    font-style: italic;
+    font-size: 21px;
+    color: #ddd;
+    line-height: 1.8;
+}
+
+.step-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+    margin: 32px 0;
+}
+.step-card {
+    background: #262a32;
+    border: 1px solid #333a44;
+    border-radius: 8px;
+    padding: 28px;
+    text-align: center;
+}
+.step-card .num {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 36px;
+    color: #c9a84c;
+    font-weight: 700;
+}
+.step-card .label {
+    font-size: 14px;
+    color: #8a8577;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-top: 4px;
+}
+.step-card .desc {
+    font-size: 17px;
+    color: #c5c0b5;
+    margin-top: 12px;
+}
+.step-card.done { border-color: #6daa6d; }
+.step-card.done .label { color: #6daa6d; }
+.step-card.stuck { border-color: #c57a7a; }
+.step-card.stuck .label { color: #c57a7a; }
+.step-card.new { border-color: #c9a84c; }
+.step-card.new .label { color: #c9a84c; }
+
+.note {
+    background: #1a1a0d;
+    border: 1px solid #c9a84c;
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin: 32px 0;
+}
+.note p { color: #ccc; margin-bottom: 0; }
+.note .note-label {
+    color: #c9a84c;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+footer {
+    padding: 60px 0;
+    text-align: center;
+    color: #8a8577;
+    font-size: 15px;
+    border-top: 1px solid #333a44;
+}
+footer a { color: #a09a8e; }
+footer a:hover { color: #c9a84c; }
+
+@media (max-width: 768px) {
+    .container { padding: 0 20px; }
+    .hero h1 { font-size: 32px; }
+    .hero .subtitle { font-size: 18px; }
+    h2 { font-size: 26px; }
+    section { padding: 50px 0; }
+    .site-nav .container { flex-direction: column; gap: 12px; }
+    .site-nav .nav-links { flex-wrap: wrap; justify-content: center; gap: 14px; }
+    .site-nav .nav-links a { font-size: 13px; }
+}
+</style>
+</head>
+<body>
+<script>if(sessionStorage.getItem("ovcg-accepted")!=="1"){window.location.href="../";}</script>
+
+<nav class="site-nav">
+    <div class="container">
+        <a href="index.html" class="nav-home">Groningen War Puzzles</a>
+        <div class="nav-links">
+            <a href="index.html">Start here</a>
+            <a href="../bevindingen.html">Findings (Dutch)</a>
+            <a href="../archief.html">Archive (Dutch)</a>
+            <a href="../methode.html">Method (Dutch)</a>
+            <a href="../cijfers.html">Numbers (Dutch)</a>
+            <a href="../tijdlijn.html">Timeline (Dutch)</a>
+            <a href="../changelog.html">Changelog (Dutch)</a>
+            <a href="archives.html" class="active">Archives</a>
+            <a href="about.html">About</a>
+            <a href="../archiefwereld.html" style="font-size:18px; margin-left:8px;" title="Nederlandse versie">NL</a>
+        </div>
+    </div>
+</nav>
+
+<div class="hero">
+    <div class="container">
+        <h1>Possible implications for the archive sector</h1>
+        <p class="subtitle">The technical barrier between digitising and making accessible &mdash; a bottleneck the archive sector has faced for twenty years &mdash; may have been resolved in recent months without most people noticing. This experiment shows why.</p>
+    </div>
+</div>
+
+<!-- THE BOTTLENECK -->
+<section>
+    <div class="container">
+        <div class="readable" style="text-align:center;">
+            <h2 style="text-align:center;">The bottleneck</h2>
+
+            <p>The archive world has been working with three steps for decades:</p>
+        </div>
+
+        <div class="step-grid">
+            <div class="step-card done">
+                <div class="num">1</div>
+                <div class="label">Done</div>
+                <div class="desc"><strong>Preserve</strong><br>Safeguard the physical object</div>
+            </div>
+            <div class="step-card done">
+                <div class="num">2</div>
+                <div class="label">Done</div>
+                <div class="desc"><strong>Digitise</strong><br>Photograph the object</div>
+            </div>
+            <div class="step-card stuck">
+                <div class="num">3</div>
+                <div class="label">Stalled</div>
+                <div class="desc"><strong>Make accessible</strong><br>Add metadata so it can be found</div>
+            </div>
+        </div>
+
+        <div class="readable">
+            <p>Step 3 is where things stall &mdash; and the situation is more nuanced than you might think. Making accessible in the archive world does not mean transcribing every card; it means describing what is there so someone can find it. And at the collection level, that has often been done: cards are listed in inventories, organised by name, and retrievable physically or digitally. But making the <em>contents</em> of those cards searchable &mdash; reading each card, structuring it into fields, making it linkable and countable &mdash; is a fundamentally different step. And that step is left undone for most collections, simply because doing it by hand is too much work.</p>
+
+            <p>The consequence is that enormous collections are <em>digitised</em> and <em>findable</em> at the item level, but the content remains inaccessible. You can look up a card if you already know the person &mdash; but you cannot ask how many cards mention Neuengamme, or who was arrested on 13 November 1943, or which names keep appearing as traitors.</p>
+
+            <p>The resistance cards of the OVCG in Groningen are a striking example. The digital archive was first published in 2004, and in 2021 the Mondriaan Fund awarded the project <a href="https://www.ovcg.nl/nieuws/ovcg-zichtbaar-online/">"OVCG Visible Online"</a> &mdash; a two-year programme in collaboration with the Groningen Archives to describe the collection and improve findability. That work was done professionally and carefully, and the result is impressive: 4,272 of 4,615 cards are digitised and findable by name. But the contents of those cards &mdash; what is written on them, who is mentioned, what connections exist between them &mdash; had never been made searchable. Not because the work was inadequate, but because that step was simply not feasible with the available resources. Until April 2026.</p>
+        </div>
+    </div>
+</section>
+
+<!-- WHAT IS DIFFERENT HERE -->
+<section>
+    <div class="container">
+        <div class="readable">
+            <h2>The difference between OCR and informatisation</h2>
+
+            <p>What happened here resembles OCR, but it is something fundamentally different. Traditional OCR reads typed text and turns it into plain text &mdash; character by character, with no understanding of what it says. The result is searchable text, but nothing more.</p>
+
+            <p>What I used is a Vision LLM: an AI model that can <em>look at</em> and <em>understand</em> images. It does not just read the handwriting &mdash; it recognises that "geb. 12-3-1918" is a date of birth, that "KP" is a resistance group, that "Neuengamme" is a concentration camp, and that "gearr. 4-12-1944" means someone was arrested on that date. The difference becomes concrete when you look at the same card:</p>
+
+            <div class="quote-block">
+                <strong style="color:#c57a7a;">OCR produces:</strong> "Koerierster, veel verzetswerk. Vrouwenmars nr 104."<br><br>
+                <strong style="color:#6daa6d;">Vision AI produces:</strong> Name: Albertien Lunshof-Lunshof. Role: courier. Resistance work: yes. Women's March: participant, number 104. Own card: no &mdash; mentioned as subordinate clause on the card of husband Albert Lunshof (minr 1153854).
+            </div>
+
+            <p>That is not transcription &mdash; that is <span class="highlight">reading with comprehension and structuring in a single step</span>. The machine does in one operation what traditionally requires two separate processes: first reading, then cataloguing. And that is where the breakthrough lies. Not in the speed, but in the fact that digitising and making accessible collapse into one. The gap between them disappears.</p>
+
+            <div class="note">
+                <p class="note-label">What about Transkribus?</p>
+                <p><a href="https://www.transkribus.org/">Transkribus</a> is an established platform for handwriting recognition widely used in the European archive world, and it is excellent at what it does: converting handwriting into searchable text. But it is and remains <strong>transcription</strong> &mdash; it produces plain text, not structured data. You can search for the word "Neuengamme" but you do not get a field <em>concentration camp: Neuengamme, deportation date: 12-11-1944</em>. Transkribus makes text searchable. What was done here makes <strong>meaning</strong> searchable.</p>
+                <p style="margin-top:12px;">The same applies to crowdsourcing platforms like <a href="https://velehanden.nl/">VeleHanden.nl</a>, where thousands of volunteers transcribe handwritten documents &mdash; valuable work, but the goal is and remains transcription, not informatisation.</p>
+                <p style="margin-top:12px;">How we approach handwritten texts differently &mdash; and how you can verify whether what AI finds is actually correct &mdash; is described in <a href="https://world.hey.com/martijnaslander/hoe-weet-je-of-wat-ai-vindt-ook-klopt-als-je-in-een-oud-archief-zoekt-af1491c9">How do you know if what AI finds is actually correct, when searching an old archive?</a> (Dutch)</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- THE DIFFERENCE BETWEEN TRANSCRIBING AND INFORMATISING -->
+<section>
+    <div class="container">
+        <div class="readable">
+            <h2>The difference between transcribing and informatising</h2>
+
+            <p><strong>Transcribing</strong> is essentially a single operation: transferring text from one medium to another. From handwriting to digital text. It is one discipline &mdash; palaeography &mdash; and the result is a readable copy of what was written.</p>
+
+            <p><strong>Informatising</strong> is something fundamentally different, and the distinction is crucial. It means: applying multiple disciplines simultaneously to the same source. Not just reading, but also understanding, structuring, cross-referencing, contextualising and validating. That requires not one skill but six:</p>
+        </div>
+
+        <div class="step-grid" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));">
+            <div class="step-card">
+                <div class="num" style="font-size:28px;">1</div>
+                <div class="desc"><strong>Palaeography</strong><br>Reading the handwriting</div>
+            </div>
+            <div class="step-card">
+                <div class="num" style="font-size:28px;">2</div>
+                <div class="desc"><strong>Archival science</strong><br>Structuring into fields: name, date, group, fate</div>
+            </div>
+            <div class="step-card">
+                <div class="num" style="font-size:28px;">3</div>
+                <div class="desc"><strong>Historical research</strong><br>Recognising context: KP = resistance group, Neuengamme = camp</div>
+            </div>
+            <div class="step-card">
+                <div class="num" style="font-size:28px;">4</div>
+                <div class="desc"><strong>Data analysis</strong><br>Cross-referencing across 3,150 records</div>
+            </div>
+            <div class="step-card">
+                <div class="num" style="font-size:28px;">5</div>
+                <div class="desc"><strong>Fact-checking</strong><br>External validation against 7 online sources</div>
+            </div>
+            <div class="step-card">
+                <div class="num" style="font-size:28px;">6</div>
+                <div class="desc"><strong>Network analysis</strong><br>Making connections between individuals visible</div>
+            </div>
+        </div>
+
+        <div class="readable">
+            <p>None of these steps is new in itself. They have been performed for decades by excellent professionals in their respective fields. But they are normally carried out by different people, in different months, with different tools &mdash; the palaeographer reads, the archivist structures, the historian contextualises, the data analyst cross-references. They rarely work simultaneously on the same material, simply because that is logistically impossible and financially unfeasible.</p>
+
+            <p>What Agentic AI makes possible is applying those disciplines <strong>simultaneously</strong>, to the same material, in the same session. Not because AI is smarter than the individual specialist &mdash; it is not &mdash; but because it can combine all six steps in a single pass at a scale that would be impossible for a team of specialists.</p>
+
+            <p>I previously applied the same method to genealogical research on Merovingian kings, where the simultaneous cross-referencing of onomastics, hagiography, prosopography and eight other disciplines led to hypotheses that the individual fields had not formulated &mdash; not because the specialists could not, but because nobody was standing in all those fields at once. (<a href="https://world.hey.com/martijnaslander/ai-als-geniale-genealoog-een-vakgebied-geherdefinieerd-24304f89">Read: AI as a brilliant genealogist</a>, Dutch)</p>
+
+            <p>With the resistance cards it is exactly the same. The building blocks were all already there &mdash; the cards, the sources, the expertise. What was missing was someone or something that could apply all six disciplines simultaneously to 3,150 cards in a single night. The difference between transcribing and informatising is not a difference in speed but a difference in category: one discipline versus six disciplines at once.</p>
+
+            <p>On top of that, the pipeline improves as it processes more cards. Not because the model learns in the technical sense, but because previously transcribed cards are fed as context &mdash; the model recognises handwriting patterns, Groningen place names and frequently used abbreviations better because it has already seen the previous cards. I previously applied this technique to the <a href="https://martijnaslander.github.io/luhmann-zettelkasten/">Zettelkasten archive of Niklas Luhmann</a> &mdash; 90,000 handwritten note cards by the most famous German sociologist of the twentieth century, where an academic team with a five-million-euro budget has been working for ten years and is a third of the way through. Technically, this resistance archive is the second project in two weeks that I have informatised in this way.</p>
+        </div>
+    </div>
+</section>
+
+<!-- EMERGENT PATTERNS -->
+<section>
+    <div class="container">
+        <div class="readable">
+            <h2>The power of emergent analytical insights</h2>
+
+            <p>The real power lies not in reading one card &mdash; it lies in reading <strong>all cards at once</strong>. An archivist who reads one card sees one story. But a traitor who is mentioned on five different cards, by five different people, over a period of two months &mdash; that pattern is completely invisible when you read one card at a time. It only becomes visible when you lay all 3,150 side by side.</p>
+
+            <p>And that is precisely what happened here. Geesje Bleeker appears on five independent cards &mdash; no single card describes her as a serial betrayer, but five cards together do. Eleven cards mention amounts for which the SD released people, and no single card describes a "system," but together they sketch an informal corruption system with tariffs. Dozens of cards mention fragments of the same route &mdash; Groningen, Scholtenhuis, Neuengamme, L&uuml;beck Bay &mdash; and no single card describes the complete deportation route, but together they trace it.</p>
+
+            <p>These are what you might call <span class="highlight">emergent insights</span>: they do not exist on the individual cards; they only emerge when you treat the entire archive as a dataset. No human can hold 3,150 cards in their head simultaneously. A machine can.</p>
+        </div>
+    </div>
+</section>
+
+<!-- THE ERROR DISCUSSION -->
+<section>
+    <div class="container">
+        <div class="readable">
+            <h2>Having the error discussion honestly</h2>
+
+            <p>The first reaction from the archive world will be: <em>but you don't know if the transcription is correct.</em> And that is true. The AI transcription has not been independently validated and undoubtedly contains errors, from misread handwriting to misinterpreted abbreviations and incorrectly linked names. I do not dispute that, because it is a given with any form of automated processing.</p>
+
+            <p>But it is worth recognising that the implicit assumption behind that criticism is that the alternative would be a flawless human transcription &mdash; and that does not exist. Human transcription also contains errors, interpretation and inconsistencies, with the difference that human transcription takes a hundred times as long and costs a hundred times as much. The honest comparison is therefore not:</p>
+
+            <div class="quote-block" style="border-left-color:#c57a7a;">
+                AI transcription (with errors) vs. perfect human transcription
+            </div>
+
+            <p>but:</p>
+
+            <div class="quote-block" style="border-left-color:#6daa6d;">
+                AI transcription (with errors, <strong>available now</strong>) vs. no transcription (for twenty years)
+            </div>
+
+            <p>The question is not whether this is perfect, but whether it is useful enough to find things that would otherwise not be found. The answer is on this site &mdash; patterns that were invisible for eighty years, connections that were technically impossible to make, research questions that nobody could ask because the data was not searchable.</p>
+
+            <p>It is also worth considering that errors do not begin with the AI. The cards themselves were written years to decades after the war, based on testimonies and memories &mdash; not by the resistance fighters themselves, but by researchers who reconstructed after the fact what had happened. Memories shift, details fade, some things are emphasised and others omitted. That is not a reproach to the archive's creators, but it does mean there are three sources of error in this data, not one: the original recording, the selection of who received a card in the first place, and our AI reading of it. Of those three, the AI transcription is the only one you can check and correct after the fact &mdash; and that is precisely what we invite.</p>
+
+            <p>The errors must be found and corrected, and that is the next step &mdash; a step that requires precisely the expertise that archivists and historians possess. But that step can only be taken after someone has taken the first one.</p>
+        </div>
+    </div>
+</section>
+
+<!-- THE SHIFT -->
+<section>
+    <div class="container">
+        <div class="readable">
+            <h2>From gatekeeper to validator</h2>
+
+            <p>This shifts the role of the archive. Until now, the archive was the gatekeeper &mdash; only what they had made accessible was findable, and the rest existed in theory but was invisible in practice.</p>
+
+            <p>If Agentic AI (not to be confused with chatbots and LLMs, which can be highly unreliable) can do the initial informatisation &mdash; fast, cheap, imperfect but useful &mdash; then the role of the professional changes. Not disappearing, but shifting: from <em>we read the cards and make them findable</em> to <em>we validate what the machine has read and correct where necessary</em>.</p>
+
+            <p>That is not a disaster for the profession but a meaningful refinement of it. The professional no longer spends their time retyping names and dates, but on what they were actually trained for: assessing connections, testing hypotheses, placing findings in their historical context. The craft does not become redundant &mdash; it is finally deployed for its intended purpose.</p>
+
+            <div class="note">
+                <p class="note-label">The invitation</p>
+                <p>This project does not claim definitive answers &mdash; it delivers research questions. Every hypothesis on this site is an open question waiting for someone with the knowledge to confirm, refute or nuance it. The <a href="about.html#inbox">inbox</a> is open.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- THE SCALE -->
+<section>
+    <div class="container">
+        <div class="readable">
+            <h2>How scalable is this experiment?</h2>
+
+            <p>3,150 cards is a relatively small archive. But the method used here scales to virtually any collection available as scans. The National Archives of the Netherlands holds millions of digitised pages, and at the Amsterdam City Archives, NIOD (Institute for War, Holocaust and Genocide Studies) and the regional archives, there are collections everywhere whose contents are not searchable &mdash; handwritten documents, deeds, forms, cards and letters that were once photographed and have been waiting ever since.</p>
+
+            <p>The technology used here &mdash; a Vision LLM that reads and structures handwriting &mdash; works in principle on all those collections. Not perfectly, but well enough to start. The cost of this project was a few euros in API fees and one night's work &mdash; not by an archivist, but by someone who knows how to call an API.</p>
+
+            <p>This means the familiar argument <em>"we don't have enough money and we don't have enough people"</em> becomes a fundamentally different conversation. The technology is available and the costs have become negligible &mdash; the question is no longer whether we can do it, but whether we want to do it this way.</p>
+        </div>
+    </div>
+</section>
+
+<!-- DON'T WAIT -->
+<section>
+    <div class="container">
+        <div class="readable">
+            <h2>Why an amateur need not strive for perfection</h2>
+
+            <p>The archive world has a culture of rigour, and rightly so &mdash; you do not treat historical sources lightly, every word counts and every interpretation must be justified. But that rigour has a downside, because it can also become a reason for inaction. <em>We will wait until the technology is better, we will wait until there is a budget, we will wait until there is a protocol.</em> And meanwhile the cards lie in drawers, the people who can still confirm the stories pass away, and knowledge is lost that is not in the archive but only in the minds of descendants.</p>
+
+            <p>This project is not perfect and undoubtedly contains errors that need to be found and corrected. But it exists, and because it exists, people can now search for their family name, researchers can find patterns that were previously invisible, and archivists can begin validating what the machine has read. Something that exists with errors is ultimately more useful than something that does not exist because it was not yet perfect enough.</p>
+
+            <p>The stories on these cards are eighty years old. The cards themselves were written in the decades that followed. They have been online as scans since 2004. And they are now, in April 2026, as far as we know searchable, linkable and countable for the first time. I am genuinely curious whether there are people in the archive world who want to work with this.</p>
+
+            <p>This experiment is a sub-project of the <a href="https://digitalefitheid.nl/over/pilot-informatie-autonomie/">Pilot Information Autonomy</a>, an ongoing laboratory where I work with a small group of motivated people, supported by an advisory board, on precisely these kinds of questions &mdash; questions that are alive in government and public administration, and that we try to make transparent and practically manageable. If you work in government or in a government-affiliated organisation and want to explore experiments like this: <a href="mailto:martijn@digitalefitheid.nl">please get in touch</a>.</p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>Groningen War Puzzles &mdash; a citizen science project by Martijn Aslander, April 2026</p>
+        <p style="margin-top:8px;"><a href="index.html">&larr; Back to the project</a></p>
+    </div>
+</footer>
+
+</body>
+</html>

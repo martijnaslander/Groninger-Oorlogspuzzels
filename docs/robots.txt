@@ -1,29 +1,28 @@
 User-agent: *
-Disallow: /
+Allow: /index.html
+Allow: /archiefwereld.html
+Allow: /over.html
+Allow: /methode.html
+Allow: /robots.txt
+Disallow: /archief.html
+Disallow: /bevindingen.html
+Disallow: /tijdlijn.html
+Disallow: /cijfers.html
+Disallow: /changelog.html
+Disallow: /en/
 
 User-agent: GPTBot
-Disallow: /
-
-User-agent: ChatGPT-User
-Disallow: /
-
-User-agent: CCBot
-Disallow: /
+Allow: /index.html
+Allow: /archiefwereld.html
+Allow: /over.html
+Allow: /methode.html
+Disallow: /archief.html
+Disallow: /bevindingen.html
 
 User-agent: Google-Extended
-Disallow: /
-
-User-agent: anthropic-ai
-Disallow: /
-
-User-agent: ClaudeBot
-Disallow: /
-
-User-agent: cohere-ai
-Disallow: /
-
-User-agent: Bytespider
-Disallow: /
-
-User-agent: FacebookBot
-Disallow: /
+Allow: /index.html
+Allow: /archiefwereld.html
+Allow: /over.html
+Allow: /methode.html
+Disallow: /archief.html
+Disallow: /bevindingen.html
